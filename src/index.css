@@ -1,3 +1,8 @@
+@import './css/assistant.css';
+@import './css/components/cards.css';
+@import './css/components/scrollbar.css';
+@import './css/components/slider.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,12 +15,20 @@
   font-style: normal;
 }
 
+
 a {
-  @apply text-[#6941C6] dark:text-[#AFA1FC] underline;
+  @apply text-[#6941C6] dark:text-[#AFA1FC];
+}
+
+.sidebar a {
+  @apply text-black dark:text-white/80  no-underline;
+}
+.sidebar li {
+  @apply hover:bg-gray-200 hover:font-bold dark:hover:bg-gray-800 p-2 rounded-lg transition duration-300;
 }
 
 body {
-  @apply font-manrope dark:bg-[#101828] dark:text-white;
+  @apply font-manrope dark:bg-[#090d14] dark:text-white;
 }
 .FormInput_label {
   @apply block text-gray-700 text-[16px] font-bold mb-2 dark:text-white;
@@ -45,14 +58,14 @@ body {
   top: 0;
   width: 20px;
   height: 20px;
-  border: 2px solid #6941C6; /* Border color */
+  border: 2px solid #6941c6; /* Border color */
   border-radius: 4px; /* Rounded corners */
   background-color: white; /* Background color */
 }
 
 .terms-checkbox:checked + label .checkmark {
-  background-color: #6941C6; /* Background color when checked */
-  border-color: #6941C6; /* Border color when checked */
+  background-color: #6941c6; /* Background color when checked */
+  border-color: #6941c6; /* Border color when checked */
 }
 
 .terms-checkbox:checked + label .checkmark:after {
@@ -65,4 +78,26 @@ body {
   border: solid white; /* Checkmark color */
   border-width: 0 2px 2px 0;
   transform: rotate(45deg);
+}
+
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }

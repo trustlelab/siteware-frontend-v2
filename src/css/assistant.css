@@ -1,0 +1,29 @@
+/* index.css */
+.assistant-card {
+    @apply flex flex-col cursor-pointer dark:bg-gray-900 shadow-lg hover:shadow-xl p-5 border border-transparent rounded-[20px] h-64 transform transition-transform hover:-translate-y-1;
+  }
+  
+  .assistant-status {
+    @apply flex justify-between items-center mb-2;
+  }
+  
+  .assistant-title {
+    @apply font-semibold text-lg dark:text-white;
+  }
+  
+  .assistant-trigger {
+    @apply dark:text-gray-300 text-sm;
+  }
+  
+  .assistant-date {
+    @apply dark:text-gray-400 text-xs;
+  }
+  
+  .assistant-button {
+    @apply bg-[#C1B5FD] text-black hover:bg-[#AC9DFC] px-4 py-2 rounded-lg font-bold  transform transition duration-300 ease-in-out hover:scale-105;
+  }
+  
+  .assistant-delete-button {
+    @apply flex items-center hover:text-red-500  hover:border border-red-600 px-4 py-2 rounded-lg font-bold dark:text-white transform transition duration-300 ease-in-out hover:scale-105;
+  }
+  
