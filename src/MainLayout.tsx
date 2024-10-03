@@ -1,0 +1,15 @@
+import { Outlet } from 'react-router-dom';
+import Sidebar from './components/Sidebar';
+
+const MainLayout: React.FC = () => {
+  return (
+    <div className="flex justify-between">
+      <Sidebar /> {/* Sidebar will be shown on all logged-in routes */}
+      <main className="w-[90%]">
+        <Outlet /> {/* Render the routed component here */}
+      </main>
+    </div>
+  );
+};
+
+export default MainLayout;
