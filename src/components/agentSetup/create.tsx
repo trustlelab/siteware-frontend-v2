@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AgentCard from './agentTemplate';
+import AgentCard from './AgentTemplates';
 import { BsBodyText } from "react-icons/bs";
 import { RiUserVoiceLine } from "react-icons/ri";
 

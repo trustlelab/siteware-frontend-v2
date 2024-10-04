@@ -3,7 +3,7 @@ import Carouselwrapper from './components/Carouselwrapper';
 
 import API from '../API';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons
-import Logo from '../components/logo';
+import Logo from '../components/Logo';
 
 // Define an interface for the response data
 interface ResetPasswordResponse {

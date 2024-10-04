@@ -15,6 +15,9 @@
   font-style: normal;
 }
 
+input{
+  @apply outline-none
+}
 
 a {
   @apply text-[#6941C6] dark:text-[#AFA1FC];
@@ -40,6 +43,26 @@ body {
   @apply bg-[#6941C6] text-white h-[48px] font-bold py-2 px-4 rounded-[8px] w-full hover:bg-[#5c37a6] transition duration-200;
   @apply dark:bg-gradient-to-r dark:from-[#C1B5FD] dark:to-[#AC9DFC] dark:text-black;
 }
+
+
+/* Custom form classes with more unique names */
+.config_input {
+  @apply border-gray-600 bg-gray-100 dark:bg-gray-800 mt-1 p-2 dark:border rounded w-full dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-400;
+}
+
+.config_label {
+  @apply text-gray-600 dark:text-gray-300;
+}
+
+.config_helper_text {
+  @apply text-sm text-gray-500 dark:text-gray-400 mt-1;
+}
+
+.config_button {
+  @apply bg-teal-500 text-white p-2 px-10 rounded focus:outline-none hover:bg-teal-600 transition-colors;
+}
+
+
 /* Signup.css */
 .terms-checkbox {
   display: none; /* Hide the default checkbox */

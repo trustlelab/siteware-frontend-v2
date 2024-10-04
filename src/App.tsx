@@ -2,11 +2,11 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import { useState, useEffect } from 'react';
 import Signup from './Page/Signup';
 import ForgotPassword from './Page/ForgotPassword';
-import Login from './Page/login';
 import MainLayout from './MainLayout';
-import Assistants from './components/agentSetup/agentList';
-import CreateAgent from './components/agentSetup/create';
+import Assistants from './components/agentSetup/AgentList';
 import ConfigureAgent from './components/agentSetup/ConfigureAgent';
+import CreateAgent from './components/agentSetup/Create';
+import Login from './Page/Login';
 
 const App: React.FC = () => {
   // State to store login status

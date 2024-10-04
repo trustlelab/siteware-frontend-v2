@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaMicrophone, FaCog, FaUsers, FaLayerGroup, FaListAlt } from 'react-icons/fa';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md'; // Smart toggle icons
-import Logo from './logo';
+import Logo from './Logo';
 import ThemeToggle from './ToggleTheme';
 
 const Sidebar: React.FC = () => {

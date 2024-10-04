@@ -5,7 +5,7 @@ const MainLayout: React.FC = () => {
   return (
     <div className="flex justify-between">
       <Sidebar /> {/* Sidebar will be shown on all logged-in routes */}
-      <main className="w-[90%]">
+      <main className="bg-[#fdfdfd] dark:bg-[#0d121a] w-[90%]">
         <Outlet /> {/* Render the routed component here */}
       </main>
     </div>

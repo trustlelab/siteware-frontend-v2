@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa'; // Import eye icons
 import Carouselwrapper from './components/Carouselwrapper';
 import API from '../API';
-import Logo from '../components/logo';
+import Logo from '../components/Logo';
 import ContinueWithGoogle from './components/continuewithGoodbutton';
 import Form_divider from './components/form_divider';
 // Define the component as a functional component

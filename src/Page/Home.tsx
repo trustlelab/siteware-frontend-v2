@@ -1,5 +1,5 @@
 
-import Assistants from '../components/agentSetup/agentList';
+import Assistants from '../components/agentSetup/AgentList';
 import Sidebar from '../components/Sidebar';
 
 function Home() {

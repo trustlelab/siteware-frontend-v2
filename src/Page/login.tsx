@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Carouselwrapper from './components/Carouselwrapper';
 import API from '../API';
-import Logo from '../components/logo';
+import Logo from '../components/Logo';
 import Form_divider from './components/form_divider';
 import ContinueWithGoogle from './components/continuewithGoodbutton';
 

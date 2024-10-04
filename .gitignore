@@ -7,18 +7,58 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Dependency directories
+node_modules/
+bower_components/
+
+# Build outputs
+dist/
+dist-ssr/
+out/
+build/
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Temporary files
+*.tmp
+*.temp
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory
+coverage/
+*.lcov
+
+# OS generated files
+.DS_Store
+Thumbs.db
+.nfs*
 
 # Editor directories and files
-.vscode/*
+.vscode/
 !.vscode/extensions.json
-.idea
-.DS_Store
+.idea/
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# IDE-specific files
+/.project
+/.classpath
+/.settings
+/.factorypath
+
+# System file
+*.local
+
+# Output of `npm pack`
+*.tgz
+
+# Jest related
+jest-output.log

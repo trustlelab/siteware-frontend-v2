@@ -1,6 +1,6 @@
 /* index.css */
 .assistant-card {
-    @apply flex flex-col cursor-pointer dark:bg-gray-900 shadow-lg hover:shadow-xl p-5 border border-transparent rounded-[20px] h-64 transform transition-transform hover:-translate-y-1;
+    @apply flex flex-col cursor-pointer dark:bg-gray-900 shadow-lg hover:shadow-xl p-5 border border-transparent rounded-[20px] h-[200px] transform transition-transform hover:-translate-y-1;
   }
   
   .assistant-status {
