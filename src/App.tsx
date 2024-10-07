@@ -7,6 +7,7 @@ import ConfigureAgent from './components/agent/ConfigureAgent';
 import CreateAgent from './components/agent/Create';
 import Login from './components/auth/Login';
 import Agents from './components/agent/AgentList';
+import Profile from './components/home/Profile';
 
 const App: React.FC = () => {
   // State to store login status
@@ -39,6 +40,7 @@ const App: React.FC = () => {
           <Route path="campaigns" element={<Agents />} />
           <Route path="create-agent" element={<CreateAgent />} />
           <Route path="configure-agent" element={<ConfigureAgent />} />
+          <Route path="profile" element={<Profile />} />
 
         </Route>
 

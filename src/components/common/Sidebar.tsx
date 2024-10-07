@@ -91,7 +91,7 @@ const Sidebar: React.FC = () => {
         <li className="">
           <Link to="/community" className="flex items-center space-x-2 focus:outline-none">
             <FaUsers className="icon" />
-            {isSidebarOpen && <span>Community</span>}
+            {isSidebarOpen && <span>For Developers</span>}
           </Link>
         </li>
         <ThemeToggle/>

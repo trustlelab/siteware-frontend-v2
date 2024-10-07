@@ -30,6 +30,7 @@ const ConfigureAgent: React.FC = () => {
   const [agents, setAgents] = useState<Agent[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const currentId = useSelector((state: RootState) => state.agent.id);
+  const currentAgentName = useSelector((state: RootState) => state.agent.agentData?.name);
 
   useEffect(() => {
     const fetchAgents = async () => {
@@ -75,8 +76,8 @@ const ConfigureAgent: React.FC = () => {
   return (
     <main className='flex space-y-4 m-10 w-full'>
       <div className='flex space-y-4'>
-        <div className='space-y-3 shadow-light dark:shadow-none mr-[12px] p-2 rounded-lg w-[250px] h-screen'>
-          <h1>Agents List </h1>
+        <div className='space-y-3 dark:bg-gray-900 shadow-light dark:shadow-none mr-[12px] px-4 py-2 rounded-lg w-[290px] h-screen'>
+          <h1 className='text-xl'>Agents </h1>
           {agents.map((agent) => {
             const isActive = currentId === agent.id;
 
@@ -96,22 +97,23 @@ const ConfigureAgent: React.FC = () => {
           })}
         </div>
         <div className='space-y-4 w-full'>
-          <div className='flex justify-between'>
-            <button className='dark:bg-black px-6 p-2 rounded-full'>
-              My assistant
-            </button>
+          <div className='flex justify-between w-[900px]'>
+            <div className='rounded-full text-xl sapce-y-5'>
+              <p>{currentAgentName || 'Select an Agant'}</p>
+              <div className="border-green-600 dark:bg-gray-900 px-2 border rounded-lg text-green-500 dark:text-gray-300">
+                <div className="font-semibold text-sm">$0.05/min</div>
+              </div>
+            </div>
 
             <div className="flex space-x-4">
-              <div className="border-green-600 dark:bg-gray-900 px-5 p-1 border rounded-lg text-green-500 dark:text-gray-300">
-                <div className="font-semibold text-xl">$0.05/min</div>
-              </div>
+             
 
-              <button className="flex items-center hover:dark:bg-gray-700 dark:bg-gray-800 shadow-md p-2 rounded-lg dark:text-gray-300 transition duration-200">
+              <button className="flex items-center hover:dark:bg-gray-700 dark:bg-gray-800 shadow-md px-[12px] p-2 rounded-lg h-[40px] dark:text-gray-300 transition duration-200">
                 <FaPhone className="mr-2" />
                 Receive Incoming Calls
               </button>
 
-              <button className="flex items-center bg-primary-light hover:bg-purple-800 shadow-md p-2 rounded-lg text-white transition duration-200">
+              <button className="flex items-center bg-primary-light hover:bg-purple-800 shadow-md px-[12px] p-2 rounded-lg h-[40px] text-white transition duration-200">
                 <FaComments className="mr-2" />
                 Speak to Your Agent
               </button>

@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for 
 import API from '../../utils/API';
 import { useDispatch } from 'react-redux';
 import { setId } from '../../redux/slices/agent-slice';
+import LoadingSkeleton from '../common/LoadingSkeleton';
+import Header from '../home/Header';
 
 // Define the Agent type based on the JSON structure you provided
 interface Agent {
@@ -53,9 +55,15 @@ const AgentCard: React.FC<{ agent: Agent; onDelete: (id: number) => void }> = ({
           </div>
           <button
             className="flex items-center text-red-500 hover:text-red-700 transition duration-300 assistant-delete-button"
-            onClick={(e) => {
+            onClick={async (e) => {
               e.stopPropagation(); // Prevent card click when delete button is clicked
-              onDelete(agent.id);
+              try {
+                await API.delete(`/agent/remove/${agent.id}`);
+                alert('Agent removed successfully');
+                onDelete(agent.id);
+              } catch (error) {
+                alert('Error removing agent');
+              }
             }}
           >
             <RiDeleteBin6Line size={20} />
@@ -69,17 +77,20 @@ const AgentCard: React.FC<{ agent: Agent; onDelete: (id: number) => void }> = ({
 const Agents: React.FC = () => {
   // State for managing agents
   const [agents, setAgents] = useState<Agent[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchAgents = async () => {
       try {
-        const response = await API.get<AgentsResponse>("/agent/getlist");
+        const response = await API.get<AgentsResponse>('/agent/getlist');
         const agentsData = response?.data.agents;
         if (agentsData) {
           setAgents(agentsData); // Set agents into state
         }
       } catch (error) {
-        console.error("Error fetching agents:", error);
+        console.error('Error fetching agents:', error);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -89,22 +100,25 @@ const Agents: React.FC = () => {
   // Function to remove an agent
   const handleDelete = (id: number) => {
     setAgents((prevAgents) => prevAgents.filter((agent) => agent.id !== id));
-    // You can also call an API to delete the agent on the server side
   };
 
   return (
     <div className="p-6 min-h-screen dark:text-white">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="font-bold text-2xl">Agents</h1>
+      <Header/>
+      <div className="my-6">
         <Link to={'/create-agent'}>
           <button className="assistant-button">+ Create Agent</button>
         </Link>
       </div>
-      <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {agents.map((agent) => (
-          <AgentCard key={agent.id} agent={agent} onDelete={handleDelete} />
-        ))}
-      </div>
+      {loading ? (
+      <LoadingSkeleton/>
+      ) : (
+        <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+          {agents.map((agent) => (
+            <AgentCard key={agent.id} agent={agent} onDelete={handleDelete} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

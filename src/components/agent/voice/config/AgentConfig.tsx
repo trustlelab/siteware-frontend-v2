@@ -43,7 +43,7 @@ const AgentConfig = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 shadow-md mx-auto p-6 rounded-lg max-w-6xl">
+    <div className="dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
       <h2 className="mb-4 text-xl">Agent Configuration</h2>
 
       {agentData && (

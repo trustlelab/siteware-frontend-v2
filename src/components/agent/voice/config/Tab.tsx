@@ -24,7 +24,7 @@ const Tab: React.FC<TabProps> = ({ onSelect }) => {
     };
 
     return (
-        <div className="bg-gray-100 dark:bg-gray-800 mb-4 rounded-lg">
+        <div className="bg-gray-100 dark:bg-gray-800 mb-4 rounded-lg w-[900px]" >
             <div className="flex space-x-4 p-2">
                 {tabs.map((tab) => (
                     <button

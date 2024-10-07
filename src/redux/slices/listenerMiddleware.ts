@@ -1,5 +1,6 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
 import { setId, fetchAgentData } from './agent-slice';
+import { fetchUserProfile } from './profile-slice';
 
 const listenerMiddleware = createListenerMiddleware();
 
@@ -9,6 +10,8 @@ listenerMiddleware.startListening({
     const id = action.payload;
     // Dispatch fetchAgentData thunk
     listenerApi.dispatch(fetchAgentData(id));
+    // Dispatch fetchUserProfile thunk
+    listenerApi.dispatch(fetchUserProfile());
   },
 });
 

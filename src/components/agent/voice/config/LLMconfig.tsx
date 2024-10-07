@@ -52,7 +52,7 @@ const LLMConfigurator = () => {
   };
 
   return (
-    <div className="shadow-lg mx-auto p-8 rounded-2xl max-w-5xl">
+    <div className="shadow-lg p-2 rounded-2xl w-[900px]">
       {/* Responsive Two-column grid layout */}
       <div className="gap-8 grid grid-cols-1 md:grid-cols-2">
         {/* Column 1 */}

@@ -73,6 +73,16 @@ export const updateAgentData = createAsyncThunk<Agent, { id: number; data: Parti
   }
 );
 
+// Thunk to delete agent data
+export const deleteAgentData = createAsyncThunk<number, number>(
+  'agent/deleteAgentData',
+  async (id) => {
+    console.log('Deleting agent data for id:', id);
+    await API.delete(`/agent/remove/${id}`);
+    return id;
+  }
+);
+
 const agentSlice = createSlice({
   name: 'agent',
   initialState,
@@ -92,6 +102,13 @@ const agentSlice = createSlice({
     builder.addCase(updateAgentData.fulfilled, (state, action: PayloadAction<Agent>) => {
       state.agentData = action.payload;
       console.log('Agent data updated in state:', state.agentData);
+    });
+    builder.addCase(deleteAgentData.fulfilled, (state, action: PayloadAction<number>) => {
+      if (state.id === action.payload) {
+        state.id = null;
+        state.agentData = null;
+        console.log('Agent data deleted for id:', action.payload);
+      }
     });
   },
 });

@@ -1,6 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../../../redux/store';
+import { fetchAgentData, updateAgentData } from '../../../../redux/slices/agent-slice';
 
 const VoiceConfig = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const agentId = useSelector((state: RootState) => state.agent.id);
+    const agentData = useSelector((state: RootState) => state.agent.agentData);
+
     const [synthesizer, setSynthesizer] = useState('Deepgram');
     const [voiceModel, setVoiceModel] = useState('Arcas');
     const [bufferSize, setBufferSize] = useState(150);
@@ -10,9 +17,57 @@ const VoiceConfig = () => {
     const [isUserOnline, setIsUserOnline] = useState(true);
     const [userOnlineMessage, setUserOnlineMessage] = useState('Hey, are you still there');
     const [invokeAfterSeconds, setInvokeAfterSeconds] = useState(6);
+    const [isSaving, setIsSaving] = useState(false);
+
+    useEffect(() => {
+        if (agentId) {
+            dispatch(fetchAgentData(agentId));
+        }
+    }, [agentId, dispatch]);
+
+    useEffect(() => {
+        if (agentData) {
+            setSynthesizer(agentData.ttsEngine || 'Deepgram');
+            setVoiceModel(agentData.ttsVoices || 'Arcas');
+            setBufferSize(agentData.bufferSize || 150);
+            setEndpointing(agentData.endpointing || 100);
+            setLinearDelay(agentData.linearDelay || 400);
+            setAmbientNoise(agentData.ambientNoise || 'No ambient noise');
+            setIsUserOnline(agentData.voiceCallSupported || true);
+            setUserOnlineMessage(agentData.onlineCheckMessage || 'Hey, are you still there');
+            setInvokeAfterSeconds(agentData.invokeAfterSeconds || 6);
+        }
+    }, [agentData]);
+
+    const handleSave = async () => {
+        if (!agentId) return;
+
+        setIsSaving(true);
+        const updatedData = {
+            id: agentId,
+            data: {
+                ttsEngine: synthesizer,
+                ttsVoices: voiceModel,
+                bufferSize,
+                endpointing,
+                linearDelay,
+                ambientNoise,
+                voiceCallSupported: isUserOnline,
+                onlineCheckMessage: userOnlineMessage,
+                invokeAfterSeconds,
+            },
+        };
+        try {
+            await dispatch(updateAgentData(updatedData));
+        } catch (error) {
+            console.error('Error updating agent data:', error);
+        } finally {
+            setIsSaving(false);
+        }
+    };
 
     return (
-        <div className="bg-white dark:bg-gray-900 shadow-md mx-auto p-6 rounded-lg max-w-6xl">
+        <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
             {/* Two-column responsive grid */}
             <div className="gap-6 grid grid-cols-1 md:grid-cols-2">
                 {/* Synthesizer Dropdown */}
@@ -38,7 +93,6 @@ const VoiceConfig = () => {
                         <option value="Arcas">Arcas</option>
                         <option value="Other">Other</option>
                     </select>
-                
                 </div>
 
                 {/* Buffer Size Slider */}
@@ -151,6 +205,17 @@ const VoiceConfig = () => {
                         <p className="config_helper_text">{invokeAfterSeconds}</p>
                     </div>
                 </div>
+            </div>
+
+            {/* Save Button */}
+            <div className="mt-6">
+                <button
+                    className="bg-blue-500 hover:bg-blue-600 px-5 py-3 rounded-lg w-full md:w-auto text-white transition-colors config_button"
+                    onClick={handleSave}
+                    disabled={isSaving}
+                >
+                    {isSaving ? 'Saving...' : 'Save'}
+                </button>
             </div>
         </div>
     );
