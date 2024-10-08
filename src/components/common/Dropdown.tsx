@@ -1,9 +1,8 @@
-import React from 'react';
 
 interface DropdownItem {
     label: string;
     icon: React.ReactNode;
-    onClick: () => void; // Action to be executed on click
+    onClick: () => void;
 }
 
 interface DropdownProps {
@@ -22,7 +21,7 @@ const Dropdown: React.FC<DropdownProps> = ({ isOpen, items, onClose }) => {
                         className="flex items-center hover:bg-gray-700 px-4 py-2 w-full text-gray-300 text-left"
                         onClick={() => {
                             item.onClick();
-                            onClose(); // Close the dropdown after action
+                            onClose();
                         }}
                     >
                         {item.icon} <span className="ml-2">{item.label}</span>

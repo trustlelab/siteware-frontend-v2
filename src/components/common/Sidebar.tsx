@@ -1,104 +1,150 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { FaMicrophone, FaCog, FaUsers, FaLayerGroup, FaListAlt } from 'react-icons/fa';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md'; // Smart toggle icons
+import { Link, useLocation } from 'react-router-dom';
+import { FaPhone, FaFolder, FaTools, FaCube, FaUsers, FaMicrophone, FaLayerGroup } from 'react-icons/fa';
+import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
 import Logo from './Logo';
-import ThemeToggle from './ToggleTheme';
 
 const Sidebar: React.FC = () => {
-  // Load sidebar state from localStorage
-  const initialSidebarState: boolean = JSON.parse(localStorage.getItem('sidebarOpen') || 'true');
-  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(initialSidebarState);
-  const [isOpen, setIsOpen] = useState<boolean>(false); // State for accordion, initially closed
+  const location = useLocation();
+  const initialSidebarState = JSON.parse(localStorage.getItem('sidebarOpen') || 'true');
+  const initialPlatformState = JSON.parse(localStorage.getItem('platformOpen') || 'false');
+  const initialLogsState = JSON.parse(localStorage.getItem('logsOpen') || 'false');
 
-  // Persist sidebar state in localStorage whenever it's updated
+  const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(initialSidebarState);
+  const [platformOpen, setPlatformOpen] = useState<boolean>(initialPlatformState);
+  const [logsOpen, setLogsOpen] = useState<boolean>(initialLogsState);
+
   useEffect(() => {
     localStorage.setItem('sidebarOpen', JSON.stringify(isSidebarOpen));
   }, [isSidebarOpen]);
 
-  // Handle sidebar toggle
-  const handleSidebarToggle = (): void => {
+  useEffect(() => {
+    localStorage.setItem('platformOpen', JSON.stringify(platformOpen));
+  }, [platformOpen]);
+
+  useEffect(() => {
+    localStorage.setItem('logsOpen', JSON.stringify(logsOpen));
+  }, [logsOpen]);
+
+  const handleSidebarToggle = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  // Handle dropdown toggle for Appointments
-  const handleDropdownToggle = (): void => {
-    setIsOpen(prevState => !prevState || false); // Only set to true, never false
+  const handlePlatformToggle = () => {
+    setPlatformOpen((prevState: boolean) => !prevState);
+  };
+
+  const handleLogsToggle = () => {
+    setLogsOpen((prevState: boolean) => !prevState);
   };
 
   return (
-    <div className={`  border-gray-300 dark:border-slate-800 dark:bg-bg-gray-800 p-5 border ${isSidebarOpen ? 'w-64' : 'w-20'} h-screen text-gray-900 dark:text-gray-200 transition-width duration-300`}>
-    <aside className='sidebar fixed'>
-    <div className="flex justify-between items-center">
-      <Logo width={126.95} height={24.5} />
-
-        <button
-          onClick={handleSidebarToggle}
-          className="text-white focus:outline-none"
-        >
-          {isSidebarOpen ? <MdChevronLeft size={24} /> : <MdChevronRight size={24} />}
-        </button>
-      </div>
-
-      <ul className="space-y-3 mt-4">
-        <li className="">
-          <Link to="/" className="flex items-center space-x-2 focus:outline-none">
-            <FaMicrophone className="icon" />
-            {isSidebarOpen && <span>Assistants</span>}
-          </Link>
-        </li>
-        <li className="">
-          <Link to="/campaigns" className="flex items-center space-x-2 focus:outline-none">
-            <FaLayerGroup className="icon" />
-            {isSidebarOpen && <span>Campaigns</span>}
-          </Link>
-        </li>
-
-        {/* Accordion for Appointments */}
-        <li>
-          <div
-            className="flex justify-between items-center hover:bg-gray-200 dark:hover:bg-gray-800 p-2 rounded-lg transition duration-300 cursor-pointer focus:outline-none ring-indigo-500 focus:ring-2 ring-offset-2"
-            onClick={handleDropdownToggle}
-            aria-expanded={isOpen}
-          >
-            <div className="flex items-center space-x-2">
-              <FaListAlt className="icon" />
-              {isSidebarOpen && <span>Appointments</span>}
-            </div>
-            {isSidebarOpen && (isOpen ? <span>&#x25B2;</span> : <span>&#x25BC;</span>)} {/* Up/Down arrows */}
+    <div className="border-gray-300 dark:border-slate-800 dark:bg-bg-gray-800 p-5 border w-64 max-w-xs h-screen text-gray-900 dark:text-gray-200 transition-width">
+      <aside className="fixed flex flex-col justify-between h-full">
+        <div>
+          <div className="flex justify-between items-center">
+            {isSidebarOpen ? <Logo width={126.95} height={24.5} /> : <span className="font-bold text-xl">S</span>}
+            <button onClick={handleSidebarToggle} className="text-white focus:outline-none">
+              {isSidebarOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
+            </button>
           </div>
-          {isOpen && (
-            <ul className={`space-y-4 mt-2 ${isSidebarOpen ? 'pl-6' : 'pl-2'}`}>
-              <li className="">
-                <Link to="/appointments/inbound" className="focus:outline-none">Inbound Calls</Link>
-              </li>
-              <li className="">
-                <Link to="/appointments/outbound" className="focus:outline-none">Outbound Calls</Link>
-              </li>
-            </ul>
-          )}
-        </li>
 
-        {/* Divider */}
-        <hr className="border-gray-300 dark:border-gray-700 my-4" />
+          <ul className="space-y-1 mt-4">
+            <li>
+              <Link to="/" className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/' ? 'bg-gray-100 dark:bg-gray-800 font-bold' : ''}`}>                <FaMicrophone className="icon" />
+                {isSidebarOpen && <span>Overview</span>}
+              </Link>
+            </li>
 
-        <li className="">
-          <Link to="/settings" className="flex items-center space-x-2 focus:outline-none">
-            <FaCog className="icon" />
-            {isSidebarOpen && <span>Settings</span>}
-          </Link>
-        </li>
-        <li className="">
-          <Link to="/community" className="flex items-center space-x-2 focus:outline-none">
+            <li>
+              <div
+                className={`flex justify-between items-center p-2 rounded-lg transition cursor-pointer w-full ${platformOpen ? 'bg-gray-100 dark:bg-gray-800' : ''}`}
+                onClick={handlePlatformToggle}
+                aria-expanded={platformOpen}
+              >
+                <div className="flex items-center space-x-3">
+                  <FaLayerGroup className="icon" />
+                  {isSidebarOpen && <span>Platform</span>}
+                </div>
+                {isSidebarOpen && (platformOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />)}
+              </div>
+              {platformOpen && (
+                <ul className={`space-y-1 mt-0.5 dark:bg-[#161e2d] p-2 rounded-lg ${isSidebarOpen ? 'pl-4' : 'pl-2'}`}>
+                  <li>
+                    <Link to="/agents" className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/assistants' ? 'bg-gray-800 font-bold' : ''}`}>
+                      <FaMicrophone className="icon" />
+                      {isSidebarOpen && <span>Agents</span>}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/phone-numbers" className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/phone-numbers' ? 'bg-gray-800 font-bold' : ''}`}>
+                      <FaPhone className="icon" />
+                      {isSidebarOpen && <span>Phone Numbers</span>}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/platform/files" className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/files' ? 'bg-gray-800 font-bold' : ''}`}>
+                      <FaFolder className="icon" />
+                      {isSidebarOpen && <span>Files</span>}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/platform/tools" className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/tools' ? 'bg-gray-800 font-bold' : ''}`}>
+                      <FaTools className="icon" />
+                      {isSidebarOpen && <span>Tools</span>}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/platform/blocks" className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/blocks' ? 'bg-gray-800 font-bold' : ''}`}>
+                      <FaCube className="icon" />
+                      {isSidebarOpen && <span>Blocks</span>}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link to="/platform/squads" className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/squads' ? 'bg-gray-800 font-bold' : ''}`}>
+                      <FaUsers className="icon" />
+                      {isSidebarOpen && <span>Squads</span>}
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            <li>
+              <div
+                className={`flex justify-between items-center p-2 rounded-lg transition cursor-pointer w-full ${logsOpen ? 'bg-gray-100 dark:bg-gray-800' : ''}`}
+                onClick={handleLogsToggle}
+                aria-expanded={logsOpen}
+              >
+                <div className="flex items-center space-x-3">
+                  <FaFolder className="icon" />
+                  {isSidebarOpen && <span>Logs</span>}
+                </div>
+                {isSidebarOpen && (logsOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />)}
+              </div>
+              {logsOpen && (
+                <ul className={`space-y-1 mt-0.5 dark:bg-gray-700 p-2 rounded-lg ${isSidebarOpen ? 'pl-4' : 'pl-2'}`}>
+                  <li>
+                    <Link to="/logs/voice-library" className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/logs/voice-library' ? 'bg-gray-800 font-bold' : ''}`}>
+                      <FaFolder className="icon" />
+                      {isSidebarOpen && <span>Voice Library</span>}
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            <hr className="border-gray-300 dark:border-gray-700 my-4" />
+          </ul>
+        </div>
+
+        <div className="pb-4">
+          <Link to="/profile" className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/profile' ? 'bg-gray-800 font-bold' : ''}`}>
             <FaUsers className="icon" />
-            {isSidebarOpen && <span>For Developers</span>}
+            {isSidebarOpen && <span>Profile</span>}
           </Link>
-        </li>
-        <ThemeToggle/>
-
-      </ul>
-    </aside>
-
+        </div>
+      </aside>
     </div>
   );
 };

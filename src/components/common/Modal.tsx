@@ -1,11 +1,10 @@
-import React from 'react';
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
-  className?: string; // For additional custom styling
-  overlayClassName?: string; // Custom class for overlay
+  className?: string; 
+  overlayClassName?: string; 
 }
 
 const Modal: React.FC<ModalProps> = ({

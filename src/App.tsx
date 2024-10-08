@@ -8,6 +8,8 @@ import CreateAgent from './components/agent/Create';
 import Login from './components/auth/Login';
 import Agents from './components/agent/AgentList';
 import Profile from './components/home/Profile';
+import PhoneNumbers from './components/phone-numbers/ImportPhoneNumber';
+import Overview from './components/home/Overview';
 
 const App: React.FC = () => {
   // State to store login status
@@ -36,11 +38,12 @@ const App: React.FC = () => {
 
         {/* Private Routes - Protected by login check */}
         <Route path="/" element={isLoggedIn ? <MainLayout/>  : <Navigate to="/login" />}>
-          <Route index element={<Agents />} />
-          <Route path="campaigns" element={<Agents />} />
+          <Route index element={<Overview />} />
+          <Route path="agents" element={<Agents />} />
           <Route path="create-agent" element={<CreateAgent />} />
           <Route path="configure-agent" element={<ConfigureAgent />} />
           <Route path="profile" element={<Profile />} />
+          <Route path='phone-numbers' element={<PhoneNumbers/>}/>
 
         </Route>
 

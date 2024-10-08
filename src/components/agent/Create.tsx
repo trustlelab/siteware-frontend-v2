@@ -47,7 +47,7 @@ const CreateAgent: React.FC = () => {
     ];
 
     return (
-        <div className="space-y-3 dark:bg-black p-8 w-[100%] min-h-screen">
+        <div className="space-y-3 p-8 w-[100%] min-h-screen">
             <section className='flex flex-col justify-center items-center space-y-5'>
                 <h2 className="mb-4 font-bold text-3xl text-gray-800 dark:text-white">Create Agent</h2>
 

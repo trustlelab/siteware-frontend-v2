@@ -1,50 +1,123 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Siteware Frontend
 
-Currently, two official plugins are available:
+## Overview
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Siteware Frontend** is the frontend of an AI-powered voice agent platform built using **Vite**, **TypeScript**, and **React**. The project is designed for scalability and ease of use, integrating modern frontend technologies.
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Ensure you have the following installed on your system:
 
-- Configure the top-level `parserOptions` property like this:
+*   **Node.js** (v18 or above)
+*   **npm** or **yarn**
+*   **Docker**
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### Setup
+
+1.  Clone the repository:
+    
+2.  Install dependencies:
+    
+    ```
+    npm install
+    ```
+
+### Step 3: Run the Development Server
+
+To start the development server and enable hot-reloading for local development, use the following command:
+
+```
+npm run dev
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+or for **yarn**:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
 ```
+yarn dev
+```
+
+The application will be available at:
+
+```
+http://localhost:5000
+```
+
+### Step 4: Build the Project for Production
+
+To create a production-ready build of the project, run:
+
+```
+npm run build
+```
+
+or for **yarn**:
+
+```
+yarn build
+```
+
+This will generate the optimized static files in the `dist` folder.
+
+### Step 5: Preview the Production Build
+
+If you'd like to preview the production build locally, you can use the following command:
+
+```
+npm run preview
+```
+
+or for **yarn**:
+
+```
+yarn preview
+```
+
+This will start a server to preview the production build at:
+
+```
+http://localhost:5000
+```
+
+## Docker Setup
+
+### Step 1: Build the Docker Image
+
+To containerize the project, ensure Docker is installed, and then build the Docker image:
+
+```
+docker build -t siteware-frontend .
+```
+
+### Step 2: Run the Docker Container
+
+After building the Docker image, run the container using the following command:
+
+```
+docker run -p 5000:5000 siteware-frontend
+```
+
+The application will be available at:
+
+```
+http://localhost:5000
+```
+
+## Development Tips
+
+*   **Linting**: Ensure code consistency and quality by running the linter:
+    
+    ```
+    npm run lint
+    ```
+    
+*   **Testing**: To run tests, use the following command (if tests are configured):
+    
+    ```
+    npm run test
+    ```
+    
+
+## Accessing the Application in Production
+
+Once deployed, you can access the application on the appropriate server URL.

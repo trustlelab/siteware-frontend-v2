@@ -1,4 +1,3 @@
-// About.js
 import LinePattern from '../../assets/icons/patterns/line-pattern.svg'; // Adjust the path as needed
 import ThemeToggle from './ToggleTheme';
 import Carousel from './Carousel';

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import API from '../../utils/API';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setId } from '../../redux/slices/agent-slice';
 import LoadingSkeleton from '../common/LoadingSkeleton';
-import Header from '../home/Header';
+import FilterAgentAndSearch from './FilterAgentAndSearch';
+import { fetchUserProfile } from '../../redux/slices/profile-slice';
+import { RootState, AppDispatch } from '../../redux/store';
 
 // Define the Agent type based on the JSON structure you provided
 interface Agent {
@@ -27,7 +29,7 @@ interface AgentsResponse {
 // Card component for each agent, showing the name, model, status, created date, and action buttons
 const AgentCard: React.FC<{ agent: Agent; onDelete: (id: number) => void }> = ({ agent, onDelete }) => {
   const navigate = useNavigate(); // For navigation
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   // Handle card click to navigate to the configure page
   const handleCardClick = () => {
@@ -38,7 +40,7 @@ const AgentCard: React.FC<{ agent: Agent; onDelete: (id: number) => void }> = ({
   return (
     <div
       onClick={handleCardClick} // Navigate when the card is clicked
-      className="bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl p-4 rounded-lg transition duration-300 cursor-pointer assistant-card"
+      className="bg-white dark:bg-gray-800 p-4 rounded-lg transition duration-300 cursor-pointer assistant-card"
     >
       {/* Agent name, model and created date */}
       <h3 className="mb-2 font-bold text-black text-lg dark:text-white assistant-title">{agent.name}</h3>
@@ -78,6 +80,12 @@ const Agents: React.FC = () => {
   // State for managing agents
   const [agents, setAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const dispatch = useDispatch<AppDispatch>();
+  const profile = useSelector((state: RootState) => state.userProfile.profile);
+
+  useEffect(() => {
+    dispatch(fetchUserProfile());
+  }, [dispatch]);
 
   useEffect(() => {
     const fetchAgents = async () => {
@@ -104,12 +112,27 @@ const Agents: React.FC = () => {
 
   return (
     <div className="p-6 min-h-screen dark:text-white">
-      <Header/>
-      <div className="my-6">
+
+      <div>
+        <h1 className='font-bold font-manrope text-3xl'>
+          Welcome {profile?.firstName ?? ''}
+        </h1>
+        <span>
+          Explore your created agents
+        </span>
+      </div>
+      
+      <div className="flex justify-between my-6">
+      <FilterAgentAndSearch/>
+
         <Link to={'/create-agent'}>
           <button className="assistant-button">+ Create Agent</button>
         </Link>
+
       </div>
+      
+     <div className='my-4'>
+     </div>
       {loading ? (
       <LoadingSkeleton/>
       ) : (

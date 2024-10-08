@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { FaCog, FaMicrophone, FaVolumeUp, FaTools, FaChartLine, FaPhone } from 'react-icons/fa';
 
 interface TabProps {
@@ -16,7 +16,7 @@ const Tab: React.FC<TabProps> = ({ onSelect }) => {
         { name: 'Tasks', icon: <FaChartLine className="mr-1" /> },
     ];
 
-    const [activeTab, setActiveTab] = React.useState(tabs[0].name);
+    const [activeTab, setActiveTab] = useState(tabs[0].name);
 
     const handleClick = (tabName: string) => {
         setActiveTab(tabName);
