@@ -1,5 +1,5 @@
 // Carousel.js
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'; // Importing icons
 
 const Carousel = () => {
