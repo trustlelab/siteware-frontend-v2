@@ -1,12 +1,15 @@
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import Signup from './Page/Signup';
-import ForgotPassword from './Page/ForgotPassword';
-import Login from './Page/login';
-import MainLayout from './MainLayout';
-import Assistants from './components/agentSetup/agentList';
-import CreateAgent from './components/agentSetup/create';
-import ConfigureAgent from './components/agentSetup/ConfigureAgent';
+import Signup from './components/auth/Signup';
+import ForgotPassword from './components/auth/ForgotPassword';
+import MainLayout from './components/layout/MainLayout';
+import ConfigureAgent from './components/agent/ConfigureAgent';
+import CreateAgent from './components/agent/Create';
+import Login from './components/auth/Login';
+import Agents from './components/agent/AgentList';
+import Profile from './components/home/Profile';
+import PhoneNumbers from './components/phone-numbers/ImportPhoneNumber';
+import Overview from './components/home/Overview';
 
 const App: React.FC = () => {
   // State to store login status
@@ -35,10 +38,12 @@ const App: React.FC = () => {
 
         {/* Private Routes - Protected by login check */}
         <Route path="/" element={isLoggedIn ? <MainLayout/>  : <Navigate to="/login" />}>
-          <Route index element={<Assistants />} />
-          <Route path="campaigns" element={<Assistants />} />
+          <Route index element={<Overview />} />
+          <Route path="agents" element={<Agents />} />
           <Route path="create-agent" element={<CreateAgent />} />
           <Route path="configure-agent" element={<ConfigureAgent />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path='phone-numbers' element={<PhoneNumbers/>}/>
 
         </Route>
 
