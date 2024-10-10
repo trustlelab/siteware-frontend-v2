@@ -1,17 +1,26 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FiPhone, FiShoppingCart, FiPlus, FiAlertTriangle } from 'react-icons/fi';
 import Modal from '../common/Modal';
 import Select from 'react-select';
 import countryTelData from 'country-telephone-data';
 
+/**
+ *
+ */
 const PhoneNumbers: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [country, setCountry] = useState(null);
 
+  /**
+   *
+   */
   const openModal = () => {
     setIsModalOpen(true);
   };
 
+  /**
+   *
+   */
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -22,6 +31,9 @@ const PhoneNumbers: React.FC = () => {
     code: country.iso2,
   }));
 
+  /**
+   *
+   */
   const handleCountryChange = (value: any) => {
     setCountry(value);
   };
@@ -33,7 +45,8 @@ const PhoneNumbers: React.FC = () => {
       </div>
       <h3 className="mb-2 font-bold text-2xl text-white">Phone Numbers</h3>
       <p className="mb-5 text-gray-400 dark:text-gray-500">
-        Assistants are able to be connected to phone numbers for calls. You can import from Twilio, Vonage, or buy one directly from Vapi for use with your assistants.
+        Assistants are able to be connected to phone numbers for calls. You can import from Twilio, Vonage, or buy one directly from Vapi for use with your
+        assistants.
       </p>
       <div className="flex justify-between mt-5">
         <button className="flex items-center bg-blue-500 px-4 py-2 rounded text-white">

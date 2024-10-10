@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { RiDeleteBin6Line } from "react-icons/ri";
+import { useEffect, useState } from 'react';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import API from '../../utils/API';
 import { useDispatch, useSelector } from 'react-redux';
-import { setId } from '../../redux/slices/agent-slice';
+import { setId } from '../../features/slices/agentSlice';
 import LoadingSkeleton from '../common/LoadingSkeleton';
 import FilterAgentAndSearch from './FilterAgentAndSearch';
-import { fetchUserProfile } from '../../redux/slices/profile-slice';
-import { RootState, AppDispatch } from '../../redux/store';
+import { fetchUserProfile } from '../../features/slices/profileSlice';
+import { RootState, AppDispatch } from '../../app/store';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Modal from '../common/Modal';
 
 // Define the Agent type based on the JSON structure you provided
 interface Agent {
@@ -26,15 +29,47 @@ interface AgentsResponse {
   agents: Agent[];
 }
 
-// Card component for each agent, showing the name, model, status, created date, and action buttons
-const AgentCard: React.FC<{ agent: Agent; onDelete: (id: number) => void }> = ({ agent, onDelete }) => {
+// Modal component for confirming deletion
+const ConfirmDeleteModal: React.FC<{ isOpen: boolean; onConfirm: () => void; onCancel: () => void }> = ({ isOpen, onConfirm, onCancel }) => (
+  <Modal
+    isOpen={isOpen}
+    onClose={onCancel}
+    className="bg-white dark:bg-gray-800 mx-auto mt-20 p-6 rounded-lg max-w-md"
+    overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+  >
+    <h2 className="mb-4 font-semibold text-lg">Are you sure you want to remove this agent?</h2>
+    <div className="flex justify-end gap-4">
+      <button className="bg-red-600 px-4 py-2 rounded-md text-white" onClick={onConfirm}>
+        Confirm
+      </button>
+      <button className="bg-gray-300 px-4 py-2 rounded-md text-black" onClick={onCancel}>
+        Cancel
+      </button>
+    </div>
+  </Modal>
+);
+
+/**
+ *
+ */
+const AgentCard: React.FC<{ agent: Agent; onDeleteClick: (agent: Agent) => void }> = ({ agent, onDeleteClick }) => {
   const navigate = useNavigate(); // For navigation
   const dispatch = useDispatch<AppDispatch>();
 
-  // Handle card click to navigate to the configure page
+  /**
+   *
+   */
   const handleCardClick = () => {
     dispatch(setId(agent.id)); // Set the agent id using redux
     navigate('/configure-agent'); // Navigate to the configure agent page
+  };
+
+  /**
+   * Handle delete button click
+   */
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent card click when delete button is clicked
+    onDeleteClick(agent);
   };
 
   return (
@@ -57,16 +92,7 @@ const AgentCard: React.FC<{ agent: Agent; onDelete: (id: number) => void }> = ({
           </div>
           <button
             className="flex items-center text-red-500 hover:text-red-700 transition duration-300 assistant-delete-button"
-            onClick={async (e) => {
-              e.stopPropagation(); // Prevent card click when delete button is clicked
-              try {
-                await API.delete(`/agent/remove/${agent.id}`);
-                alert('Agent removed successfully');
-                onDelete(agent.id);
-              } catch (error) {
-                alert('Error removing agent');
-              }
-            }}
+            onClick={handleDeleteClick}
           >
             <RiDeleteBin6Line size={20} />
           </button>
@@ -76,10 +102,15 @@ const AgentCard: React.FC<{ agent: Agent; onDelete: (id: number) => void }> = ({
   );
 };
 
+/**
+ *
+ */
 const Agents: React.FC = () => {
   // State for managing agents
   const [agents, setAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
   const dispatch = useDispatch<AppDispatch>();
   const profile = useSelector((state: RootState) => state.userProfile.profile);
 
@@ -88,6 +119,9 @@ const Agents: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
+    /**
+     *
+     */
     const fetchAgents = async () => {
       try {
         const response = await API.get<AgentsResponse>('/agent/getlist');
@@ -106,42 +140,76 @@ const Agents: React.FC = () => {
   }, []);
 
   // Function to remove an agent
+  /**
+   *
+   */
   const handleDelete = (id: number) => {
     setAgents((prevAgents) => prevAgents.filter((agent) => agent.id !== id));
   };
 
+  /**
+   * Handle delete click from AgentCard
+   */
+  const handleDeleteClick = (agent: Agent) => {
+    setSelectedAgent(agent);
+    setIsModalOpen(true);
+  };
+
+  /**
+   * Confirm agent deletion
+   */
+  const confirmDelete = async () => {
+    if (selectedAgent) {
+      try {
+        await API.delete(`/agent/remove/${selectedAgent.id}`);
+        toast.success('Agent removed successfully');
+        handleDelete(selectedAgent.id);
+      } catch (error) {
+        toast.error('Error removing agent');
+      } finally {
+        setIsModalOpen(false);
+        setSelectedAgent(null);
+      }
+    }
+  };
+
+  /**
+   * Cancel agent deletion
+   */
+  const cancelDelete = () => {
+    setIsModalOpen(false);
+    setSelectedAgent(null);
+  };
+
   return (
     <div className="p-6 min-h-screen dark:text-white">
-
+      <ToastContainer position="bottom-center" />
       <div>
-        <h1 className='font-bold font-manrope text-3xl'>
-          Welcome {profile?.firstName ?? ''}
-        </h1>
-        <span>
-          Explore your created agents
-        </span>
+        <h1 className="font-bold font-manrope text-3xl">Welcome, {profile?.firstName ?? ''}</h1>
+        <span>Explore your created agents</span>
       </div>
-      
+
       <div className="flex justify-between my-6">
-      <FilterAgentAndSearch/>
+        <FilterAgentAndSearch />
 
         <Link to={'/create-agent'}>
           <button className="assistant-button">+ Create Agent</button>
         </Link>
-
       </div>
-      
-     <div className='my-4'>
-     </div>
+
+      <div className="my-4"></div>
       {loading ? (
-      <LoadingSkeleton/>
+        <LoadingSkeleton />
       ) : (
         <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {agents.map((agent) => (
-            <AgentCard key={agent.id} agent={agent} onDelete={handleDelete} />
+            <AgentCard key={agent.id} agent={agent} onDeleteClick={handleDeleteClick} />
           ))}
         </div>
       )}
+
+      {/* Confirmation Modal */}
+      <ConfirmDeleteModal isOpen={isModalOpen} onConfirm={confirmDelete} onCancel={cancelDelete} />
     </div>
   );
 };

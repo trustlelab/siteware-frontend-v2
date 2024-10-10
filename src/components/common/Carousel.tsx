@@ -1,7 +1,9 @@
-// Carousel.js
 import { useState, useEffect } from 'react';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'; // Importing icons
 
+/**
+ *
+ */
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -11,30 +13,34 @@ const Carousel = () => {
       phrase: 'Easily build a custom voice assistant to address your specific needs on any platform.',
       image: 'https://tinyurl.com/grt456', // Original image URL
       smallImage: 'https://ln.run/YIXAj', // Original small image URL
-      id: 1
+      id: 1,
     },
     {
       title: 'Customize Responses for Any Problem',
       phrase: 'Define how your assistant responds to various user inputs with AI-driven solutions.',
       image: 'https://ln.run/8Unoa', // Original image URL
       smallImage: 'https://ln.run/eK7ad', // Original small image URL
-      id: 2
+      id: 2,
     },
     {
       title: 'Deploy Across Platforms',
       phrase: 'Your assistant can be deployed on any platform, supporting web, mobile, and desktop apps.',
       image: 'https://ln.run/v2boj', // Original image URL
       smallImage: 'https://ln.run/QyDTU', // Original small image URL
-      id: 3
-    }
+      id: 3,
+    },
   ];
-  
-  
 
+  /**
+   *
+   */
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
   };
 
+  /**
+   *
+   */
   const prevSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + slides.length) % slides.length);
   };
@@ -51,18 +57,12 @@ const Carousel = () => {
     <div className="relative mx-auto mt-[220px] p-6 rounded-lg max-w-3xl h-[520px] overflow-hidden">
       {/* Main Image and Small Image Container */}
       <div className="flex justify-center items-center mb-4">
-        <div className='relative w-[477px] h-[328px]'>
+        <div className="relative w-[477px] h-[328px]">
           <div className="bg-white rounded-[12px] w-[432px] h-[260px]">
-            <img
-              src={slides[currentIndex].image}
-              className="shadow-md rounded-lg w-[432px] h-[260px]"
-            />
+            <img src={slides[currentIndex].image} className="shadow-md rounded-lg w-[432px] h-[260px]" />
           </div>
           <div className="right-[30px] bottom-0 absolute bg-white rounded-[12px] w-[192px] h-[192px]">
-            <img
-              src={slides[currentIndex].smallImage}
-              className="shadow-md rounded-[12px] w-full h-auto"
-            />
+            <img src={slides[currentIndex].smallImage} className="shadow-md rounded-[12px] w-full h-auto" />
           </div>
         </div>
       </div>
@@ -76,7 +76,7 @@ const Carousel = () => {
       {/* Navigation Buttons */}
       <div className="bottom-4 left-1/2 absolute flex justify-between items-center px-4 w-[60%] transform -translate-x-1/2">
         <button onClick={prevSlide} className="dark:hover:bg-black hover:bg-purple-200 p-2 rounded-full transition duration-300">
-          <AiOutlineLeft className="text-lg"  color='white'/>
+          <AiOutlineLeft className="text-lg" color="white" />
         </button>
 
         <div className="flex justify-center mt-2">
@@ -90,12 +90,11 @@ const Carousel = () => {
         </div>
 
         <button onClick={nextSlide} className="dark:hover:bg-black hover:bg-purple-200 p-2 rounded-full transition duration-300">
-          <AiOutlineRight color='white' className="text-lg" />
+          <AiOutlineRight color="white" className="text-lg" />
         </button>
       </div>
 
       {/* Indicator Dots */}
-
     </div>
   );
 };

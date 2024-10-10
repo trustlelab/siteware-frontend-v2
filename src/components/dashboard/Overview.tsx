@@ -2,6 +2,9 @@ import { FiTrendingUp } from 'react-icons/fi';
 import { Doughnut } from 'react-chartjs-2';
 import 'chart.js/auto';
 
+/**
+ *
+ */
 const Overview: React.FC = () => {
   const callData = {
     totalMinutes: 5,
@@ -72,18 +75,16 @@ const Overview: React.FC = () => {
       <div className="gap-4 grid grid-cols-2 mb-10">
         <div className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg">
           <h4 className="mb-4 font-bold text-lg">Reason Call Ended</h4>
-          <div className='w-[300px]'>
-          <Doughnut data={reasonCallEndedData} />
+          <div className="w-[300px]">
+            <Doughnut data={reasonCallEndedData} />
           </div>
         </div>
         <div className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg">
           <h4 className="mb-4 font-bold text-lg">Average Call Duration by Assistant</h4>
-         
-          <div className='w-[300px]'>
-          <Doughnut data={averageCallDurationData} />
+
+          <div className="w-[300px]">
+            <Doughnut data={averageCallDurationData} />
           </div>
-          
-          
         </div>
       </div>
       <div className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg">

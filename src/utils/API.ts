@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // Create an instance of axios with predefined config
 const API = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/',  // Fallback to localhost if env is not found
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/', // Fallback to localhost if env is not found
 });
 
 // Add a request interceptor to include Authorization token

@@ -1,18 +1,16 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @font-face {
   font-family: 'Manrope';
-  src: url('./assets/Fonts/Manrope/Manrope-VariableFont_wght.ttf')
-    format('truetype');
+  src: url('./assets/Fonts/Manrope/Manrope-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900; /* Adjust this based on the font weight range */
   font-style: normal;
 }
 
-input{
-  @apply outline-none
+input {
+  @apply outline-none;
 }
 
 a {
@@ -27,7 +25,7 @@ a {
 }
 
 body {
-  @apply font-manrope dark:bg-[#090d14] dark:text-white;
+  @apply font-manrope dark:bg-[#090d14] dark:text-white overflow-x-hidden;
 }
 .FormInput_label {
   @apply block text-gray-700 text-[16px] font-bold mb-2 dark:text-white;
@@ -39,7 +37,6 @@ body {
   @apply bg-[#6941C6] text-white h-[48px] font-bold py-2 px-4 rounded-[8px] w-full hover:bg-[#5c37a6] transition duration-200;
   @apply dark:bg-gradient-to-r dark:from-[#C1B5FD] dark:to-[#AC9DFC] dark:text-black;
 }
-
 
 /* Custom form classes with more unique names */
 .config_input {
@@ -58,13 +55,9 @@ body {
   @apply bg-teal-500 text-white p-2 px-10 rounded focus:outline-none hover:bg-teal-600 transition-colors;
 }
 
-
-
 .createAgentcard {
   @apply flex flex-col justify-center items-center space-y-2   w-[200px] h-[120px] hover:scale-105 duration-500;
 }
-
-
 
 /* index.css */
 .assistant-card {
@@ -135,8 +128,6 @@ body {
   transform: rotate(45deg);
 }
 
-
-
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -144,19 +135,18 @@ body {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1; 
+  @apply bg-[#f1f9ff] dark:bg-black;
 }
- 
+
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888; 
+  @apply bg-[#bdbdbd] dark:bg-gray-600;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555; 
+  @apply bg-[#c4ccd8];
 }
-
 
 /* width */
 .msb::-webkit-scrollbar {
@@ -165,17 +155,17 @@ body {
 
 /* Track */
 .msb::-webkit-scrollbar-track {
-  @apply dark:bg-gray-600
+  @apply dark:bg-gray-600;
 }
- 
+
 /* Handle */
 .msb::-webkit-scrollbar-thumb {
- @apply dark:bg-black
+  @apply dark:bg-black;
 }
 
 /* Handle on hover */
 .msb::-webkit-scrollbar-thumb:hover {
-  @apply dark:bg-gray-600
+  @apply dark:bg-gray-600;
 }
 
 /* Custom styles for the range input */
@@ -216,3 +206,5 @@ body {
   box-shadow: 0 0 5px rgba(255, 106, 106, 0.5); /* Subtle shadow for depth */
   cursor: pointer; /* Pointer cursor on hover */
 }
+
+

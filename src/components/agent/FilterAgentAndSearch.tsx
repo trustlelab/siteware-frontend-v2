@@ -1,15 +1,24 @@
 import React, { useState } from 'react';
 import { FiFilter } from 'react-icons/fi';
 
+/**
+ *
+ */
 const FilterAgentAndSearch: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeFilter, setActiveFilter] = useState<'text' | 'voice'>('text');
 
+  /**
+   *
+   */
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchQuery(value);
   };
 
+  /**
+   *
+   */
   const handleFilterChange = (filter: 'text' | 'voice') => {
     setActiveFilter(filter);
   };
