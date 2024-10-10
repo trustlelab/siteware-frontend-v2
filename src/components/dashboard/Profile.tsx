@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { FaTrash } from 'react-icons/fa';
+import { IoMdClose } from 'react-icons/io';
 import { useSelector, useDispatch } from 'react-redux';
-import { RootState, AppDispatch } from '../../redux/store';
-import { fetchUserProfile, updateProfileAvatar, updateUserProfile, removeProfileAvatar, removeUserAccount } from '../../redux/slices/profile-slice';
+import { RootState, AppDispatch } from '../../app/store';
+import { fetchUserProfile, updateProfileAvatar, updateUserProfile, removeProfileAvatar, removeUserAccount } from '../../features/slices/profileSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from '../common/Modal';
+import { useNavigate } from 'react-router-dom';
 
+/**
+ *
+ */
 const Profile: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
   const { profile } = useSelector((state: RootState) => state.userProfile);
   const [isSaving, setIsSaving] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,6 +35,9 @@ const Profile: React.FC = () => {
     }
   }, [profile, dispatch]);
 
+  /**
+   *
+   */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -38,6 +46,9 @@ const Profile: React.FC = () => {
     }));
   };
 
+  /**
+   *
+   */
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const formData = new FormData();
@@ -52,6 +63,9 @@ const Profile: React.FC = () => {
     }
   };
 
+  /**
+   *
+   */
   const handleRemoveAvatar = async () => {
     const resultAction = await dispatch(removeProfileAvatar());
     if (removeProfileAvatar.fulfilled.match(resultAction)) {
@@ -62,6 +76,9 @@ const Profile: React.FC = () => {
     }
   };
 
+  /**
+   *
+   */
   const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     if (profile) {
@@ -77,10 +94,16 @@ const Profile: React.FC = () => {
     }
   };
 
+  /**
+   *
+   */
   const handleDeleteAccount = () => {
     setIsModalOpen(true);
   };
 
+  /**
+   *
+   */
   const confirmDeleteAccount = async () => {
     setIsModalOpen(false);
     const resultAction = await dispatch(removeUserAccount());
@@ -93,6 +116,9 @@ const Profile: React.FC = () => {
     }
   };
 
+  /**
+   *
+   */
   const cancelDeleteAccount = () => {
     setIsModalOpen(false);
   };
@@ -101,23 +127,26 @@ const Profile: React.FC = () => {
     <div className="bg-white dark:bg-gray-900 shadow-md mx-auto p-6 rounded-lg max-w-4xl">
       <ToastContainer position="bottom-center" />
       <div className="flex flex-col items-center mb-6">
-        <label htmlFor="avatar-upload" className="cursor-pointer">
-          <img
-            src={profile?.avatarUrl ? `http://localhost:8000${profile.avatarUrl}` : 'https://ln.run/Cffck'}
-            alt="Profile Avatar"
-            className="mb-4 rounded-full w-32 h-32"
-          />
-        </label>
-        <input
-          id="avatar-upload"
-          type="file"
-          accept="image/*"
-          className="hidden"
-          onChange={handleAvatarChange}
-        />
-        <button className="text-red-500 hover:text-red-700" onClick={handleRemoveAvatar}>
-          <FaTrash size={20} />
-        </button>
+        <div className="relative w-32">
+          <label htmlFor="avatar-upload" className="cursor-pointer">
+            <img
+              src={profile?.avatarUrl ? `${import.meta.env.VITE_API_BASE_URL}${profile.avatarUrl}` : 'https://ln.run/Cffck'}
+              alt="Profile Avatar"
+              className="mb-4 rounded-full w-32 h-32"
+            />
+          </label>
+          <input id="avatar-upload" type="file" accept="image/*" className="hidden" onChange={handleAvatarChange} />
+          <button
+            className="top-0 right-0 absolute flex justify-center items-center bg-gray-700 dark:hover:bg-black rounded-full w-[30px] h-[30px] text-white hover:text-white"
+            onClick={handleRemoveAvatar}
+          >
+            <IoMdClose size={20} />
+          </button>
+        </div>
+
+        <h1 className="text-2xl">
+          {formData.firstName} {formData.lastName}
+        </h1>
       </div>
 
       <div className="bg-gray-100 dark:bg-gray-800 mb-6 p-6 rounded-lg">
@@ -167,10 +196,7 @@ const Profile: React.FC = () => {
               />
             </div>
           </div>
-          <button
-            type="submit"
-            className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md w-full md:w-auto font-semibold text-white"
-          >
+          <button type="submit" className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md w-full md:w-auto font-semibold text-white">
             {isSaving ? 'Saving...' : 'Save'}
           </button>
         </form>
@@ -178,16 +204,17 @@ const Profile: React.FC = () => {
 
       <div className="bg-gray-100 dark:bg-gray-800 mb-6 p-6 rounded-lg">
         <h2 className="mb-4 font-semibold text-lg">Password</h2>
-        <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md w-full md:w-auto font-semibold text-white">
-          Reset Password
+        <button
+          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md w-full md:w-auto font-semibold text-white"
+          onClick={() => navigate('/update-password')}
+        >
+          Update Password
         </button>
       </div>
 
       <div className="bg-gray-100 dark:bg-gray-800 mb-6 p-6 rounded-lg">
         <h2 className="mb-4 font-semibold text-lg">API</h2>
-        <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md w-full md:w-auto font-semibold text-white">
-          Generate API Key
-        </button>
+        <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md w-full md:w-auto font-semibold text-white">Generate API Key</button>
       </div>
 
       <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">

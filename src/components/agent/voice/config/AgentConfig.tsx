@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../../../redux/store';
-import { fetchAgentData, updateAgentData } from '../../../../redux/slices/agent-slice';
+import { RootState, AppDispatch } from '../../../../app/store';
+import { fetchAgentData, updateAgentData } from '../../../../features/slices/agentSlice';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+/**
+ *
+ */
 const AgentConfig = () => {
   const dispatch = useDispatch<AppDispatch>();
   const agentData = useSelector((state: RootState) => state.agent.agentData);
@@ -17,7 +22,6 @@ const AgentConfig = () => {
       dispatch(fetchAgentData(id));
     }
   }, [id, dispatch]);
-  
 
   // Update local state when agentData changes
   useEffect(() => {
@@ -27,6 +31,9 @@ const AgentConfig = () => {
     }
   }, [agentData]);
 
+  /**
+   *
+   */
   const handleSave = async () => {
     if (id) {
       setIsSaving(true);
@@ -39,11 +46,13 @@ const AgentConfig = () => {
       };
       await dispatch(updateAgentData(updatedData));
       setIsSaving(false);
+      toast.success('Agent configuration saved successfully');
     }
   };
 
   return (
     <div className="dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
+      <ToastContainer />
       <h2 className="mb-4 text-xl">Agent Configuration</h2>
 
       {agentData && (
@@ -76,11 +85,7 @@ const AgentConfig = () => {
             </p>
           </div>
 
-          <button
-            className="config_button"
-            onClick={handleSave}
-            disabled={isSaving}
-          >
+          <button className="config_button" onClick={handleSave} disabled={isSaving}>
             {isSaving ? 'Saving...' : 'Save'}
           </button>
         </>

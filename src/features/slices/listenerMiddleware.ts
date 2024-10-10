@@ -1,11 +1,14 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
-import { setId, fetchAgentData } from './agent-slice';
-import { fetchUserProfile } from './profile-slice';
+import { setId, fetchAgentData } from './agentSlice';
+import { fetchUserProfile } from './profileSlice';
 
 const listenerMiddleware = createListenerMiddleware();
 
 listenerMiddleware.startListening({
   actionCreator: setId,
+  /**
+   *
+   */
   effect: async (action, listenerApi) => {
     const id = action.payload;
     // Dispatch fetchAgentData thunk

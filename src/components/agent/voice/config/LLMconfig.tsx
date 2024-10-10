@@ -1,8 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../../../redux/store';
-import { updateAgentData, fetchAgentData } from '../../../../redux/slices/agent-slice';
+import { RootState, AppDispatch } from '../../../../app/store';
+import { updateAgentData, fetchAgentData } from '../../../../features/slices/agentSlice';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
+/**
+ *
+ */
 const LLMConfigurator = () => {
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
@@ -29,6 +34,9 @@ const LLMConfigurator = () => {
     }
   }, [agentData]);
 
+  /**
+   *
+   */
   const handleSave = async () => {
     if (!agentId) return;
 
@@ -44,6 +52,7 @@ const LLMConfigurator = () => {
     };
     try {
       await dispatch(updateAgentData(updatedData));
+      toast.success('Agent configuration saved successfully');
     } catch (error) {
       console.error('Error updating agent data:', error);
     } finally {
@@ -53,16 +62,13 @@ const LLMConfigurator = () => {
 
   return (
     <div className="shadow-lg p-2 rounded-2xl w-[900px]">
+      <ToastContainer />
       {/* Responsive Two-column grid layout */}
       <div className="gap-8 grid grid-cols-1 md:grid-cols-2">
         {/* Column 1 */}
         <div>
           <label className="config_label">Choose LLM Model</label>
-          <select
-            className="config_input"
-            value={llmModel}
-            onChange={(e) => setLLMModel(e.target.value)}
-          >
+          <select className="config_input" value={llmModel} onChange={(e) => setLLMModel(e.target.value)}>
             <option value="Openai">Openai</option>
             <option value="Other">Other</option>
           </select>
@@ -71,11 +77,7 @@ const LLMConfigurator = () => {
         {/* Column 2 */}
         <div>
           <label className="config_label">LLM Version</label>
-          <select
-            className="config_input"
-            value={llmVersion}
-            onChange={(e) => setLLMVersion(e.target.value)}
-          >
+          <select className="config_input" value={llmVersion} onChange={(e) => setLLMVersion(e.target.value)}>
             <option value="gpt-4o mini">gpt-4o mini</option>
             <option value="gpt-3.5">gpt-3.5</option>
           </select>
@@ -84,15 +86,7 @@ const LLMConfigurator = () => {
         {/* Column 1: Tokens Slider */}
         <div>
           <label className="config_label">Tokens generated on each LLM output</label>
-          <input
-            type="range"
-            className="l range-slider"
-            min={50}
-            max={300}
-            step={1}
-            value={tokens}
-            onChange={(e) => setTokens(+e.target.value)}
-          />
+          <input type="range" className="l range-slider" min={50} max={300} step={1} value={tokens} onChange={(e) => setTokens(+e.target.value)} />
           <p className="config_helper_text">{tokens}</p>
           <p className="config_helper_text">
             Increasing tokens enables longer responses to be queued before sending to speech generation but increases latency.
@@ -102,19 +96,9 @@ const LLMConfigurator = () => {
         {/* Column 2: Temperature Slider */}
         <div>
           <label className="config_label">Temperature</label>
-          <input
-            type="range"
-            className="l range-slider"
-            min={0}
-            max={1}
-            step={0.1}
-            value={temperature}
-            onChange={(e) => setTemperature(+e.target.value)}
-          />
+          <input type="range" className="l range-slider" min={0} max={1} step={0.1} value={temperature} onChange={(e) => setTemperature(+e.target.value)} />
           <p className="config_helper_text">{temperature}</p>
-          <p className="config_helper_text">
-            Increasing temperature enables heightened creativity but increases the chance of deviation from the prompt.
-          </p>
+          <p className="config_helper_text">Increasing temperature enables heightened creativity but increases the chance of deviation from the prompt.</p>
         </div>
       </div>
 
