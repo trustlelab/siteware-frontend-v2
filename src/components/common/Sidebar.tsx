@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaPhone, FaFolder, FaTools, FaCube, FaUsers, FaMicrophone, FaLayerGroup, FaSignOutAlt } from 'react-icons/fa';
+import { FaPhone, FaFolder, FaTools, FaCube, FaUsers, FaLayerGroup, FaSignOutAlt } from 'react-icons/fa';
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
 import Logo from './Logo';
 import SmallLogo from './SmallLogo';
