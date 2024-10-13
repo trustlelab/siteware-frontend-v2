@@ -33,9 +33,9 @@ const SetNewPassword: React.FC = () => {
 
   return (
     <div className="bg-white dark:bg-gray-900 shadow-md mx-auto p-6 rounded-lg max-w-2xl">
-       <div className='mb-10'>
+      <div className="mb-10">
         <Link to="/profile"> Back to profile</Link>
-       </div>
+      </div>
       <ToastContainer position="bottom-center" />
       <h1 className="mb-4 font-bold text-2xl text-gray-800 dark:text-white">Update Your Password</h1>
       <p className="mb-6 text-gray-600 dark:text-gray-400">Please enter your old password, and set a new password below.</p>

@@ -1,0 +1,13 @@
+{
+    "welcome": "Willkommen, {{name}}",
+    "explore_agents": "Erkunden Sie Ihre erstellten Agenten",
+    "create_agent": "Agent erstellen",
+    "running": "Läuft",
+    "not_deployed": "NICHT EINGESETZT",
+    "confirm_remove_agent": "Sind Sie sicher, dass Sie diesen Agenten entfernen möchten?",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen",
+    "agent_removed_success": "Agent erfolgreich entfernt",
+    "agent_remove_error": "Fehler beim Entfernen des Agenten"
+  }
+  

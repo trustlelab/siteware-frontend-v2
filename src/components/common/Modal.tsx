@@ -41,7 +41,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className = ''
     >
       <div
         ref={modalRef}
-        className={`relative bg-white p-6 rounded-lg shadow-lg ${className}`}
+        className={`relative bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg ${className}`}
         onClick={(e) => e.stopPropagation()} // Prevent closing on content click
       >
         {/* Close Button */}

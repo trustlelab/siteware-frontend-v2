@@ -1,4 +1,3 @@
-
 # Siteware Frontend
 
 ## Overview
@@ -9,16 +8,15 @@
 
 Ensure you have the following installed on your system:
 
-*   **Node.js** (v18 or above)
-*   **npm** or **yarn**
-*   **Docker**
+- **Node.js** (v18 or above)
+- **npm** or **yarn**
+- **Docker**
 
 ### Setup
 
 1.  Clone the repository:
-    
 2.  Install dependencies:
-    
+
     ```
     npm install
     ```
@@ -105,18 +103,17 @@ http://localhost:5000
 
 ## Development Tips
 
-*   **Linting**: Ensure code consistency and quality by running the linter:
-    
-    ```
-    npm run lint
-    ```
-    
-*   **Testing**: To run tests, use the following command (if tests are configured):
-    
-    ```
-    npm run test
-    ```
-    
+- **Linting**: Ensure code consistency and quality by running the linter:
+
+  ```
+  npm run lint
+  ```
+
+- **Testing**: To run tests, use the following command (if tests are configured):
+
+  ```
+  npm run test
+  ```
 
 ## Accessing the Application in Production
 

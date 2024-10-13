@@ -1,0 +1,10 @@
+{
+    "agent": "Agent",
+    "llm": "LLM",
+    "transcriber": "Transkribierer",
+    "voice": "Stimme",
+    "call": "Anruf",
+    "functions": "Funktionen",
+    "tasks": "Aufgaben"
+  }
+  

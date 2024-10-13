@@ -12,6 +12,7 @@ import VoiceConfig from './voice/config/VoiceConfig';
 import CallConfig from './voice/config/CallConfig';
 import FunctionsConfig from './voice/config/FunctionsConfig';
 import TasksConfig from './voice/config/TaskConfiguration';
+import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
 
 interface Agent {
   id: number;
@@ -25,10 +26,8 @@ interface AgentsResponse {
   agents: Agent[];
 }
 
-/**
- *
- */
 const ConfigureAgent: React.FC = () => {
+  const { t } = useTranslation('configureAgent'); // Use the 'configureAgent' namespace
   const [activeTab, setActiveTab] = useState<string>('Model');
   const [agents, setAgents] = useState<Agent[]>([]);
   const dispatch = useDispatch<AppDispatch>();
@@ -36,9 +35,6 @@ const ConfigureAgent: React.FC = () => {
   const currentAgentName = useSelector((state: RootState) => state.agent.agentData?.name);
 
   useEffect(() => {
-    /**
-     * Fetch agent list when component mounts
-     */
     const fetchAgents = async () => {
       try {
         const response = await API.get<AgentsResponse>('/agent/getlist');
@@ -52,9 +48,6 @@ const ConfigureAgent: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    /**
-     * Load selected agent ID from Redux state or localStorage
-     */
     if (currentId) {
       dispatch(fetchAgentData(currentId));
       localStorage.setItem('selectedAgentId', currentId.toString());
@@ -68,9 +61,6 @@ const ConfigureAgent: React.FC = () => {
     }
   }, [dispatch, currentId]);
 
-  /**
-   * Handle agent selection and save the selected agent ID to localStorage
-   */
   const handleAgentClick = (id: number) => {
     if (currentId !== id) {
       dispatch(setId(id));
@@ -79,9 +69,6 @@ const ConfigureAgent: React.FC = () => {
     }
   };
 
-  /**
-   * Render content based on the active tab
-   */
   const renderContent = () => {
     switch (activeTab) {
       case 'Agent':
@@ -107,7 +94,7 @@ const ConfigureAgent: React.FC = () => {
     <main className="flex space-y-4 m-10 w-full">
       <div className="flex space-y-4">
         <div className="space-y-3 dark:bg-gray-900 shadow-light dark:shadow-none mr-[12px] px-4 py-2 rounded-lg w-[290px] h-screen">
-          <h1 className="text-xl">Agents </h1>
+          <h1 className="text-xl">{t('agents')}</h1>
           {agents.map((agent) => {
             const isActive = currentId === agent.id;
 
@@ -127,21 +114,21 @@ const ConfigureAgent: React.FC = () => {
         <div className="space-y-4 w-full">
           <div className="flex justify-between w-[900px]">
             <div className="rounded-full text-xl sapce-y-5">
-              <p>{currentAgentName || 'Select an Agant'}</p>
+              <p>{currentAgentName || t('select_agent')}</p>
               <div className="border-green-600 dark:bg-gray-900 px-2 border rounded-lg text-green-500 dark:text-gray-300">
-                <div className="font-semibold text-sm">$0.05/min</div>
+                <div className="font-semibold text-sm">{t('call_rate')}</div>
               </div>
             </div>
 
             <div className="flex space-x-4">
               <button className="flex items-center hover:dark:bg-gray-700 dark:bg-gray-800 shadow-md px-[12px] p-2 rounded-lg h-[40px] dark:text-gray-300 transition duration-200">
                 <FaPhone className="mr-2" />
-                Receive Incoming Calls
+                {t('incoming_calls')}
               </button>
 
               <button className="flex items-center bg-primary-light hover:bg-purple-800 shadow-md px-[12px] p-2 rounded-lg h-[40px] text-white transition duration-200">
                 <FaComments className="mr-2" />
-                Speak to Your Agent
+                {t('speak_to_agent')}
               </button>
             </div>
           </div>

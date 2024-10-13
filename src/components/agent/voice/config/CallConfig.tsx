@@ -4,11 +4,13 @@ import { RootState, AppDispatch } from '../../../../app/store';
 import { fetchAgentData, updateAgentData } from '../../../../features/slices/agentSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from '../../../lib/Button';
+import Dropdown from '../../../lib/DropDown';
+import SliderInput from '../../../lib/SliderInput';
+import { useTranslation } from 'react-i18next'; // Import the translation hook
 
-/**
- *
- */
 const CallConfig = () => {
+  const { t } = useTranslation('callConfig'); // Use the namespace for CallConfig translations
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);
@@ -32,9 +34,6 @@ const CallConfig = () => {
     }
   }, [agentData]);
 
-  /**
-   *
-   */
   const handleSave = async () => {
     if (!agentId) return;
 
@@ -49,7 +48,7 @@ const CallConfig = () => {
     };
     try {
       await dispatch(updateAgentData(updatedData));
-      toast.success('Configuration saved successfully');
+      toast.success(t('configuration_saved')); // Translated toast message
     } catch (error) {
       console.error('Error updating agent data:', error);
     } finally {
@@ -60,66 +59,73 @@ const CallConfig = () => {
   return (
     <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
       <ToastContainer />
+      
       {/* Provider Dropdown */}
-      <div className="mb-6">
-        <label className="config_label">Provider</label>
-        <select className="config_input" value={provider} onChange={(e) => setProvider(e.target.value)}>
-          <option value="Twilio">Twilio</option>
-          <option value="Other">Other</option>
-        </select>
-      </div>
+      <Dropdown
+        label={t('provider')}
+        options={['Twilio', 'Other']}
+        selected={provider}
+        onChange={(value) => setProvider(value)}
+      />
 
       {/* Call Hangup Logic */}
       <div className="mb-6">
-        <label className="config_label">Call hangup logic</label>
+        <label className="config_label">{t('call_hangup_logic')}</label>
         <div className="flex justify-between items-center">
-          <select className="w-2/3 config_input">
-            <option value="silence">
-              Call hangs up on silence for <strong>{hangupTime}</strong> seconds
-            </option>
-          </select>
+          <Dropdown
+            label=""
+            options={[`${t('hangup_on_silence', { seconds: hangupTime })}`]}
+            selected={`${t('hangup_on_silence', { seconds: hangupTime })}`}
+            onChange={() => {}}
+          />
           <div className="ml-4 w-1/3">
-            <label className="block text-gray-500">Time (seconds)</label>
-            <input type="range" className="mt-1 range-slider" min={1} max={60} step={1} value={hangupTime} onChange={(e) => setHangupTime(+e.target.value)} />
-            <p className="mt-1 text-center text-gray-500">{hangupTime}</p>
+            <SliderInput
+              label={t('time_seconds')}
+              min={1}
+              max={60}
+              step={1}
+              value={hangupTime}
+              onChange={(value) => setHangupTime(value)}
+            />
           </div>
         </div>
       </div>
 
       {/* Call Termination */}
       <div className="mb-6">
-        <label className="config_label">Call Termination</label>
+        <label className="config_label">{t('call_termination')}</label>
         <div className="flex justify-between items-center">
-          <select className="w-2/3 config_input">
-            <option value="time">
-              The call ends after <strong>{terminationTime}</strong> seconds of call time
-            </option>
-          </select>
+          <Dropdown
+            label=""
+            options={[`${t('termination_after_seconds', { seconds: terminationTime })}`]}
+            selected={`${t('termination_after_seconds', { seconds: terminationTime })}`}
+            onChange={() => {}}
+          />
           <div className="ml-4 w-1/3">
-            <label className="block text-gray-500">Time (seconds)</label>
-            <input
-              type="range"
-              className="mt-1 range-slider"
+            <SliderInput
+              label={t('time_seconds')}
               min={60}
               max={600}
               step={10}
               value={terminationTime}
-              onChange={(e) => setTerminationTime(+e.target.value)}
+              onChange={(value) => setTerminationTime(value)}
             />
-            <p className="mt-1 text-center text-gray-500">{terminationTime}</p>
           </div>
         </div>
       </div>
 
       {/* Save Button */}
       <div className="mt-6">
-        <button
-          className="bg-blue-500 hover:bg-blue-600 px-5 py-3 rounded-lg w-full md:w-auto text-white transition-colors config_button"
+        <Button
+          variant="primary"
+          size="normal"
+          radius="lg"
           onClick={handleSave}
           disabled={isSaving}
+          className="w-full md:w-auto"
         >
-          {isSaving ? 'Saving...' : 'Save'}
-        </button>
+          {isSaving ? t('saving') : t('save')} {/* Translated button text */}
+        </Button>
       </div>
     </div>
   );

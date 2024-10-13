@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import { Link, useNavigate } from 'react-router-dom'; 
 import API from '../../utils/API';
 import { useDispatch, useSelector } from 'react-redux';
 import { setId } from '../../features/slices/agentSlice';
@@ -11,89 +11,77 @@ import { RootState, AppDispatch } from '../../app/store';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from '../common/Modal';
+import Button from '../lib/Button';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
-// Define the Agent type based on the JSON structure you provided
 interface Agent {
   id: number;
   name: string;
   model: string;
-  uniqueId: string; // Add uniqueId to the agent interface
+  uniqueId: string; 
   createdAt: string;
   deployed: boolean;
 }
 
-// API response structure
 interface AgentsResponse {
   status: number;
   message: string;
   agents: Agent[];
 }
 
-// Modal component for confirming deletion
-const ConfirmDeleteModal: React.FC<{ isOpen: boolean; onConfirm: () => void; onCancel: () => void }> = ({ isOpen, onConfirm, onCancel }) => (
-  <Modal
-    isOpen={isOpen}
-    onClose={onCancel}
-    className="bg-white dark:bg-gray-800 mx-auto mt-20 p-6 rounded-lg max-w-md"
-    overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
-  >
-    <h2 className="mb-4 font-semibold text-lg">Are you sure you want to remove this agent?</h2>
-    <div className="flex justify-end gap-4">
-      <button className="bg-red-600 px-4 py-2 rounded-md text-white" onClick={onConfirm}>
-        Confirm
-      </button>
-      <button className="bg-gray-300 px-4 py-2 rounded-md text-black" onClick={onCancel}>
-        Cancel
-      </button>
-    </div>
-  </Modal>
-);
+const ConfirmDeleteModal: React.FC<{ isOpen: boolean; onConfirm: () => void; onCancel: () => void }> = ({ isOpen, onConfirm, onCancel }) => {
+  const { t } = useTranslation('agents'); // Use the agents namespace for translations
+  return (
+    <Modal
+      isOpen={isOpen}
+      onClose={onCancel}
+      className="bg-white dark:bg-gray-800 mx-auto mt-20 p-6 rounded-lg max-w-md"
+      overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
+    >
+      <h2 className="mb-4 font-semibold text-lg">{t('confirm_remove_agent')}</h2>
+      <div className="flex justify-end gap-4">
+        <Button variant='error' onClick={onConfirm}>
+          {t('confirm')}
+        </Button>
+        <Button variant='success' onClick={onCancel}>
+          {t('cancel')}
+        </Button>
+      </div>
+    </Modal>
+  );
+};
 
-/**
- *
- */
 const AgentCard: React.FC<{ agent: Agent; onDeleteClick: (agent: Agent) => void }> = ({ agent, onDeleteClick }) => {
-  const navigate = useNavigate(); // For navigation
+  const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
+  const { t } = useTranslation('agents'); // Use the agents namespace for translations
 
-  /**
-   *
-   */
   const handleCardClick = () => {
-    dispatch(setId(agent.id)); // Set the agent id using redux
-    navigate('/configure-agent'); // Navigate to the configure agent page
+    dispatch(setId(agent.id));
+    navigate('/configure-agent');
   };
 
-  /**
-   * Handle delete button click
-   */
   const handleDeleteClick = (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card click when delete button is clicked
+    e.stopPropagation();
     onDeleteClick(agent);
   };
 
   return (
     <div
-      onClick={handleCardClick} // Navigate when the card is clicked
+      onClick={handleCardClick}
       className="bg-white dark:bg-gray-800 p-4 rounded-lg transition duration-300 cursor-pointer assistant-card"
     >
-      {/* Agent name, model and created date */}
       <h3 className="mb-2 font-bold text-black text-lg dark:text-white assistant-title">{agent.name}</h3>
       <p className="text-gray-500 text-sm assistant-date">Model: {agent.model}</p>
       <p className="text-gray-500 text-sm assistant-date">Created: {new Date(agent.createdAt).toLocaleDateString()}</p>
-
-      {/* Action buttons */}
       <div className="flex justify-between mt-auto">
         <div className="flex justify-between w-full">
           <div className="flex justify-between items-center space-y-2 mt-4 assistant-status">
             <span className="text-gray-400 text-xs">
-              {agent.deployed ? 'Running' : <div className="bg-green-400 p-2 rounded-full font-bold text-black">NOT DEPLOYED</div>}
+              {agent.deployed ? t('running') : <div className="bg-green-400 p-2 rounded-full font-bold text-black">{t('not_deployed')}</div>}
             </span>
           </div>
-          <button
-            className="flex items-center text-red-500 hover:text-red-700 transition duration-300 assistant-delete-button"
-            onClick={handleDeleteClick}
-          >
+          <button className="flex items-center text-red-500 hover:text-red-700 transition duration-300 assistant-delete-button" onClick={handleDeleteClick}>
             <RiDeleteBin6Line size={20} />
           </button>
         </div>
@@ -102,11 +90,8 @@ const AgentCard: React.FC<{ agent: Agent; onDeleteClick: (agent: Agent) => void 
   );
 };
 
-/**
- *
- */
 const Agents: React.FC = () => {
-  // State for managing agents
+  const { t } = useTranslation('agents'); // Use the agents namespace for translations
   const [agents, setAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -119,15 +104,12 @@ const Agents: React.FC = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    /**
-     *
-     */
     const fetchAgents = async () => {
       try {
         const response = await API.get<AgentsResponse>('/agent/getlist');
         const agentsData = response?.data.agents;
         if (agentsData) {
-          setAgents(agentsData); // Set agents into state
+          setAgents(agentsData);
         }
       } catch (error) {
         console.error('Error fetching agents:', error);
@@ -139,33 +121,23 @@ const Agents: React.FC = () => {
     fetchAgents();
   }, []);
 
-  // Function to remove an agent
-  /**
-   *
-   */
   const handleDelete = (id: number) => {
     setAgents((prevAgents) => prevAgents.filter((agent) => agent.id !== id));
   };
 
-  /**
-   * Handle delete click from AgentCard
-   */
   const handleDeleteClick = (agent: Agent) => {
     setSelectedAgent(agent);
     setIsModalOpen(true);
   };
 
-  /**
-   * Confirm agent deletion
-   */
   const confirmDelete = async () => {
     if (selectedAgent) {
       try {
         await API.delete(`/agent/remove/${selectedAgent.id}`);
-        toast.success('Agent removed successfully');
+        toast.success(t('agent_removed_success'));
         handleDelete(selectedAgent.id);
       } catch (error) {
-        toast.error('Error removing agent');
+        toast.error(t('agent_remove_error'));
       } finally {
         setIsModalOpen(false);
         setSelectedAgent(null);
@@ -173,9 +145,6 @@ const Agents: React.FC = () => {
     }
   };
 
-  /**
-   * Cancel agent deletion
-   */
   const cancelDelete = () => {
     setIsModalOpen(false);
     setSelectedAgent(null);
@@ -185,19 +154,20 @@ const Agents: React.FC = () => {
     <div className="p-6 min-h-screen dark:text-white">
       <ToastContainer position="bottom-center" />
       <div>
-        <h1 className="font-bold font-manrope text-3xl">Welcome, {profile?.firstName ?? ''}</h1>
-        <span>Explore your created agents</span>
+        <h1 className="font-bold font-manrope text-3xl">{t('welcome', { name: profile?.firstName ?? '' })}</h1>
+        <span>{t('explore_agents')}</span>
       </div>
 
       <div className="flex justify-between my-6">
         <FilterAgentAndSearch />
 
         <Link to={'/create-agent'}>
-          <button className="assistant-button">+ Create Agent</button>
+          <Button variant='primary' >
+            {t('create_agent')}
+          </Button>
         </Link>
       </div>
 
-      <div className="my-4"></div>
       {loading ? (
         <LoadingSkeleton />
       ) : (
@@ -208,7 +178,6 @@ const Agents: React.FC = () => {
         </div>
       )}
 
-      {/* Confirmation Modal */}
       <ConfirmDeleteModal isOpen={isModalOpen} onConfirm={confirmDelete} onCancel={cancelDelete} />
     </div>
   );

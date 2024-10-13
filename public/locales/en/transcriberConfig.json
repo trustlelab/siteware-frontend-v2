@@ -1,0 +1,15 @@
+{
+    "choose_transcriber": "Choose Transcriber",
+    "version": "Version",
+    "choose_language": "Choose language",
+    "keywords": "Keywords",
+    "keywords_helper": "Enter certain keywords/proper nouns you'd want to boost while understanding speech",
+    "interrupt_words": "Number of words to wait for before interrupting (in words)",
+    "interrupt_words_helper": "Agent will not consider interruptions until these many words are spoken (If recipient says 'Stopwords' such as Stop, Wait, Hold On, agent will pause by default)",
+    "backchanneling": "Backchanneling",
+    "backchanneling_helper": "Agent will speak filler words in between sentences to show the recipient that they are listening to them",
+    "saving": "Saving...",
+    "save": "Save",
+    "save_success": "Agent configuration saved successfully"
+  }
+  

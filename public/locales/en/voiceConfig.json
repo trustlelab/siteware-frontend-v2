@@ -1,0 +1,18 @@
+{
+    "choose_synthesizer": "Choose Synthesizer",
+    "choose_voice_model": "Choose Voice Model",
+    "buffer_size": "Buffer Size",
+    "buffer_size_helper": "Increasing buffer size enables the agent to speak long responses fluently, but increases latency.",
+    "endpointing": "Endpointing (in ms)",
+    "endpointing_helper": "Number of milliseconds your agent will wait before generating a response. Lower endpointing reduces latency but could lead to the agent interrupting mid-sentence.",
+    "linear_delay": "Linear delay (in ms)",
+    "linear_delay_helper": "Linear delay accounts for long pauses mid-sentence. If the recipient is expected to speak long sentences, increase the value of linear delay.",
+    "ambient_noise": "Ambient Noise",
+    "user_online_check": "Agent will check if the user is online if there's no reply from the user.",
+    "user_online_message": "User is online message",
+    "invoke_after_seconds": "Invoke message after (seconds)",
+    "saving": "Saving...",
+    "save": "Save",
+    "save_success": "Agent configuration saved successfully"
+  }
+  

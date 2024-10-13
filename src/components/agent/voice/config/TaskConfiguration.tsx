@@ -4,11 +4,14 @@ import { RootState, AppDispatch } from '../../../../app/store';
 import { fetchAgentData, updateAgentData } from '../../../../features/slices/agentSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from '../../../lib/Button'; // Reusable Button component
+import Dropdown from '../../../lib/DropDown'; // Reusable Dropdown component
+import Input from '../../../lib/Input'; // Reusable Input component
+import Checkbox from '../../../lib/Checkbox'; // Reusable Checkbox component
+import { useTranslation } from 'react-i18next'; // Import the translation hook
 
-/**
- *
- */
 const TasksConfig = () => {
+  const { t } = useTranslation('tasksConfig'); // Use the namespace for TasksConfig translations
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);
@@ -34,9 +37,6 @@ const TasksConfig = () => {
     }
   }, [agentData]);
 
-  /**
-   *
-   */
   const handleSave = async () => {
     if (!agentId) return;
 
@@ -51,7 +51,7 @@ const TasksConfig = () => {
     };
     try {
       await dispatch(updateAgentData(updatedData));
-      toast.success('Agent configuration saved successfully');
+      toast.success(t('save_success')); // Translated toast message
     } catch (error) {
       console.error('Error updating agent data:', error);
     } finally {
@@ -60,84 +60,88 @@ const TasksConfig = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-950 shadow-md p-6 rounded-lg w-[900px]">
+    <div className="bg-white dark:bg-gray-950 shadow-md p-6 rounded-lg w-full md:w-[900px]">
       <ToastContainer />
-      <h3 className="mb-4 font-semibold text-lg">Tasks Configuration</h3>
-      <p className="mb-6 text-gray-500 text-sm">Configure the tasks that should be executed after the conversation ends.</p>
+      <h3 className="mb-4 font-semibold text-lg">{t('tasks_configuration')}</h3>
+      <p className="mb-6 text-gray-500 text-sm">{t('tasks_configuration_description')}</p>
 
-      {/* Summarization Task */}
-      <div className="flex justify-between items-center mb-6">
-        <div className="w-3/4">
-          <label className="config_label">Summarization</label>
-          <p className="config_helper_text">Automatically generate a summary of the conversation.</p>
-        </div>
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            checked={isSummarizationEnabled}
-            onChange={() => setIsSummarizationEnabled(!isSummarizationEnabled)}
-            className="form-checkbox w-5 h-5 text-teal-600"
-          />
+      <div className="gap-6 grid grid-cols-1 md:grid-cols-2 mb-6">
+        {/* Summarization Task */}
+        <div className="flex flex-col bg-gray-100 dark:bg-gray-800 p-4 border rounded-lg">
+          <div className="flex justify-between items-center">
+            <div>
+              <label className="config_label">{t('summarization')}</label>
+              <p className="config_helper_text">{t('summarization_description')}</p>
+            </div>
+            <Checkbox
+              id="summarization"
+              checked={isSummarizationEnabled}
+              onChange={() => setIsSummarizationEnabled(!isSummarizationEnabled)}
+            />
+          </div>
           {isSummarizationEnabled && (
-            <select className="ml-4 config_input" value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)}>
-              <option value="gpt-3.5-turbo-1106">gpt-3.5-turbo-1106</option>
-              <option value="gpt-3.5-turbo-1110">gpt-3.5-turbo-1110</option>
-              <option value="gpt-4">gpt-4</option>
-            </select>
+            <Dropdown
+              label=""
+              options={['gpt-3.5-turbo-1106', 'gpt-3.5-turbo-1110', 'gpt-4']}
+              selected={selectedModel}
+              onChange={(value) => setSelectedModel(value)}
+              searchable={false}
+            />
           )}
         </div>
-      </div>
 
-      {/* Extraction Task */}
-      <div className="flex justify-between items-center mb-6">
-        <div className="w-3/4">
-          <label className="config_label">Extraction</label>
-          <p className="config_helper_text">Extract structured data from the conversation based on the prompt.</p>
+        {/* Extraction Task */}
+        <div className="flex flex-col bg-gray-100 dark:bg-gray-800 p-4 border rounded-lg">
+          <div className="flex justify-between items-center">
+            <div>
+              <label className="config_label">{t('extraction')}</label>
+              <p className="config_helper_text">{t('extraction_description')}</p>
+            </div>
+            <Checkbox
+              id="extraction"
+              checked={isExtractionEnabled}
+              onChange={() => setIsExtractionEnabled(!isExtractionEnabled)}
+            />
+          </div>
         </div>
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            checked={isExtractionEnabled}
-            onChange={() => setIsExtractionEnabled(!isExtractionEnabled)}
-            className="form-checkbox w-5 h-5 text-teal-600"
-          />
-        </div>
-      </div>
 
-      {/* Webhook Task */}
-      <div className="flex justify-between items-center mb-6">
-        <div className="w-3/4">
-          <label className="config_label">Post extracted data to webhook</label>
-          <p className="config_helper_text">Automatically send extracted data to a webhook.</p>
-        </div>
-        <div className="flex items-center">
-          <input
-            type="checkbox"
-            checked={Boolean(webhookUrl)}
-            onChange={() => setWebhookUrl(webhookUrl ? '' : 'https://')}
-            className="form-checkbox w-5 h-5 text-teal-600"
-          />
+        {/* Webhook Task */}
+        <div className="flex flex-col col-span-1 md:col-span-2 bg-gray-100 dark:bg-gray-800 p-4 border rounded-lg">
+          <div className="flex justify-between items-center">
+            <div>
+              <label className="config_label">{t('webhook')}</label>
+              <p className="config_helper_text">{t('webhook_description')}</p>
+            </div>
+            <Checkbox
+              id="webhook"
+              checked={Boolean(webhookUrl)}
+              onChange={() => setWebhookUrl(webhookUrl ? '' : 'https://')}
+            />
+          </div>
           {webhookUrl && (
-            <input
-              type="text"
-              className="ml-4 w-96 config_input"
+            <Input
+              id="webhookUrl"
+              placeholder={t('enter_webhook')}
               value={webhookUrl}
               onChange={(e) => setWebhookUrl(e.target.value)}
-              placeholder="Enter a valid webhook URL"
+              className="mt-4"
             />
           )}
         </div>
       </div>
 
       {/* Save Button */}
-      <div className="mt-6">
-        <button
-          className="bg-blue-500 hover:bg-blue-600 px-5 py-3 rounded-lg w-full md:w-auto text-white transition-colors config_button"
+      <div className="flex justify-end mt-6">
+        <Button
+          variant="primary"
+          size="normal"
+          radius="lg"
           onClick={handleSave}
           disabled={isSaving}
+          className="w-full md:w-auto"
         >
-          {isSaving ? 'Saving...' : 'Save'}
-        </button>
+          {isSaving ? t('saving') : t('save')}
+        </Button>
       </div>
     </div>
   );

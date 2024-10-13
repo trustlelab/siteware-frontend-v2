@@ -1,0 +1,15 @@
+{
+    "choose_transcriber": "Wählen Sie einen Transkriptor",
+    "version": "Version",
+    "choose_language": "Sprache auswählen",
+    "keywords": "Schlüsselwörter",
+    "keywords_helper": "Geben Sie bestimmte Schlüsselwörter/Eigennamen ein, die bei der Sprachverständnis hervorgehoben werden sollen",
+    "interrupt_words": "Anzahl der Wörter, die vor der Unterbrechung gewartet werden sollen (in Wörtern)",
+    "interrupt_words_helper": "Der Agent berücksichtigt keine Unterbrechungen, bis diese Anzahl von Wörtern gesprochen wurde (Wenn der Empfänger 'Stopwörter' wie Stop, Warte, Halt sagt, pausiert der Agent standardmäßig)",
+    "backchanneling": "Backchanneling",
+    "backchanneling_helper": "Der Agent wird Füllwörter zwischen den Sätzen sprechen, um dem Empfänger zu zeigen, dass er ihm zuhört",
+    "saving": "Speichern...",
+    "save": "Speichern",
+    "save_success": "Agentenkonfiguration erfolgreich gespeichert"
+  }
+  

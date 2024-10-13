@@ -7,11 +7,12 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Modal from '../common/Modal';
 import { useNavigate } from 'react-router-dom';
+import Input from '../lib/Input';
+import Button from '../lib/Button';
+import { useTranslation } from 'react-i18next';
 
-/**
- *
- */
 const Profile: React.FC = () => {
+  const { t } = useTranslation('profile');  // Specify the namespace 'profile'
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { profile } = useSelector((state: RootState) => state.userProfile);
@@ -35,9 +36,6 @@ const Profile: React.FC = () => {
     }
   }, [profile, dispatch]);
 
-  /**
-   *
-   */
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -46,39 +44,30 @@ const Profile: React.FC = () => {
     }));
   };
 
-  /**
-   *
-   */
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const formData = new FormData();
       formData.append('avatar', e.target.files[0]);
       const resultAction = await dispatch(updateProfileAvatar(formData));
       if (updateProfileAvatar.fulfilled.match(resultAction)) {
-        toast.success('Profile avatar updated successfully!');
+        toast.success(t('avatar_updated'));
         dispatch(fetchUserProfile());
       } else {
-        toast.error('Failed to update profile avatar.');
+        toast.error(t('avatar_update_failed'));
       }
     }
   };
 
-  /**
-   *
-   */
   const handleRemoveAvatar = async () => {
     const resultAction = await dispatch(removeProfileAvatar());
     if (removeProfileAvatar.fulfilled.match(resultAction)) {
-      toast.success('Profile avatar removed successfully!');
+      toast.success(t('avatar_removed'));
       dispatch(fetchUserProfile());
     } else {
-      toast.error('Failed to remove profile avatar.');
+      toast.error(t('avatar_remove_failed'));
     }
   };
 
-  /**
-   *
-   */
   const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
     if (profile) {
@@ -86,39 +75,30 @@ const Profile: React.FC = () => {
       const resultAction = await dispatch(updateUserProfile({ ...profile, ...formData }));
       setIsSaving(false);
       if (updateUserProfile.fulfilled.match(resultAction)) {
-        toast.success('Profile updated successfully!');
+        toast.success(t('profile_updated'));
         dispatch(fetchUserProfile());
       } else {
-        toast.error('Failed to update profile.');
+        toast.error(t('profile_update_failed'));
       }
     }
   };
 
-  /**
-   *
-   */
   const handleDeleteAccount = () => {
     setIsModalOpen(true);
   };
 
-  /**
-   *
-   */
   const confirmDeleteAccount = async () => {
     setIsModalOpen(false);
     const resultAction = await dispatch(removeUserAccount());
     if (removeUserAccount.fulfilled.match(resultAction)) {
       localStorage.clear();
-      toast.success('Your account has been successfully removed.');
+      toast.success(t('account_removed'));
       window.location.href = '/login';
     } else {
-      toast.error('Failed to remove account.');
+      toast.error(t('account_remove_failed'));
     }
   };
 
-  /**
-   *
-   */
   const cancelDeleteAccount = () => {
     setIsModalOpen(false);
   };
@@ -131,7 +111,7 @@ const Profile: React.FC = () => {
           <label htmlFor="avatar-upload" className="cursor-pointer">
             <img
               src={profile?.avatarUrl ? `${import.meta.env.VITE_API_BASE_URL}${profile.avatarUrl}` : 'https://ln.run/Cffck'}
-              alt="Profile Avatar"
+              alt={t('avatar_alt')}
               className="mb-4 rounded-full w-32 h-32"
             />
           </label>
@@ -150,88 +130,90 @@ const Profile: React.FC = () => {
       </div>
 
       <div className="bg-gray-100 dark:bg-gray-800 mb-6 p-6 rounded-lg">
-        <h2 className="mb-4 font-semibold text-lg">Personal Information</h2>
+        <h2 className="mb-4 font-semibold text-lg">{t('personal_information')}</h2>
         <form onSubmit={handleSaveProfile}>
           <div className="gap-4 grid grid-cols-1 md:grid-cols-2 mb-4">
-            <div>
-              <label className="block mb-1 font-medium text-sm">Username</label>
-              <input
-                type="text"
-                name="username"
-                className="border-gray-300 dark:bg-gray-700 p-2 border rounded-md w-full dark:text-white"
-                value={formData.username}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label className="block mb-1 font-medium text-sm">Email</label>
-              <input
-                type="email"
-                name="email"
-                className="border-gray-300 bg-gray-200 dark:bg-gray-700 p-2 border rounded-md w-full dark:text-white"
-                value={profile?.email || ''}
-                disabled
-              />
-            </div>
+            <Input
+              label={t('username')}
+              name="username"
+              type="text"
+              value={formData.username}
+              onChange={handleInputChange}
+              className="dark:bg-gray-700"
+            />
+            <Input
+              label={t('email')}
+              name="email"
+              type="email"
+              value={profile?.email || ''}
+              disabled
+              className="bg-gray-200 dark:bg-gray-700"
+            />
           </div>
           <div className="gap-4 grid grid-cols-1 md:grid-cols-2 mb-4">
-            <div>
-              <label className="block mb-1 font-medium text-sm">First Name</label>
-              <input
-                type="text"
-                name="firstName"
-                className="border-gray-300 dark:bg-gray-700 p-2 border rounded-md w-full dark:text-white"
-                value={formData.firstName}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label className="block mb-1 font-medium text-sm">Last Name</label>
-              <input
-                type="text"
-                name="lastName"
-                className="border-gray-300 dark:bg-gray-700 p-2 border rounded-md w-full dark:text-white"
-                value={formData.lastName}
-                onChange={handleInputChange}
-              />
-            </div>
+            <Input
+              label={t('first_name')}
+              name="firstName"
+              type="text"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              className="dark:bg-gray-700"
+            />
+            <Input
+              label={t('last_name')}
+              name="lastName"
+              type="text"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              className="dark:bg-gray-700"
+            />
           </div>
-          <button type="submit" className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md w-full md:w-auto font-semibold text-white">
-            {isSaving ? 'Saving...' : 'Save'}
-          </button>
+          <Button
+            type="submit"
+            variant="primary"
+            className="w-full md:w-auto"
+          >
+            {isSaving ? t('saving') : t('save')}
+          </Button>
         </form>
       </div>
 
       <div className="bg-gray-100 dark:bg-gray-800 mb-6 p-6 rounded-lg">
-        <h2 className="mb-4 font-semibold text-lg">Password</h2>
-        <button
-          className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md w-full md:w-auto font-semibold text-white"
+        <h2 className="mb-4 font-semibold text-lg">{t('password')}</h2>
+        <Button
+          variant="primary"
           onClick={() => navigate('/update-password')}
+          className="w-full md:w-auto"
         >
-          Update Password
-        </button>
-      </div>
-
-      <div className="bg-gray-100 dark:bg-gray-800 mb-6 p-6 rounded-lg">
-        <h2 className="mb-4 font-semibold text-lg">API</h2>
-        <button className="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md w-full md:w-auto font-semibold text-white">Generate API Key</button>
+          {t('update_password')}
+        </Button>
       </div>
 
       <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
-        <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md w-full font-semibold text-white" onClick={handleDeleteAccount}>
-          Delete Account
-        </button>
+        <Button
+          variant="error"
+          onClick={handleDeleteAccount}
+          className="w-full"
+        >
+          {t('delete_account')}
+        </Button>
       </div>
 
       <Modal isOpen={isModalOpen} onClose={cancelDeleteAccount} className="bg-white dark:bg-gray-800 shadow-lg mx-auto mt-20 p-6 rounded-lg max-w-md">
-        <h2 className="mb-4 font-semibold text-lg">Are you sure you want to remove your account?</h2>
+        <h2 className="mb-4 font-semibold text-lg">{t('confirm_delete_account')}</h2>
         <div className="flex justify-end gap-4">
-          <button className="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-md font-semibold text-white" onClick={confirmDeleteAccount}>
-            Yes, Delete My Account
-          </button>
-          <button className="bg-gray-400 hover:bg-gray-500 px-4 py-2 rounded-md font-semibold text-white" onClick={cancelDeleteAccount}>
-            No, Keep My Account
-          </button>
+          <Button
+            variant="error"
+            onClick={confirmDeleteAccount}
+          >
+            {t('yes_delete_account')}
+          </Button>
+          <Button
+            variant="primary"
+            onClick={cancelDeleteAccount}
+          >
+            {t('no_keep_account')}
+          </Button>
         </div>
       </Modal>
     </div>

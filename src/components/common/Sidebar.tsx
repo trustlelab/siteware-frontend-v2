@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaPhone, FaFolder, FaTools, FaCube, FaUsers, FaMicrophone, FaLayerGroup, FaSignOutAlt } from 'react-icons/fa';
+import { FaPhone, FaFolder, FaTools, FaCube, FaUsers, FaLayerGroup, FaSignOutAlt } from 'react-icons/fa';
 import { MdKeyboardArrowUp, MdKeyboardArrowDown } from 'react-icons/md';
 import Logo from './Logo';
 import SmallLogo from './SmallLogo';
-import { MdOutlineDashboard ,MdSupportAgent  } from "react-icons/md";
+import { MdOutlineDashboard, MdSupportAgent } from 'react-icons/md';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
-/**
- *
- */
 const Sidebar: React.FC = () => {
+  const { t } = useTranslation('sidebar'); // Specify the 'sidebar' namespace
   const location = useLocation();
   const initialSidebarState = JSON.parse(localStorage.getItem('sidebarOpen') || 'true');
   const initialPlatformState = JSON.parse(localStorage.getItem('platformOpen') || 'false');
@@ -31,41 +30,39 @@ const Sidebar: React.FC = () => {
     localStorage.setItem('logsOpen', JSON.stringify(logsOpen));
   }, [logsOpen]);
 
-  /**
-   *
-   */
   const handleSidebarToggle = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
-  /**
-   *
-   */
   const handlePlatformToggle = () => {
     setPlatformOpen((prevState: boolean) => !prevState);
   };
 
-  /**
-   *
-   */
   const handleLogsToggle = () => {
     setLogsOpen((prevState: boolean) => !prevState);
   };
 
-  /**
-   *
-   */
   const handleLogout = () => {
     localStorage.clear();
     window.location.reload();
   };
 
   return (
-    <div className={`border-gray-300 dark:border-slate-800 dark:bg-bg-gray-800 p-5 border ${isSidebarOpen ? "w-64" : "w-[95px]"}  max-w-xs h-screen text-gray-900 dark:text-gray-200 transition-width duration-300 ease-in-out`}> {/* Added smooth transition */}
+    <div
+      className={`border-gray-300 dark:border-slate-800 dark:bg-bg-gray-800 p-5 border ${isSidebarOpen ? 'w-64' : 'w-[95px]'} max-w-xs h-screen text-gray-900 dark:text-gray-200 transition-width duration-300 ease-in-out`}
+    >
       <aside className="fixed flex flex-col justify-between h-full">
         <div>
           <div className="flex justify-between items-center">
-            {isSidebarOpen ? <Link to="/"><Logo width={126.95} height={24.5} /></Link> : <SmallLogo width={30} height={30} />}
+            {isSidebarOpen ? (
+              <Link to="/">
+                <Logo width={126.95} height={24.5} />
+              </Link>
+            ) : (
+              <Link to="/">
+                <SmallLogo width={30} height={30} />
+              </Link>
+            )}
             <button onClick={handleSidebarToggle} className="dark:text-white focus:outline-none rotate-[268deg]">
               {isSidebarOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />}
             </button>
@@ -78,7 +75,7 @@ const Sidebar: React.FC = () => {
                 className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/' ? 'bg-gray-100 dark:bg-gray-800 font-bold' : ''}`}
               >
                 <MdOutlineDashboard className="icon" />
-                {isSidebarOpen && <span>Overview</span>}
+                {isSidebarOpen && <span>{t('overview')}</span>}
               </Link>
             </li>
 
@@ -90,19 +87,19 @@ const Sidebar: React.FC = () => {
               >
                 <div className="flex items-center space-x-3">
                   <FaLayerGroup className="icon" />
-                  {isSidebarOpen && <span>Platform</span>}
+                  {isSidebarOpen && <span>{t('platform')}</span>}
                 </div>
                 {isSidebarOpen && (platformOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />)}
               </div>
               {platformOpen && (
-                <ul className={`space-y-1 mt-0.5 dark:bg-[#161e2d] p-2 rounded-lg transition-all duration-300 ease-in-out ${isSidebarOpen ? 'pl-4' : 'pl-2'}`}> {/* Added smooth transition */}
+                <ul className={`space-y-1 mt-0.5 dark:bg-[#161e2d] p-2 rounded-lg transition-all duration-300 ease-in-out ${isSidebarOpen ? 'pl-4' : 'pl-2'}`}>
                   <li>
                     <Link
                       to="/agents"
                       className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/assistants' ? 'bg-gray-800 font-bold' : ''}`}
                     >
                       <MdSupportAgent className="icon" />
-                      {isSidebarOpen && <span>Agents</span>}
+                      {isSidebarOpen && <span>{t('agents')}</span>}
                     </Link>
                   </li>
                   <li>
@@ -111,7 +108,7 @@ const Sidebar: React.FC = () => {
                       className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/phone-numbers' ? 'bg-gray-800 font-bold' : ''}`}
                     >
                       <FaPhone className="icon" />
-                      {isSidebarOpen && <span>Phone Numbers</span>}
+                      {isSidebarOpen && <span>{t('phone_numbers')}</span>}
                     </Link>
                   </li>
                   <li>
@@ -120,7 +117,7 @@ const Sidebar: React.FC = () => {
                       className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/files' ? 'bg-gray-800 font-bold' : ''}`}
                     >
                       <FaFolder className="icon" />
-                      {isSidebarOpen && <span>Files</span>}
+                      {isSidebarOpen && <span>{t('files')}</span>}
                     </Link>
                   </li>
                   <li>
@@ -129,7 +126,7 @@ const Sidebar: React.FC = () => {
                       className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/tools' ? 'bg-gray-800 font-bold' : ''}`}
                     >
                       <FaTools className="icon" />
-                      {isSidebarOpen && <span>Tools</span>}
+                      {isSidebarOpen && <span>{t('tools')}</span>}
                     </Link>
                   </li>
                   <li>
@@ -138,7 +135,7 @@ const Sidebar: React.FC = () => {
                       className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/blocks' ? 'bg-gray-800 font-bold' : ''}`}
                     >
                       <FaCube className="icon" />
-                      {isSidebarOpen && <span>Blocks</span>}
+                      {isSidebarOpen && <span>{t('blocks')}</span>}
                     </Link>
                   </li>
                   <li>
@@ -147,7 +144,7 @@ const Sidebar: React.FC = () => {
                       className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/platform/squads' ? 'bg-gray-800 font-bold' : ''}`}
                     >
                       <FaUsers className="icon" />
-                      {isSidebarOpen && <span>Squads</span>}
+                      {isSidebarOpen && <span>{t('squads')}</span>}
                     </Link>
                   </li>
                 </ul>
@@ -162,19 +159,19 @@ const Sidebar: React.FC = () => {
               >
                 <div className="flex items-center space-x-3">
                   <FaFolder className="icon" />
-                  {isSidebarOpen && <span>Logs</span>}
+                  {isSidebarOpen && <span>{t('logs')}</span>}
                 </div>
                 {isSidebarOpen && (logsOpen ? <MdKeyboardArrowUp size={24} /> : <MdKeyboardArrowDown size={24} />)}
               </div>
               {logsOpen && (
-                <ul className={`space-y-1 mt-0.5 dark:bg-gray-700 p-2 rounded-lg transition-all duration-300 ease-in-out ${isSidebarOpen ? 'pl-4' : 'pl-2'}`}> {/* Added smooth transition */}
+                <ul className={`space-y-1 mt-0.5 dark:bg-gray-700 p-2 rounded-lg transition-all duration-300 ease-in-out ${isSidebarOpen ? 'pl-4' : 'pl-2'}`}>
                   <li>
                     <Link
                       to="/logs/voice-library"
                       className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/logs/voice-library' ? 'bg-gray-800 font-bold' : ''}`}
                     >
                       <FaFolder className="icon" />
-                      {isSidebarOpen && <span>Voice Library</span>}
+                      {isSidebarOpen && <span>{t('voice_library')}</span>}
                     </Link>
                   </li>
                 </ul>
@@ -191,14 +188,11 @@ const Sidebar: React.FC = () => {
             className={`flex items-center space-x-3 p-2 rounded-lg transition ${location.pathname === '/profile' ? 'bg-gray-800 font-bold' : ''}`}
           >
             <FaUsers className="icon" />
-            {isSidebarOpen && <span>Profile</span>}
+            {isSidebarOpen && <span>{t('profile')}</span>}
           </Link>
-          <button
-            onClick={handleLogout}
-            className={`flex items-center space-x-3 p-2 rounded-lg transition w-full mt-4 ${'bg-gray-100 dark:bg-gray-800'}`}
-          >
+          <button onClick={handleLogout} className={`flex items-center space-x-3 p-2 rounded-lg transition w-full mt-4 ${'bg-gray-100 dark:bg-gray-800'}`}>
             <FaSignOutAlt className="icon" />
-            {isSidebarOpen && <span>Logout</span>}
+            {isSidebarOpen && <span>{t('logout')}</span>}
           </button>
         </div>
       </aside>

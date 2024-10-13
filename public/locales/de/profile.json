@@ -1,0 +1,25 @@
+{
+    "personal_information": "Persönliche Informationen",
+    "username": "Benutzername",
+    "email": "E-Mail",
+    "first_name": "Vorname",
+    "last_name": "Nachname",
+    "avatar_alt": "Profilbild",
+    "password": "Passwort",
+    "update_password": "Passwort ändern",
+    "delete_account": "Konto löschen",
+    "confirm_delete_account": "Sind Sie sicher, dass Sie Ihr Konto löschen möchten?",
+    "yes_delete_account": "Ja, Konto löschen",
+    "no_keep_account": "Nein, Konto behalten",
+    "saving": "Speichern...",
+    "save": "Speichern",
+    "avatar_updated": "Profilbild erfolgreich aktualisiert!",
+    "avatar_update_failed": "Profilbild konnte nicht aktualisiert werden.",
+    "avatar_removed": "Profilbild erfolgreich entfernt!",
+    "avatar_remove_failed": "Profilbild konnte nicht entfernt werden.",
+    "profile_updated": "Profil erfolgreich aktualisiert!",
+    "profile_update_failed": "Profilaktualisierung fehlgeschlagen.",
+    "account_removed": "Ihr Konto wurde erfolgreich gelöscht.",
+    "account_remove_failed": "Konto konnte nicht gelöscht werden."
+  }
+  

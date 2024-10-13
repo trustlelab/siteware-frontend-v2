@@ -4,11 +4,12 @@ import { RootState, AppDispatch } from '../../../../app/store';
 import { fetchAgentData, updateAgentData } from '../../../../features/slices/agentSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from '../../../lib/Button';
+import Input from '../../../lib/Input';
+import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
 
-/**
- *
- */
 const AgentConfig = () => {
+  const { t } = useTranslation('agentConfig'); // Use the 'agentConfig' namespace for translations
   const dispatch = useDispatch<AppDispatch>();
   const agentData = useSelector((state: RootState) => state.agent.agentData);
   const id = useSelector((state: RootState) => state.agent.id);
@@ -31,9 +32,6 @@ const AgentConfig = () => {
     }
   }, [agentData]);
 
-  /**
-   *
-   */
   const handleSave = async () => {
     if (id) {
       setIsSaving(true);
@@ -46,48 +44,47 @@ const AgentConfig = () => {
       };
       await dispatch(updateAgentData(updatedData));
       setIsSaving(false);
-      toast.success('Agent configuration saved successfully');
+      toast.success(t('save_success')); // Use translated success message
     }
   };
 
   return (
     <div className="dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
       <ToastContainer />
-      <h2 className="mb-4 text-xl">Agent Configuration</h2>
+      <h2 className="mb-4 text-xl">{t('agent_configuration')}</h2> {/* Translated heading */}
 
       {agentData && (
         <>
           <div className="mb-4">
-            <label className="config_label">Agent Welcome Message</label>
-            <input
+            <Input
+              label={t('welcome_message_label')}
               type="text"
               value={welcomeMessage}
               onChange={(e) => setWelcomeMessage(e.target.value)}
-              className="config_input"
-              placeholder="Enter welcome message"
+              placeholder={t('welcome_message_placeholder')}
             />
             <p className="config_helper_text">
-              This will be the initial message from the agent. You can use variables here using <code>{'{variable_name}'}</code>
+              {t('welcome_message_help')} <code>{'{variable_name}'}</code>
             </p>
           </div>
 
           <div className="mb-4">
-            <label className="config_label">Agent Prompt</label>
-            <textarea
-              className="config_input"
+            <Input
+              label={t('agent_prompt_label')}
+              type='textarea'
               rows={14}
               value={agentPrompt}
               onChange={(e) => setAgentPrompt(e.target.value)}
-              placeholder="You are a helpful agent..."
+              placeholder={t('agent_prompt_placeholder')}
             />
             <p className="config_helper_text">
-              You can define variables in the prompt using <code>{'{variable_name}'}</code>
+              {t('agent_prompt_help')} <code>{'{variable_name}'}</code>
             </p>
           </div>
 
-          <button className="config_button" onClick={handleSave} disabled={isSaving}>
-            {isSaving ? 'Saving...' : 'Save'}
-          </button>
+          <Button onClick={handleSave} disabled={isSaving} size='normal'>
+            {isSaving ? t('saving') : t('save')} {/* Translated button text */}
+          </Button>
         </>
       )}
     </div>
