@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
 import { FiFilter } from 'react-icons/fi';
+import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
-/**
- *
- */
 const FilterAgentAndSearch: React.FC = () => {
+  const { t } = useTranslation('filter'); // Use 'filter' namespace
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeFilter, setActiveFilter] = useState<'text' | 'voice'>('text');
 
-  /**
-   *
-   */
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
     setSearchQuery(value);
   };
 
-  /**
-   *
-   */
   const handleFilterChange = (filter: 'text' | 'voice') => {
     setActiveFilter(filter);
   };
@@ -29,7 +22,7 @@ const FilterAgentAndSearch: React.FC = () => {
         type="text"
         value={searchQuery}
         onChange={handleSearchChange}
-        placeholder="Search Agents"
+        placeholder={t('search_agents')} // Translated placeholder
         className="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full text-black dark:text-white focus:outline-none"
       />
 
@@ -38,13 +31,13 @@ const FilterAgentAndSearch: React.FC = () => {
           onClick={() => handleFilterChange('text')}
           className={`px-4 py-2 rounded-l-full ${activeFilter === 'text' ? 'bg-gray-200 dark:bg-gray-600' : 'bg-transparent'} focus:outline-none`}
         >
-          Text
+          {t('text_filter')} {/* Translated button label */}
         </button>
         <button
           onClick={() => handleFilterChange('voice')}
           className={`px-4 py-2 rounded-r-full ${activeFilter === 'voice' ? 'bg-gray-200 dark:bg-gray-600' : 'bg-transparent'} focus:outline-none`}
         >
-          Voice
+          {t('voice_filter')} {/* Translated button label */}
         </button>
       </div>
 

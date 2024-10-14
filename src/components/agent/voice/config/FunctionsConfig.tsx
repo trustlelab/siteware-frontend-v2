@@ -4,11 +4,15 @@ import { RootState, AppDispatch } from '../../../../app/store';
 import { updateAgentData, fetchAgentData } from '../../../../features/slices/agentSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from '../../../lib/Button'; // Reusable Button component
+import Dropdown from '../../../lib/DropDown'; // Reusable Dropdown component
+import { useTranslation } from 'react-i18next'; // Import the translation hook
 
 /**
  * Function component for configuring agent functions.
  */
 const FunctionsConfig: FC = () => {
+  const { t } = useTranslation('functionsConfig'); // Use the namespace for FunctionsConfig translations
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);
@@ -42,7 +46,7 @@ const FunctionsConfig: FC = () => {
     };
     try {
       await dispatch(updateAgentData(updatedData));
-      toast.success('Function configuration saved successfully');
+      toast.success(t('function_saved')); // Translated toast message
     } catch (error) {
       console.error('Error updating agent data:', error);
     } finally {
@@ -53,20 +57,30 @@ const FunctionsConfig: FC = () => {
   return (
     <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
       <ToastContainer />
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center gap-4">
         <div className="w-3/4">
-          <label className="config_label">Choose a function</label>
-          <select className="w-full config_input" value={selectedFunction} onChange={(e) => setSelectedFunction(e.target.value)}>
-            <option value="Check slot availability (using Cal.com)">Check slot availability (using Cal.com)</option>
-            <option value="Another function">Another function</option>
-            <option value="Yet another function">Yet another function</option>
-          </select>
+          <Dropdown
+            label={t('choose_function')} // Translated label
+            options={[
+              t('check_slot_availability'), // Translated dropdown options
+              t('another_function'),
+              t('yet_another_function'),
+            ]}
+            selected={selectedFunction}
+            onChange={(value) => setSelectedFunction(value)}
+          />
         </div>
 
         <div className="flex justify-end w-1/4">
-          <button className="bg-blue-500 hover:bg-blue-600 px-4 py-2 rounded text-white" onClick={handleSave} disabled={isSaving}>
-            {isSaving ? 'Saving...' : 'Save Function'}
-          </button>
+          <Button
+            variant="primary"
+            size="normal"
+            radius="lg"
+            onClick={handleSave}
+            disabled={isSaving}
+          >
+            {isSaving ? t('saving') : t('save_function')} {/* Translated button label */}
+          </Button>
         </div>
       </div>
     </div>

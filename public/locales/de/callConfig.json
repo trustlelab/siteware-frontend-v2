@@ -1,0 +1,12 @@
+{
+    "provider": "Anbieter",
+    "call_hangup_logic": "Anruf-Auflegelogik",
+    "hangup_on_silence": "Der Anruf wird nach {{seconds}} Sekunden Stille beendet",
+    "call_termination": "Anrufbeendigung",
+    "termination_after_seconds": "Der Anruf endet nach {{seconds}} Sekunden Gesprächszeit",
+    "time_seconds": "Zeit (Sekunden)",
+    "save": "Speichern",
+    "saving": "Speichern...",
+    "configuration_saved": "Konfiguration erfolgreich gespeichert"
+  }
+  

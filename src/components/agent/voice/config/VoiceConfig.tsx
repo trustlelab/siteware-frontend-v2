@@ -4,11 +4,15 @@ import { RootState, AppDispatch } from '../../../../app/store';
 import { fetchAgentData, updateAgentData } from '../../../../features/slices/agentSlice';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Button from '../../../lib/Button';
+import Dropdown from '../../../lib/DropDown';
+import SliderInput from '../../../lib/SliderInput';
+import Input from '../../../lib/Input';
+import Checkbox from '../../../lib/Checkbox';
+import { useTranslation } from 'react-i18next'; // Import useTranslation
 
-/**
- *
- */
 const VoiceConfig = () => {
+  const { t } = useTranslation('voiceConfig'); // Use the 'voiceConfig' namespace
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);
@@ -44,9 +48,6 @@ const VoiceConfig = () => {
     }
   }, [agentData]);
 
-  /**
-   *
-   */
   const handleSave = async () => {
     if (!agentId) return;
 
@@ -67,7 +68,7 @@ const VoiceConfig = () => {
     };
     try {
       await dispatch(updateAgentData(updatedData));
-      toast.success('Agent configuration saved successfully');
+      toast.success(t('save_success')); // Translated success message
     } catch (error) {
       console.error('Error updating agent data:', error);
     } finally {
@@ -78,126 +79,95 @@ const VoiceConfig = () => {
   return (
     <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
       <ToastContainer />
-      {/* Two-column responsive grid */}
       <div className="gap-6 grid grid-cols-1 md:grid-cols-2">
-        {/* Synthesizer Dropdown */}
-        <div>
-          <label className="config_label">Choose Synthesizer</label>
-          <select className="config_input" value={synthesizer} onChange={(e) => setSynthesizer(e.target.value)}>
-            <option value="Deepgram">Deepgram</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
+        <Dropdown
+          label={t('choose_synthesizer')} // Translated label
+          options={['Deepgram', 'Other']}
+          selected={synthesizer}
+          onChange={(value) => setSynthesizer(value)}
+        />
 
-        {/* Voice Model Dropdown with More Voices button */}
-        <div className="flex items-center">
-          <select className="w-full config_input" value={voiceModel} onChange={(e) => setVoiceModel(e.target.value)}>
-            <option value="Arcas">Arcas</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
+        <Dropdown
+          label={t('choose_voice_model')} // Translated label
+          options={['Arcas', 'Other']}
+          selected={voiceModel}
+          onChange={(value) => setVoiceModel(value)}
+        />
 
-        {/* Buffer Size Slider */}
-        <div>
-          <label className="config_label">Buffer Size</label>
-          <input type="range" className="mt-1 range-slider" min={50} max={300} step={1} value={bufferSize} onChange={(e) => setBufferSize(+e.target.value)} />
-          <p className="config_helper_text">{bufferSize}</p>
-          <p className="config_helper_text">Increasing buffer size enables agent to speak long responses fluently, but increases latency.</p>
-        </div>
+        <SliderInput
+          label={t('buffer_size')} // Translated label
+          min={50}
+          max={300}
+          step={1}
+          value={bufferSize}
+          onChange={(value) => setBufferSize(value)}
+          helperText={t('buffer_size_helper')} // Translated helper text
+        />
 
-        {/* Endpointing Slider */}
-        <div>
-          <label className="config_label">Endpointing (in ms)</label>
-          <input
-            type="range"
-            className="mt-1 range-slider"
-            min={50}
-            max={500}
-            step={10}
-            value={endpointing}
-            onChange={(e) => setEndpointing(+e.target.value)}
-          />
-          <p className="config_helper_text">{endpointing}</p>
-          <p className="config_helper_text">
-            Number of milliseconds your agent will wait before generating a response. Lower endpointing reduces latency but could lead to agent interrupting
-            mid-sentence.
-          </p>
-        </div>
+        <SliderInput
+          label={t('endpointing')} // Translated label
+          min={50}
+          max={500}
+          step={10}
+          value={endpointing}
+          onChange={(value) => setEndpointing(value)}
+          helperText={t('endpointing_helper')} // Translated helper text
+        />
 
-        {/* Linear Delay Slider */}
-        <div>
-          <label className="config_label">Linear delay (in ms)</label>
-          <input
-            type="range"
-            className="mt-1 range-slider"
-            min={100}
-            max={1000}
-            step={50}
-            value={linearDelay}
-            onChange={(e) => setLinearDelay(+e.target.value)}
-          />
-          <p className="config_helper_text">{linearDelay}</p>
-          <p className="config_helper_text">
-            Linear delay accounts for long pauses mid-sentence. If the recipient is expected to speak long sentences, increase the value of linear delay.
-          </p>
-        </div>
+        <SliderInput
+          label={t('linear_delay')} // Translated label
+          min={100}
+          max={1000}
+          step={50}
+          value={linearDelay}
+          onChange={(value) => setLinearDelay(value)}
+          helperText={t('linear_delay_helper')} // Translated helper text
+        />
 
-        {/* Ambient Noise Dropdown */}
-        <div>
-          <label className="config_label">Ambient Noise</label>
-          <select className="config_input" value={ambientNoise} onChange={(e) => setAmbientNoise(e.target.value)}>
-            <option value="No ambient noise">No ambient noise</option>
-            <option value="Low noise">Low noise</option>
-            <option value="Moderate noise">Moderate noise</option>
-            <option value="High noise">High noise</option>
-          </select>
-        </div>
+        <Dropdown
+          label={t('ambient_noise')} // Translated label
+          options={['No ambient noise', 'Low noise', 'Moderate noise', 'High noise']}
+          selected={ambientNoise}
+          onChange={(value) => setAmbientNoise(value)}
+        />
 
-        {/* Online Check */}
         <div className="col-span-2">
-          <div className="flex items-center mt-6">
-            <input type="checkbox" checked={isUserOnline} onChange={() => setIsUserOnline(!isUserOnline)} className="form-checkbox w-5 h-5 text-teal-600" />
-            <span className="ml-2 text-gray-600 dark:text-gray-300">Agent will check if the user is online if there's no reply from the user.</span>
-          </div>
+          <Checkbox
+            label={t('user_online_check')} // Translated label
+            checked={isUserOnline}
+            onChange={() => setIsUserOnline(!isUserOnline)}
+            className="mt-6"
+          />
 
-          {/* User Online Message */}
-          <div className="mt-4">
-            <label className="config_label">User is online message</label>
-            <input
-              type="text"
-              value={userOnlineMessage}
-              onChange={(e) => setUserOnlineMessage(e.target.value)}
-              className="config_input"
-              placeholder="Enter message"
-            />
-          </div>
+          <Input
+            label={t('user_online_message')} // Translated label
+            placeholder={t('user_online_message')}
+            value={userOnlineMessage}
+            onChange={(e) => setUserOnlineMessage(e.target.value)}
+          />
 
-          {/* Invoke Message After Slider */}
-          <div className="mt-4">
-            <label className="config_label">Invoke message after (seconds)</label>
-            <input
-              type="range"
-              className="mt-1 range-slider"
-              min={1}
-              max={10}
-              step={1}
-              value={invokeAfterSeconds}
-              onChange={(e) => setInvokeAfterSeconds(+e.target.value)}
-            />
-            <p className="config_helper_text">{invokeAfterSeconds}</p>
-          </div>
+          <SliderInput
+            label={t('invoke_after_seconds')} // Translated label
+            min={1}
+            max={10}
+            step={1}
+            value={invokeAfterSeconds}
+            onChange={(value) => setInvokeAfterSeconds(value)}
+          />
         </div>
       </div>
 
-      {/* Save Button */}
       <div className="mt-6">
-        <button
-          className="bg-blue-500 hover:bg-blue-600 px-5 py-3 rounded-lg w-full md:w-auto text-white transition-colors config_button"
+        <Button
+          variant="primary"
+          size="normal"
+          radius="lg"
           onClick={handleSave}
           disabled={isSaving}
+          className="w-full md:w-auto"
         >
-          {isSaving ? 'Saving...' : 'Save'}
-        </button>
+          {isSaving ? t('saving') : t('save')} {/* Translated text */}
+        </Button>
       </div>
     </div>
   );

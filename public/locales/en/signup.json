@@ -1,0 +1,17 @@
+{
+  "create_account": "Create your account",
+  "welcome_details": "Welcome! Please enter your details.",
+  "email": "Email",
+  "enter_email": "Enter your email",
+  "password": "Password",
+  "enter_password": "Enter your password",
+  "confirm_password": "Confirm Password",
+  "confirm_your_password": "Confirm your password",
+  "password_must_be_6": "Password must be at least 6 characters",
+  "passwords_do_not_match": "Passwords do not match",
+  "terms_and_conditions": "I accept the Siteware Terms of Service and Privacy Policy.",
+  "already_have_account": "Already have a Siteware account?",
+  "login": "Login",
+  "signup": "Sign up",
+  "signing_up": "Signing up..."
+}

@@ -1,30 +1,32 @@
 import { useState, useEffect } from 'react';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'; // Importing icons
+import { useTranslation } from 'react-i18next'; // Import i18n translation hook
 
 /**
  *
  */
 const Carousel = () => {
+  const { t } = useTranslation('carousel'); // Initialize i18n translation
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const slides = [
     {
-      title: 'Create Your Own Voice Assistant',
-      phrase: 'Easily build a custom voice assistant to address your specific needs on any platform.',
+      title: t('create_assistant_title'), // Translation key for title
+      phrase: t('create_assistant_phrase'), // Translation key for phrase
       image: 'https://tinyurl.com/grt456', // Original image URL
       smallImage: 'https://ln.run/YIXAj', // Original small image URL
       id: 1,
     },
     {
-      title: 'Customize Responses for Any Problem',
-      phrase: 'Define how your assistant responds to various user inputs with AI-driven solutions.',
+      title: t('customize_responses_title'), // Translation key for title
+      phrase: t('customize_responses_phrase'), // Translation key for phrase
       image: 'https://ln.run/8Unoa', // Original image URL
       smallImage: 'https://ln.run/eK7ad', // Original small image URL
       id: 2,
     },
     {
-      title: 'Deploy Across Platforms',
-      phrase: 'Your assistant can be deployed on any platform, supporting web, mobile, and desktop apps.',
+      title: t('deploy_platforms_title'), // Translation key for title
+      phrase: t('deploy_platforms_phrase'), // Translation key for phrase
       image: 'https://ln.run/v2boj', // Original image URL
       smallImage: 'https://ln.run/QyDTU', // Original small image URL
       id: 3,

@@ -1,0 +1,16 @@
+{
+    "welcome_back": "Welcome Back",
+    "enter_credentials": "Please enter your credentials to continue.",
+    "email": "Email",
+    "enter_email": "Enter your email",
+    "password": "Password",
+    "enter_password": "Enter your password",
+    "remember_me": "Remember Me",
+    "signing_in": "Signing in...",
+    "login": "Login",
+    "dont_have_account": "Don't have an account?",
+    "sign_up": "Sign up",
+    "forgot_password": "Forgot Password?",
+    "google_sign_in": "Continue with Google"
+  }
+  

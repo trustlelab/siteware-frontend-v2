@@ -1,0 +1,16 @@
+{
+    "welcome_back": "Willkommen zurück",
+    "enter_credentials": "Bitte geben Sie Ihre Anmeldedaten ein, um fortzufahren.",
+    "email": "E-Mail",
+    "enter_email": "Geben Sie Ihre E-Mail-Adresse ein",
+    "password": "Passwort",
+    "enter_password": "Geben Sie Ihr Passwort ein",
+    "remember_me": "Angemeldet bleiben",
+    "signing_in": "Anmelden...",
+    "login": "Anmelden",
+    "dont_have_account": "Sie haben kein Konto?",
+    "sign_up": "Registrieren",
+    "forgot_password": "Passwort vergessen?",
+    "google_sign_in": "Mit Google fortfahren"
+  }
+  

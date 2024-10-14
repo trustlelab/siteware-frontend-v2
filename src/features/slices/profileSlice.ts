@@ -70,6 +70,9 @@ const userProfileSlice = createSlice({
   name: 'userProfile',
   initialState,
   reducers: {},
+  /**
+   *
+   */
   extraReducers: (builder) => {
     builder
       .addCase(fetchUserProfile.pending, (state) => {

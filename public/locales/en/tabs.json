@@ -1,0 +1,10 @@
+{
+    "agent": "Agent",
+    "llm": "LLM",
+    "transcriber": "Transcriber",
+    "voice": "Voice",
+    "call": "Call",
+    "functions": "Functions",
+    "tasks": "Tasks"
+  }
+  

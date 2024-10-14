@@ -1,0 +1,18 @@
+{
+    "choose_synthesizer": "Wählen Sie einen Synthesizer",
+    "choose_voice_model": "Wählen Sie ein Stimm-Modell",
+    "buffer_size": "Puffergröße",
+    "buffer_size_helper": "Durch Erhöhen der Puffergröße kann der Agent lange Antworten flüssig sprechen, aber die Latenz steigt.",
+    "endpointing": "Endpunktfestlegung (in ms)",
+    "endpointing_helper": "Anzahl der Millisekunden, die Ihr Agent wartet, bevor er eine Antwort generiert. Niedrigere Endpunktfestlegung verringert die Latenz, kann jedoch dazu führen, dass der Agent mitten im Satz unterbricht.",
+    "linear_delay": "Lineare Verzögerung (in ms)",
+    "linear_delay_helper": "Die lineare Verzögerung berücksichtigt lange Pausen mitten im Satz. Wenn erwartet wird, dass der Empfänger lange Sätze spricht, erhöhen Sie den Wert der linearen Verzögerung.",
+    "ambient_noise": "Umgebungsgeräusche",
+    "user_online_check": "Der Agent prüft, ob der Benutzer online ist, wenn keine Antwort erfolgt.",
+    "user_online_message": "Nachricht, wenn der Benutzer online ist",
+    "invoke_after_seconds": "Nachricht nach (Sekunden) senden",
+    "saving": "Speichern...",
+    "save": "Speichern",
+    "save_success": "Agentenkonfiguration erfolgreich gespeichert"
+  }
+  

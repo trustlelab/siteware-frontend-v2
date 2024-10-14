@@ -1,0 +1,25 @@
+{
+    "personal_information": "Personal Information",
+    "username": "Username",
+    "email": "Email",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "avatar_alt": "Profile Avatar",
+    "password": "Password",
+    "update_password": "Update Password",
+    "delete_account": "Delete Account",
+    "confirm_delete_account": "Are you sure you want to remove your account?",
+    "yes_delete_account": "Yes, Delete My Account",
+    "no_keep_account": "No, Keep My Account",
+    "saving": "Saving...",
+    "save": "Save",
+    "avatar_updated": "Profile avatar updated successfully!",
+    "avatar_update_failed": "Failed to update profile avatar.",
+    "avatar_removed": "Profile avatar removed successfully!",
+    "avatar_remove_failed": "Failed to remove profile avatar.",
+    "profile_updated": "Profile updated successfully!",
+    "profile_update_failed": "Failed to update profile.",
+    "account_removed": "Your account has been successfully removed.",
+    "account_remove_failed": "Failed to remove account."
+  }
+  

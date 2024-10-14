@@ -1,50 +1,45 @@
 import React, { useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { loginThunk } from '../../features/slices/authSlice';
 import Carouselwrapper from '../common/CarouselWrapper';
-import API from '../../utils/API';
 import Logo from '../common/Logo';
-import Form_divider from '../common/Divider';
+import FormDivider from '../common/Divider';
 import ContinueWithGoogle from '../common/ContinueWithGoogle';
+import Input from '../lib/Input';
+import Button from '../lib/Button';
+import Checkbox from '../lib/Checkbox';
+import { useTranslation } from 'react-i18next';
 
-/**
- *
- */
 const Login: React.FC = () => {
+  const { t } = useTranslation('login'); // Specify the 'login' namespace
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
   const [rememberMe, setRememberMe] = useState<boolean>(false);
 
-  /**
-   *
-   */
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault(); // Prevent default form submission
+  const dispatch = useAppDispatch();
+  const { loading, error, isAuthenticated } = useAppSelector((state) => state.auth);
 
-    setLoading(true); // Set loading to true when the request starts
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
     try {
-      const response = await API.post('/auth/login', {
-        email,
-        password,
-      });
+      const resultAction = await dispatch(loginThunk({ email, password }));
 
-      // Store user data in localStorage upon successful login
-      localStorage.setItem('user', JSON.stringify(response.data)); // Adjust based on your response structure
-      setSuccess('Login successful!');
-      setError(null);
-
-      // Redirect to the root route ("/") after successful login
-      window.location.href = '/';
-    } catch (err: any) {
-      // Use any type or define a more specific error type
-      setError(err.response?.data?.message || 'Invalid email or password.');
-      setSuccess(null);
-    } finally {
-      setLoading(false); // Set loading to false when the request completes
+      if (loginThunk.fulfilled.match(resultAction)) {
+        const userData = resultAction.payload;
+        localStorage.setItem('user', JSON.stringify(userData));
+        window.location.href = '/';
+      } else {
+        console.error('Login failed', resultAction.payload);
+      }
+    } catch (err) {
+      console.error('Login error', err);
     }
   };
+
+  if (isAuthenticated) {
+    window.location.href = '/';
+  }
 
   return (
     <main className="flex justify-between">
@@ -55,73 +50,66 @@ const Login: React.FC = () => {
           </div>
           <div className="space-y-[32px]">
             <div className="space-y-[12px] sm:mt-[80px]">
-              <h1 className="font-bold text-[#475467] text-[24px] dark:text-[#D0D5DD]">Welcome Back</h1>
-              <h3 className="text-[#475467] text-[16px] dark:text-[#D0D5DD]">Please enter your credentials to continue.</h3>
+              <h1 className="font-bold text-[#475467] text-[24px] dark:text-[#D0D5DD]">
+                {t('welcome_back')}
+              </h1>
+              <h3 className="text-[#475467] text-[16px] dark:text-[#D0D5DD]">
+                {t('enter_credentials')}
+              </h3>
             </div>
 
-            <ContinueWithGoogle />
-            <Form_divider />
+            <ContinueWithGoogle text={t('google_sign_in')} />
+            <FormDivider />
 
             <form onSubmit={handleLogin}>
               <div className="mb-4">
-                <label className="FormInput_label" htmlFor="email">
-                  Email
-                </label>
-                <input
+                <Input
                   type="email"
-                  id="email"
-                  placeholder="Enter your email"
-                  className="form_input"
-                  value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  value={email}
+                  placeholder={t('enter_email')}
+                  label={t('email')}
                   required
                 />
               </div>
 
               <div className="mb-4">
-                <label className="FormInput_label" htmlFor="password">
-                  Password
-                </label>
-                <input
+                <Input
                   type="password"
-                  id="password"
-                  placeholder="Enter your password"
-                  className="form_input"
-                  value={password}
                   onChange={(e) => setPassword(e.target.value)}
+                  value={password}
+                  placeholder={t('enter_password')}
+                  label={t('password')}
                   required
                 />
               </div>
 
               {error && <p className="text-red-500">{error}</p>}
-              {success && <p className="text-green-500">{success}</p>}
-
               <div className="flex items-center mt-4">
-                <input type="checkbox" id="remember" className="terms-checkbox" checked={rememberMe} onChange={() => setRememberMe(!rememberMe)} />
-                <label htmlFor="remember" className="ml-2 dark:text-white cursor-pointer">
-                  <span className="checkmark"></span>
-                  Remember Me
-                </label>
+                <Checkbox
+                  id="remember"
+                  label={t('remember_me')}
+                  checked={rememberMe}
+                  onChange={() => setRememberMe(!rememberMe)}
+                  className="dark:text-white"
+                />
               </div>
 
               <div className="flex flex-col items-center mt-8">
-                <button type="submit" className="btn_primary" disabled={loading}>
-                  {loading ? 'Signing in...' : 'Login'}
-                </button>
+                <Button type="submit" className="w-full h-[48px]" disabled={loading}>
+                  {loading ? t('signing_in') : t('login')}
+                </Button>
               </div>
             </form>
 
             <p className="mt-4 w-full text-[16px] text-center text-gray-600 dark:text-white">
-              Don't have an account?
-              <a href="/signup" className="font-bold">
-                {' '}
-                Sign up
-              </a>
+              {t('dont_have_account')}
+              <a href="/signup" className="font-bold"> {t('sign_up')}</a>
             </p>
 
             <p className="mt-2 w-full text-center text-gray-600 text-sm">
               <a href="/forgot-password" className="font-bold text-[16px]">
-                Forgot Password?
+                {t('forgot_password')}
               </a>
             </p>
           </div>

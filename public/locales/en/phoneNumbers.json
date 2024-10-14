@@ -1,0 +1,26 @@
+{
+    "manage_phone_numbers": "Manage Your Phone Numbers",
+    "import_description": "Import your phone numbers or buy one to use with your AI assistants.",
+    "import_number": "Import Number",
+    "your_phone_numbers": "Your Phone Numbers",
+    "no_phone_numbers": "No phone numbers available",
+    "phone_number_imported_success": "Phone number imported successfully!",
+    "phone_number_import_failed": "Failed to import phone number: {{error}}",
+    "phone_number_label_updated_success": "Phone number label updated successfully!",
+    "phone_number_label_update_failed": "Failed to update phone number label: {{error}}",
+    "loading_phone_numbers": "Loading phone numbers...",
+    "failed_to_load_phone_numbers": "Failed to load phone numbers.",
+    "import_phone_number": "Import Phone Number",
+    "edit_phone_number_label": "Edit Phone Number Label",
+    "country_code": "Country Code",
+    "twilio_phone_number": "Twilio Phone Number",
+    "twilio_account_sid": "Twilio Account SID",
+    "twilio_auth_token": "Twilio Auth Token",
+    "label": "Label",
+    "label_for_phone_number": "Label for Phone Number",
+    "new_label_for_phone_number": "New Label for Phone Number",
+    "cancel": "Cancel",
+    "import": "Import",
+    "update_label": "Update Label"
+  }
+  

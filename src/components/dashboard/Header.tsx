@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import ThemeToggle from '../common/ToggleTheme';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../app/store';
+import LanguageSelector from '../common/LanguageSelector';
 
 /**
  *
@@ -14,7 +15,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="flex justify-between items-center p-4">
-      <h1 className="font-bold text-xl dark:text-white"></h1>
+      <h1 className="font-bold text-black text-xl dark:text-white"></h1>
       <div className="flex items-center space-x-4">
         <ThemeToggle />
         <button className="relative focus:outline-none">
@@ -23,6 +24,8 @@ const Header: React.FC = () => {
             3
           </span>
         </button>
+        <LanguageSelector/>
+
         <button onClick={() => navigate('/profile')}>
           {profile?.avatarUrl ? (
             <img src={`${import.meta.env.VITE_API_BASE_URL}${profile.avatarUrl}`} alt="Profile" className="rounded-full w-8 h-8" />

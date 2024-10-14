@@ -1,6 +1,7 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit';
 import { setId, fetchAgentData } from './agentSlice';
 import { fetchUserProfile } from './profileSlice';
+import { fetchPhoneNumbers } from './phonenumberSlice';
 
 const listenerMiddleware = createListenerMiddleware();
 
@@ -15,6 +16,7 @@ listenerMiddleware.startListening({
     listenerApi.dispatch(fetchAgentData(id));
     // Dispatch fetchUserProfile thunk
     listenerApi.dispatch(fetchUserProfile());
+    listenerApi.dispatch(fetchPhoneNumbers());
   },
 });
 

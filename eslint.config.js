@@ -44,7 +44,7 @@ export default [
       'jsx-a11y/label-has-associated-control': 'off',
       'jsx-a11y/control-has-associated-label': 'off',
       'jsx-a11y/label-has-for': 'off',
-      "react/prop-types": "warn",
+      'react/prop-types': 'warn',
 
       // React rules
       'react/prop-types': 'error',
