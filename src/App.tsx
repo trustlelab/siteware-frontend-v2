@@ -11,6 +11,8 @@ import Profile from './components/dashboard/Profile';
 import PhoneNumbers from './components/phone-numbers/ImportPhoneNumber';
 import Overview from './components/dashboard/Overview';
 import SetNewPassword from './components/dashboard/SetNewPassword';
+import Voices from './components/dashboard/Voices';
+import Files from './components/dashboard/Files';
 
 /**
  *
@@ -44,6 +46,9 @@ const App: React.FC = () => {
           <Route path="profile" element={<Profile />} />
           <Route path="phone-numbers" element={<PhoneNumbers />} />
           <Route path="update-password" element={<SetNewPassword />} />
+          <Route path='voices' element={<Voices/>}/>
+          <Route path='files' element={<Files/>}/>
+
         </Route>
 
         <Route path="*" element={<Navigate to={isLoggedIn ? '/' : '/login'} />} />

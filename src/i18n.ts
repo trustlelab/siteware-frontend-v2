@@ -38,7 +38,9 @@ i18n
       'tasksConfig',
       'profile',
       'phoneNumbers',
-      'carousel'
+      'carousel',
+      'voices',
+      'files'
     ],
     defaultNS: 'login',
     detection: {

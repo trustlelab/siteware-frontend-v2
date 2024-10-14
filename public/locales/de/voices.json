@@ -1,0 +1,15 @@
+{
+    "title": "Stimmen",
+    "subtitle": "Stimmen erkunden und testen",
+    "loading": "Lade Stimmen...",
+    "error": "Fehler: {{error}}",
+    "expressive": "ausdrucksstark",
+    "accent": "Akzent",
+    "age": "Alter",
+    "useCase": "Anwendungsfall",
+    "gender": "Geschlecht",
+    "NA": "N/V",
+    "stop": "Stopp",
+    "play": "Stimme abspielen"
+  }
+  
