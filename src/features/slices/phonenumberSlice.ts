@@ -42,7 +42,7 @@ export const addPhoneNumber = createAsyncThunk<PhoneNumber, { phoneNumber: strin
 );
 
 // Thunk to remove a phone number
-export const removePhoneNumber = createAsyncThunk<string, string>('phoneNumber/removePhoneNumber', async id => {
+export const removePhoneNumber = createAsyncThunk<number, number>('phoneNumber/removePhoneNumber', async id => {
   await API.delete<{ status: number }>(`/twilio/remove-number/${id}`);
   return id;
 });
@@ -122,8 +122,8 @@ const phoneNumberSlice = createSlice({
         state.status = 'loading';
         state.error = null;
       })
-      .addCase(removePhoneNumber.fulfilled, (state, action: PayloadAction<string>) => {
-        state.phoneNumbers = state.phoneNumbers.filter(phoneNumber => phoneNumber.id !== parseInt(action.payload));
+      .addCase(removePhoneNumber.fulfilled, (state, action: PayloadAction<number>) => {
+        state.phoneNumbers = state.phoneNumbers.filter(phoneNumber => phoneNumber.id !== action.payload);
         state.status = 'succeeded';
       })
       .addCase(removePhoneNumber.rejected, (state, action) => {
