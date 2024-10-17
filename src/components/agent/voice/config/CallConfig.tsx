@@ -57,28 +57,30 @@ const CallConfig = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
+    <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-full max-w-full mx-auto">
       <ToastContainer />
-      
+
       {/* Provider Dropdown */}
-      <Dropdown
-        label={t('provider')}
-        options={['Twilio', 'Other']}
-        selected={provider}
-        onChange={(value) => setProvider(value)}
-      />
+      <div className="mb-6">
+        <Dropdown
+          label={t('provider')}
+          options={['Twilio', 'Other']}
+          selected={provider}
+          onChange={(value) => setProvider(value)}
+        />
+      </div>
 
       {/* Call Hangup Logic */}
       <div className="mb-6">
-        <label className="config_label">{t('call_hangup_logic')}</label>
-        <div className="flex justify-between items-center">
+        <label className="text-gray-600 dark:text-gray-200">{t('call_hangup_logic')}</label>
+        <div className="flex flex-col md:flex-row md:items-center justify-between">
           <Dropdown
             label=""
             options={[`${t('hangup_on_silence', { seconds: hangupTime })}`]}
             selected={`${t('hangup_on_silence', { seconds: hangupTime })}`}
             onChange={() => {}}
           />
-          <div className="ml-4 w-1/3">
+          <div className="mt-4 md:mt-0 md:ml-4 w-full md:w-1/3">
             <SliderInput
               label={t('time_seconds')}
               min={1}
@@ -93,15 +95,15 @@ const CallConfig = () => {
 
       {/* Call Termination */}
       <div className="mb-6">
-        <label className="config_label">{t('call_termination')}</label>
-        <div className="flex justify-between items-center">
+        <label className="text-gray-600 dark:text-gray-200">{t('call_termination')}</label>
+        <div className="flex flex-col md:flex-row md:items-center justify-between">
           <Dropdown
             label=""
             options={[`${t('termination_after_seconds', { seconds: terminationTime })}`]}
             selected={`${t('termination_after_seconds', { seconds: terminationTime })}`}
             onChange={() => {}}
           />
-          <div className="ml-4 w-1/3">
+          <div className="mt-4 md:mt-0 md:ml-4 w-full md:w-1/3">
             <SliderInput
               label={t('time_seconds')}
               min={60}
@@ -122,7 +124,6 @@ const CallConfig = () => {
           radius="lg"
           onClick={handleSave}
           disabled={isSaving}
-          className="w-full md:w-auto"
         >
           {isSaving ? t('saving') : t('save')} {/* Translated button text */}
         </Button>

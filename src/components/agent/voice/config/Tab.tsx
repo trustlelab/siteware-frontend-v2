@@ -26,14 +26,16 @@ const Tab: React.FC<TabProps> = ({ onSelect }) => {
   };
 
   return (
-    <div className="bg-gray-100 dark:bg-gray-800 mb-4 rounded-lg w-[900px]">
-      <div className="flex space-x-4 p-2">
+    <div className="bg-gray-100 dark:bg-gray-800 mb-4 p-1 rounded-lg w-full">
+      <div className="flex space-x-4 overflow-x-auto whitespace-nowrap scrollbar-hide">
         {tabs.map((tab) => (
           <button
             key={tab.name}
             onClick={() => handleClick(tab.name)} // Use the original English name
-            className={`flex items-center px-4 py-2 rounded-full transition duration-300 ${
-              activeTab === tab.name ? 'bg-white dark:bg-gray-700 shadow-lg 500 dark:text-white' : 'text-gray-400 hover:dark:bg-gray-700'
+            className={`flex items-center px-4 py-2 whitespace-nowrap rounded-md transition duration-300 ${
+              activeTab === tab.name
+                ? 'border border-gray-200 bg-white dark:border-gray-950 dark:bg-gray-700 dark:text-white'
+                : 'text-gray-400 hover:dark:bg-gray-700'
             }`}
           >
             {tab.icon} {t(tab.translationKey)} {/* Translated display name */}

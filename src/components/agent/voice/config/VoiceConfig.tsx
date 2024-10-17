@@ -7,8 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../../lib/Button';
 import Dropdown from '../../../lib/DropDown';
 import SliderInput from '../../../lib/SliderInput';
-import Input from '../../../lib/Input';
-import Checkbox from '../../../lib/Checkbox';
+
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const VoiceConfig = () => {
@@ -77,99 +76,88 @@ const VoiceConfig = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
-      <ToastContainer />
-      <div className="gap-6 grid grid-cols-1 md:grid-cols-2">
-        <Dropdown
-          label={t('choose_synthesizer')} // Translated label
-          options={['Deepgram', 'Other']}
-          selected={synthesizer}
-          onChange={(value) => setSynthesizer(value)}
-        />
-
-        <Dropdown
-          label={t('choose_voice_model')} // Translated label
-          options={['Arcas', 'Other']}
-          selected={voiceModel}
-          onChange={(value) => setVoiceModel(value)}
-        />
-
-        <SliderInput
-          label={t('buffer_size')} // Translated label
-          min={50}
-          max={300}
-          step={1}
-          value={bufferSize}
-          onChange={(value) => setBufferSize(value)}
-          helperText={t('buffer_size_helper')} // Translated helper text
-        />
-
-        <SliderInput
-          label={t('endpointing')} // Translated label
-          min={50}
-          max={500}
-          step={10}
-          value={endpointing}
-          onChange={(value) => setEndpointing(value)}
-          helperText={t('endpointing_helper')} // Translated helper text
-        />
-
-        <SliderInput
-          label={t('linear_delay')} // Translated label
-          min={100}
-          max={1000}
-          step={50}
-          value={linearDelay}
-          onChange={(value) => setLinearDelay(value)}
-          helperText={t('linear_delay_helper')} // Translated helper text
-        />
-
-        <Dropdown
-          label={t('ambient_noise')} // Translated label
-          options={['No ambient noise', 'Low noise', 'Moderate noise', 'High noise']}
-          selected={ambientNoise}
-          onChange={(value) => setAmbientNoise(value)}
-        />
-
-        <div className="col-span-2">
-          <Checkbox
-            label={t('user_online_check')} // Translated label
-            checked={isUserOnline}
-            onChange={() => setIsUserOnline(!isUserOnline)}
-            className="mt-6"
-          />
-
-          <Input
-            label={t('user_online_message')} // Translated label
-            placeholder={t('user_online_message')}
-            value={userOnlineMessage}
-            onChange={(e) => setUserOnlineMessage(e.target.value)}
-          />
-
-          <SliderInput
-            label={t('invoke_after_seconds')} // Translated label
-            min={1}
-            max={10}
-            step={1}
-            value={invokeAfterSeconds}
-            onChange={(value) => setInvokeAfterSeconds(value)}
-          />
-        </div>
-      </div>
-
-      <div className="mt-6">
-        <Button
-          variant="primary"
-          size="normal"
-          radius="lg"
-          onClick={handleSave}
-          disabled={isSaving}
-          className="w-full md:w-auto"
-        >
-          {isSaving ? t('saving') : t('save')} {/* Translated text */}
-        </Button>
-      </div>
+    <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-full max-w-full mx-auto">
+  <ToastContainer />
+  <div className="gap-6 grid grid-cols-1 md:grid-cols-2">
+    
+    {/* Synthesizer Dropdown */}
+    <div className="flex flex-col">
+      <label className="text-gray-600 dark:text-gray-200 mb-1">{t('choose_synthesizer')}</label>
+      <Dropdown
+            options={['Deepgram', 'Other']}
+            selected={synthesizer}
+            onChange={(value) => setSynthesizer(value)} label={''}      />
     </div>
+
+    {/* Voice Model Dropdown */}
+    <div className="flex flex-col">
+      <label className="text-gray-600 dark:text-gray-200 mb-1">{t('choose_voice_model')}</label>
+      <Dropdown
+            options={['Arcas', 'Other']}
+            selected={voiceModel}
+            onChange={(value) => setVoiceModel(value)} label={''}      />
+    </div>
+
+    {/* Buffer Size Slider */}
+    <div className="flex flex-col">
+      <label className="text-gray-600 dark:text-gray-200 mb-1">{t('buffer_size')}</label>
+      <SliderInput
+            min={50}
+            max={300}
+            step={1}
+            value={bufferSize}
+            onChange={(value) => setBufferSize(value)}
+            helperText={t('buffer_size_helper')} label={''}      />
+    </div>
+
+    {/* Endpointing Slider */}
+    <div className="flex flex-col">
+      <label className="text-gray-600 dark:text-gray-200 mb-1">{t('endpointing')}</label>
+      <SliderInput
+            min={50}
+            max={500}
+            step={10}
+            value={endpointing}
+            onChange={(value) => setEndpointing(value)}
+            helperText={t('endpointing_helper')} label={''}      />
+    </div>
+
+    {/* Linear Delay Slider */}
+    <div className="flex flex-col">
+      <label className="text-gray-600 dark:text-gray-200 mb-1">{t('linear_delay')}</label>
+      <SliderInput
+            min={100}
+            max={1000}
+            step={50}
+            value={linearDelay}
+            onChange={(value) => setLinearDelay(value)}
+            helperText={t('linear_delay_helper')} label={''}      />
+    </div>
+
+    {/* Ambient Noise Dropdown */}
+    <div className="flex flex-col">
+      <label className="text-gray-600 dark:text-gray-200 mb-1">{t('ambient_noise')}</label>
+      <Dropdown
+            options={['No ambient noise', 'Low noise', 'Moderate noise', 'High noise']}
+            selected={ambientNoise}
+            onChange={(value) => setAmbientNoise(value)} label={''}      />
+    </div>
+  </div>
+
+  <div className="mt-6">
+    <Button
+      variant="primary"
+      size="normal"
+      radius="lg"
+      onClick={handleSave}
+      disabled={isSaving}
+      className="w-full md:w-auto"
+    >
+      {isSaving ? t('saving') : t('save')}
+    </Button>
+  </div>
+</div>
+
   );
 };
 

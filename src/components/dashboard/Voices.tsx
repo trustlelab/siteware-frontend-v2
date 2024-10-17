@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { fetchVoiceListThunk } from "../../features/slices/voicelabSlice"; 
 import { useAppDispatch, useAppSelector } from "../../app/hooks"; 
 import { RxSpeakerModerate } from "react-icons/rx"; 
-import { FaPlus, FaStop } from "react-icons/fa"; 
+import { FaStop } from "react-icons/fa"; 
 import Button from "../lib/Button";
 import { useTranslation } from 'react-i18next'; // Import the hook
 
@@ -44,7 +44,7 @@ const Voices: React.FC = () => {
     };
 
     return (
-        <div className="px-20">
+        <div className="sm:px-20">
             <h2 className="mb-4 font-bold text-3xl">{t('title')}</h2>
             <p className="mb-6 text-gray-600">{t('subtitle')}</p>
 
@@ -99,9 +99,7 @@ const Voices: React.FC = () => {
                                 )}
                                 <span>{playing === voice.voice_id ? t('stop') : t('play')}</span>
                             </Button>
-                            <button className="bg-gray-200 dark:bg-black dark:hover:bg-gray-700 p-3 rounded-full hover:bg-gray-300">
-                                <FaPlus className="text-xl dark:text-white text-gray-600" />
-                            </button>
+                          
                         </div>
                     </div>
                 ))}

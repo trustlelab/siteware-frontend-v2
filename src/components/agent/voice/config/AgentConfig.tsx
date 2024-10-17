@@ -49,9 +49,9 @@ const AgentConfig = () => {
   };
 
   return (
-    <div className="dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
+    <div className=" p-6 rounded-lg w-full lg:w-[900px]">
       <ToastContainer />
-      <h2 className="mb-4 text-xl">{t('agent_configuration')}</h2> {/* Translated heading */}
+      <h2 className="mb-4 text-lg md:text-xl">{t('agent_configuration')}</h2> {/* Translated heading */}
 
       {agentData && (
         <>
@@ -62,8 +62,9 @@ const AgentConfig = () => {
               value={welcomeMessage}
               onChange={(e) => setWelcomeMessage(e.target.value)}
               placeholder={t('welcome_message_placeholder')}
+              className="w-full"
             />
-            <p className="config_helper_text">
+            <p className="text-sm text-gray-500">
               {t('welcome_message_help')} <code>{'{variable_name}'}</code>
             </p>
           </div>
@@ -76,13 +77,14 @@ const AgentConfig = () => {
               value={agentPrompt}
               onChange={(e) => setAgentPrompt(e.target.value)}
               placeholder={t('agent_prompt_placeholder')}
+              className="w-full"
             />
-            <p className="config_helper_text">
+            <p className="text-sm text-gray-500">
               {t('agent_prompt_help')} <code>{'{variable_name}'}</code>
             </p>
           </div>
 
-          <Button onClick={handleSave} disabled={isSaving} size='normal'>
+          <Button onClick={handleSave} disabled={isSaving} size='normal' className="w-full md:w-auto">
             {isSaving ? t('saving') : t('save')} {/* Translated button text */}
           </Button>
         </>

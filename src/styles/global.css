@@ -128,6 +128,15 @@ body {
   transform: rotate(45deg);
 }
 
+/* Add this in your global CSS if necessary */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;

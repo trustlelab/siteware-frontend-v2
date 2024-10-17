@@ -56,7 +56,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <div
-      className={`border-gray-300 dark:border-slate-800 dark:bg-bg-gray-800 p-5 border ${isSidebarOpen ? 'w-64' : 'w-[95px]'} max-w-xs h-screen text-gray-900 dark:text-gray-200 transition-width duration-300 ease-in-out`}
+      className={`border-gray-300   bg-white dark:bg-black  dark:border-slate-800 dark:bg-bg-gray-800 p-5 border ${isSidebarOpen ? 'w-64' : 'w-[95px]'} max-w-xs h-screen text-gray-900 dark:text-gray-200 transition-width duration-300 ease-in-out`}
     >
       <aside className="fixed flex flex-col justify-between h-full">
         <div>

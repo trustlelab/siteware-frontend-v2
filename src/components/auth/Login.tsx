@@ -42,18 +42,18 @@ const Login: React.FC = () => {
   }
 
   return (
-    <main className="flex justify-between">
-      <section className="flex justify-center dark:bg-[#101828] sm:w-[860px]">
-        <div className="sm:w-[526px]">
-          <div className="mt-[80px]">
+    <main className="flex flex-col sm:flex-row justify-between h-screen">
+      <section className="flex justify-center items-center dark:bg-[#101828] sm:w-[860px] w-full px-4 sm:px-0">
+        <div className="sm:w-[526px] w-full max-w-md space-y-4">
+          <div className="mt-10 sm:mt-[80px] flex justify-center sm:justify-start">
             <Logo width={126.95} height={24.5} />
           </div>
           <div className="space-y-[32px]">
             <div className="space-y-[12px] sm:mt-[80px]">
-              <h1 className="font-bold text-[#475467] text-[24px] dark:text-[#D0D5DD]">
+              <h1 className="font-bold text-[#475467] text-[24px] dark:text-[#D0D5DD] text-center sm:text-left">
                 {t('welcome_back')}
               </h1>
-              <h3 className="text-[#475467] text-[16px] dark:text-[#D0D5DD]">
+              <h3 className="text-[#475467] text-[16px] dark:text-[#D0D5DD] text-center sm:text-left">
                 {t('enter_credentials')}
               </h3>
             </div>
@@ -115,7 +115,9 @@ const Login: React.FC = () => {
           </div>
         </div>
       </section>
-      <Carouselwrapper />
+      <section className="hidden sm:block ">
+        <Carouselwrapper />
+      </section>
     </main>
   );
 };

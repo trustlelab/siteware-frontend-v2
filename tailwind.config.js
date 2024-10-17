@@ -18,6 +18,9 @@ module.exports = {
       boxShadow: {
         light: '-1px -2px 12px #bdbdbd38',
       },
+      screens: {
+        'xl-custom': '1470px', // Custom breakpoint at 1470px
+      },
     },
   },
   plugins: [],

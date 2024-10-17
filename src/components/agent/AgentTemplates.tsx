@@ -57,6 +57,7 @@ const AgentCard: React.FC<AgentCardProps> = ({ type }) => {
 
   return (
     <div className="flex flex-col justify-center items-center space-y-3 p-6 rounded-[30px] dark:text-white">
+      {/* Modal to Create Agent */}
       <Modal className="border-gray-700 dark:bg-black border !rounded-[20px]" isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="mt-5 px-[12px] w-[480px]">
           <h2 className="mb-6 font-semibold text-2xl">{t('create_agent')}</h2>
@@ -80,7 +81,8 @@ const AgentCard: React.FC<AgentCardProps> = ({ type }) => {
         </div>
       </Modal>
 
-      <div className="dark:bg-gray-950 p-3 rounded-2xl w-[50%]">
+      {/* Agent Card Layout */}
+      <div className="dark:bg-gray-950 p-3 rounded-2xl ">
         <div className="flex items-center mb-4">
           <div className="flex justify-center items-center bg-gradient-to-r from-purple-400 to-indigo-600 rounded-full w-12 h-12 text-2xl">
             <span>👤</span>

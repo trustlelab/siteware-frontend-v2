@@ -33,11 +33,12 @@ const CreateAgent: React.FC = () => {
   ];
 
   return (
-    <div className="space-y-3 p-8 w-[100%] min-h-screen">
+    <div className="space-y-3 p-4 sm:p-8 w-full min-h-screen">
       <section className="flex flex-col justify-center items-center space-y-5">
         <h2 className="mb-4 font-bold text-3xl text-gray-800 dark:text-white">{t('create_agent')}</h2>
         <p className="mb-4 text-gray-600 text-lg dark:text-gray-400">{t('personalized_agent')}</p>
         
+        {/* Agent Type Selection */}
         <section className="flex space-x-3">
           <div
             onClick={() => setAgentType('text')}
@@ -55,12 +56,14 @@ const CreateAgent: React.FC = () => {
           </div>
         </section>
 
-        <div className="w-[80%]">
+        {/* AgentCard section */}
+        <div className="w-full sm:w-[80%]">
           <AgentCard type={agentType} />
         </div>
       </section>
       
-      <div className="space-y-3 dark:bg-slate-700 p-5">
+      {/* Template Selection */}
+      <div className="space-y-3 dark:bg-slate-700 p-5 rounded-lg">
         <h2 className="text-2xl dark:text-white">{t('choose_template')}</h2> {/* Translated text */}
         <div className="gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
           {templates.map((template) => (

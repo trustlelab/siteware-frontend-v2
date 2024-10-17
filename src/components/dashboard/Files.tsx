@@ -108,7 +108,7 @@ const Files: React.FC = () => {
     };
 
     return (
-        <div className="px-14">
+        <div className="px-4 md:px-14">
             <ToastContainer />
             <h2 className="mb-4 font-bold text-3xl">{t('title')}</h2>
             <p className="mb-6 text-gray-600">{t('subtitle')}</p>
@@ -169,7 +169,7 @@ const Files: React.FC = () => {
             {loading && <p>{t('loadingFiles')}</p>}
             {error && <p className="text-red-500">{t('error', { error })}</p>}
 
-            <div className="mt-8">
+            <div className="mt-8 overflow-x-auto"> {/* Add overflow-x-auto for mobile scrolling */}
                 <div className="shadow-md overflow-hidden border-b border-gray-200 dark:border-gray-700 sm:rounded-lg">
                     <table className="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
                         <thead className="bg-gray-100 dark:bg-gray-800">
@@ -177,13 +177,13 @@ const Files: React.FC = () => {
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
                                     {t('fileName')}
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider hidden md:table-cell">
                                     {t('label')}
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider hidden md:table-cell">
                                     {t('uuid')}
                                 </th>
-                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+                                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider hidden lg:table-cell">
                                     {t('createdAt')}
                                 </th>
                                 <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-700 dark:text-gray-300 uppercase tracking-wider">
@@ -197,13 +197,13 @@ const Files: React.FC = () => {
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="text-sm font-medium text-gray-900 dark:text-white truncate">{file.fileName}</div>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
-                                        <div className="text-sm text-gray-500 dark:text-gray-400">{file.label || t('noLabel')}</div>
+                                    <td className="px-6 py-4 whitespace-nowrap hidden md:table-cell"> {/* Hidden on small screens */}
+                                        <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{file.label || t('noLabel')}</div>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
+                                    <td className="px-6 py-4 whitespace-nowrap hidden md:table-cell"> {/* Hidden on small screens */}
                                         <div className="text-sm text-gray-500 dark:text-gray-400 truncate">{file.uuid}</div>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">
+                                    <td className="px-6 py-4 whitespace-nowrap hidden lg:table-cell"> {/* Hidden on small and medium screens */}
                                         <div className="text-sm text-gray-500 dark:text-gray-400">{new Date(file.createdAt).toLocaleDateString()}</div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">

@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Button from '../lib/Button';
 import Input from '../lib/Input';
 import { useTranslation } from 'react-i18next';
+import CountrySelector from '../common/Country_selector';
 
 const PhoneNumbers: React.FC = () => {
   const { t } = useTranslation('phoneNumbers'); // Initialize i18n translation
@@ -18,7 +19,7 @@ const PhoneNumbers: React.FC = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [country, setCountry] = useState<CountryOption | null>(null);
+  const [country, setCountry] = useState<CountryOption | null>(null); // Store selected country
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   const [accountSid, setAccountSid] = useState<string>('');
   const [authToken, setAuthToken] = useState<string>('');
@@ -26,6 +27,7 @@ const PhoneNumbers: React.FC = () => {
   const [editLabel, setEditLabel] = useState<string>('');
   const [editNumberId, setEditNumberId] = useState<number | null>(null);
 
+  // Fetch phone numbers on component mount
   useEffect(() => {
     dispatch(fetchPhoneNumbers());
   }, [dispatch]);
@@ -39,7 +41,7 @@ const PhoneNumbers: React.FC = () => {
   };
   const closeEditModal = (): void => setIsEditModalOpen(false);
 
-  const handleCountryChange = (value: CountryOption | null): void => setCountry(value);
+  const handleCountryChange = (selectedCountry: CountryOption | null): void => setCountry(selectedCountry);
 
   const handleImport = async (): Promise<void> => {
     if (country && phoneNumber && accountSid && authToken && label) {
@@ -127,25 +129,17 @@ const PhoneNumbers: React.FC = () => {
       <Modal isOpen={isModalOpen} onClose={closeModal} className="modal">
         <h2 className="mb-4 font-bold text-xl">{t('import_phone_number')}</h2>
         <form>
-          <div className="mb-4">
-            <label className="form-label">{t('country_code')}</label>
-            <select
-              value={country?.value || ''}
-              onChange={(e) => handleCountryChange(customCountryOptions.find((option) => option.value === e.target.value) || null)}
-              className="dark:bg-gray-800 form-select"
-            >
-              <option value="" disabled>
-                {t('select_country_code')}
-              </option>
-              {customCountryOptions.map((option) => (
-                <option key={option.value} value={option.value}>
-                  {option.label}
-                </option>
-              ))}
-            </select>
+          <div className="mb-4 ">
+            <CountrySelector
+              options={customCountryOptions}
+              selected={country}
+              onSelect={handleCountryChange}
+            />
+
+       
           </div>
-          <div className="mb-4">
-            <Input
+          <div className="mb-4 flex space-x-4">
+          <Input
               label={t('twilio_phone_number')}
               type="text"
               value={phoneNumber}
@@ -153,9 +147,17 @@ const PhoneNumbers: React.FC = () => {
               className="dark:bg-gray-800 form-input"
               placeholder="XXXXXXXXXX"
             />
+             <Input
+              label={t('label')}
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
+              className="dark:bg-gray-800 form-input"
+              placeholder={t('label_for_phone_number')}
+            />
+          
           </div>
           <div className="mb-4">
-            <Input
+          <Input
               label={t('twilio_account_sid')}
               type="text"
               value={accountSid}
@@ -163,8 +165,6 @@ const PhoneNumbers: React.FC = () => {
               className="dark:bg-gray-800 form-input"
               placeholder={t('twilio_account_sid')}
             />
-          </div>
-          <div className="mb-4">
             <Input
               label={t('twilio_auth_token')}
               type="text"
@@ -175,13 +175,7 @@ const PhoneNumbers: React.FC = () => {
             />
           </div>
           <div className="mb-4">
-            <Input
-              label={t('label')}
-              value={label}
-              onChange={(e) => setLabel(e.target.value)}
-              className="dark:bg-gray-800 form-input"
-              placeholder={t('label_for_phone_number')}
-            />
+           
           </div>
           <div className="flex justify-end">
             <Button variant='error' type="button" onClick={closeModal} className="px-4 py-2">
