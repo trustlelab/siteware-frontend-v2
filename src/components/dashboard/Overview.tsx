@@ -41,7 +41,7 @@ const Overview: React.FC = () => {
   return (
     <div className="bg-dark-800 mx-auto p-5 rounded-lg max-w-7xl text-black dark:text-white">
       <h2 className="mb-5 font-bold text-2xl">{t('overview')}</h2>
-      <div className="gap-4 grid grid-cols-4 mb-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
         <div className="flex flex-col bg-gray-100 dark:bg-gray-900 p-4 rounded-lg">
           <span className="text-xl">{t('total_call_minutes')}</span>
           <span className="font-bold text-4xl">{callData.totalMinutes}</span>
@@ -72,17 +72,16 @@ const Overview: React.FC = () => {
         </div>
       </div>
       <h3 className="mb-5 font-bold text-xl">{t('call_analysis')}</h3>
-      <div className="gap-4 grid grid-cols-2 mb-10">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-10">
         <div className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg">
           <h4 className="mb-4 font-bold text-lg">{t('reason_call_ended')}</h4>
-          <div className="w-[300px]">
+          <div className="w-full max-w-[300px] mx-auto">
             <Doughnut data={reasonCallEndedData} />
           </div>
         </div>
         <div className="bg-gray-100 dark:bg-gray-900 p-4 rounded-lg">
           <h4 className="mb-4 font-bold text-lg">{t('average_call_duration_by_assistant')}</h4>
-
-          <div className="w-[300px]">
+          <div className="w-full max-w-[300px] mx-auto">
             <Doughnut data={averageCallDurationData} />
           </div>
         </div>

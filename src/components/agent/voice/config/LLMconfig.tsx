@@ -60,7 +60,7 @@ const LLMConfigurator = () => {
   };
 
   return (
-    <div className="shadow-lg p-2 rounded-2xl w-[900px]">
+    <div className="shadow-lg p-6 rounded-2xl w-full md:w-5xl mx-auto">
       <ToastContainer />
       {/* Responsive Two-column grid layout */}
       <div className="gap-8 grid grid-cols-1 md:grid-cols-2">

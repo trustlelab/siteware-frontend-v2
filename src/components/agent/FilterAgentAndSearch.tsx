@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { FiFilter } from 'react-icons/fi';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
 const FilterAgentAndSearch: React.FC = () => {
@@ -17,33 +16,30 @@ const FilterAgentAndSearch: React.FC = () => {
   };
 
   return (
-    <div className="flex items-center space-x-4">
+    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 w-full">
       <input
         type="text"
         value={searchQuery}
         onChange={handleSearchChange}
         placeholder={t('search_agents')} // Translated placeholder
-        className="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full text-black dark:text-white focus:outline-none"
+        className="w-full sm:w-auto bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-full text-black dark:text-white focus:outline-none focus:ring-2 focus:ring-indigo-500"
       />
 
-      <div className="flex items-center dark:border-gray-700 border rounded-full">
+      <div className="flex items-center dark:border-gray-700 border rounded-full w-min">
         <button
           onClick={() => handleFilterChange('text')}
-          className={`px-4 py-2 rounded-l-full ${activeFilter === 'text' ? 'bg-gray-200 dark:bg-gray-600' : 'bg-transparent'} focus:outline-none`}
+          className={`px-4 py-2 rounded-l-full ${activeFilter === 'text' ? 'bg-gray-200 dark:bg-gray-600' : 'bg-transparent'} focus:outline-none focus:ring-2 focus:ring-indigo-500`}
         >
           {t('text_filter')} {/* Translated button label */}
         </button>
         <button
           onClick={() => handleFilterChange('voice')}
-          className={`px-4 py-2 rounded-r-full ${activeFilter === 'voice' ? 'bg-gray-200 dark:bg-gray-600' : 'bg-transparent'} focus:outline-none`}
+          className={`px-4 py-2 rounded-r-full ${activeFilter === 'voice' ? 'bg-gray-200 dark:bg-gray-600' : 'bg-transparent'} focus:outline-none focus:ring-2 focus:ring-indigo-500`}
         >
           {t('voice_filter')} {/* Translated button label */}
         </button>
       </div>
 
-      <button className="p-2 focus:outline-none">
-        <FiFilter size={20} />
-      </button>
     </div>
   );
 };

@@ -69,18 +69,22 @@ const ForgotPassword: React.FC = () => {
   };
 
   return (
-    <main className="flex justify-between">
+    <main className="flex flex-col sm:flex-row justify-between h-screen">
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} pauseOnFocusLoss draggable pauseOnHover />
 
-      <section className="flex justify-center dark:bg-[#101828] sm:w-[860px]">
-        <div className="sm:w-[526px]">
-          <div className="mt-[80px]">
+      <section className="flex justify-center items-center dark:bg-[#101828] sm:w-[860px] w-full px-4 sm:px-0">
+        <div className="sm:w-[526px] w-full max-w-md space-y-4">
+          <div className="mt-10 sm:mt-[80px] flex justify-center sm:justify-start">
             <Logo width={126.95} height={24.5} />
           </div>
           <div className="space-y-[32px]">
             <div className="space-y-[12px] sm:mt-[80px]">
-              <h1 className="font-bold text-[24px] dark:text-[#D0D5DD]">{t('forgot_password')}</h1>
-              <h3 className="text-[#475467] text-[16px]">{t('enter_details')}</h3>
+              <h1 className="font-bold text-[24px] dark:text-[#D0D5DD] text-center sm:text-left">
+                {t('forgot_password')}
+              </h1>
+              <h3 className="text-[#475467] text-[16px] dark:text-[#D0D5DD] text-center sm:text-left">
+                {t('enter_details')}
+              </h3>
             </div>
 
             {step === 1 && (
@@ -97,7 +101,7 @@ const ForgotPassword: React.FC = () => {
                     disabled={loading}
                   />
                 </div>
-                <Button type="submit" disabled={loading}>
+                <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? t('sending_email') : t('send_verification_code')}
                 </Button>
               </form>
@@ -116,7 +120,7 @@ const ForgotPassword: React.FC = () => {
                     required
                   />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 relative">
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     id="newPassword"
@@ -126,14 +130,14 @@ const ForgotPassword: React.FC = () => {
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
                   />
-                  <button type="button" className="top-[12px] right-0 absolute flex items-center pr-3" onClick={() => setShowPassword(!showPassword)}>
+                  <button type="button" className="absolute top-1/2 right-4 transform -translate-y-1/2" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? <FaEyeSlash color={getIconColor()} /> : <FaEye color={getIconColor()} />}
                   </button>
                   {newPassword.length > 0 && (
                     <p className={`text-sm mt-1 ${passwordStrength().color}`}>{passwordStrength().strength}</p>
                   )}
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 relative">
                   <Input
                     type={showPassword ? 'text' : 'password'}
                     id="confirmPassword"
@@ -143,11 +147,11 @@ const ForgotPassword: React.FC = () => {
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                   />
-                  <button type="button" className="top-[12px] right-0 absolute flex items-center pr-3" onClick={() => setShowPassword(!showPassword)}>
+                  <button type="button" className="absolute top-1/2 right-4 transform -translate-y-1/2" onClick={() => setShowPassword(!showPassword)}>
                     {showPassword ? <FaEyeSlash color={getIconColor()} /> : <FaEye color={getIconColor()} />}
                   </button>
                 </div>
-                <Button type="submit" disabled={loading}>
+                <Button type="submit" className="w-full" disabled={loading}>
                   {loading ? t('verifying') : t('reset_password')}
                 </Button>
               </form>
@@ -161,7 +165,9 @@ const ForgotPassword: React.FC = () => {
         </div>
       </section>
 
-      <Carouselwrapper />
+      <section className="hidden sm:block">
+        <Carouselwrapper />
+      </section>
     </main>
   );
 };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { Link, useNavigate } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom';
 import API from '../../utils/API';
 import { useDispatch, useSelector } from 'react-redux';
 import { setId } from '../../features/slices/agentSlice';
@@ -18,7 +18,7 @@ interface Agent {
   id: number;
   name: string;
   model: string;
-  uniqueId: string; 
+  uniqueId: string;
   createdAt: string;
   deployed: boolean;
 }
@@ -35,15 +35,15 @@ const ConfirmDeleteModal: React.FC<{ isOpen: boolean; onConfirm: () => void; onC
     <Modal
       isOpen={isOpen}
       onClose={onCancel}
-      className="bg-white dark:bg-gray-800 mx-auto mt-20 p-6 rounded-lg max-w-md"
+      className="bg-white dark:bg-gray-800 mx-auto p-6 rounded-lg max-w-md w-full md:w-2/3"
       overlayClassName="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center"
     >
-      <h2 className="mb-4 font-semibold text-lg">{t('confirm_remove_agent')}</h2>
+      <h2 className="mb-4 font-semibold text-lg w-[90%]">{t('confirm_remove_agent')}</h2>
       <div className="flex justify-end gap-4">
-        <Button variant='error' onClick={onConfirm}>
+        <Button variant="error" onClick={onConfirm}>
           {t('confirm')}
         </Button>
-        <Button variant='success' onClick={onCancel}>
+        <Button variant="success" onClick={onCancel}>
           {t('cancel')}
         </Button>
       </div>
@@ -69,22 +69,27 @@ const AgentCard: React.FC<{ agent: Agent; onDeleteClick: (agent: Agent) => void 
   return (
     <div
       onClick={handleCardClick}
-      className="bg-white dark:bg-gray-800 p-4 rounded-lg transition duration-300 cursor-pointer assistant-card"
+      className="bg-white border border-gray-200 dark:border-gray-900 dark:bg-gray-800 p-4 rounded-lg transition duration-300 cursor-pointer hover:shadow-lg"
     >
-      <h3 className="mb-2 font-bold text-black text-lg dark:text-white assistant-title">{agent.name}</h3>
-      <p className="text-gray-500 text-sm assistant-date">Model: {agent.model}</p>
-      <p className="text-gray-500 text-sm assistant-date">Created: {new Date(agent.createdAt).toLocaleDateString()}</p>
+      <h3 className="mb-2 font-bold text-black text-lg dark:text-white">{agent.name}</h3>
+      <p className="text-gray-500 text-sm">Model: {agent.model}</p>
+      <p className="text-gray-500 text-sm">Created: {new Date(agent.createdAt).toLocaleDateString()}</p>
       <div className="flex justify-between mt-auto">
-        <div className="flex justify-between w-full">
-          <div className="flex justify-between items-center space-y-2 mt-4 assistant-status">
-            <span className="text-gray-400 text-xs">
-              {agent.deployed ? t('running') : <div className="bg-green-400 p-2 rounded-full font-bold text-black">{t('not_deployed')}</div>}
-            </span>
-          </div>
-          <button className="flex items-center text-red-500 hover:text-red-700 transition duration-300 assistant-delete-button" onClick={handleDeleteClick}>
-            <RiDeleteBin6Line size={20} />
-          </button>
+        <div className="flex items-center space-y-2 mt-4">
+          <span className="text-gray-400 text-xs">
+            {agent.deployed ? (
+              t('running')
+            ) : (
+              <div className="bg-green-400 p-2 rounded-full font-bold text-black">{t('not_deployed')}</div>
+            )}
+          </span>
         </div>
+        <button
+          className="flex items-center text-red-500 hover:text-red-700 transition duration-300"
+          onClick={handleDeleteClick}
+        >
+          <RiDeleteBin6Line size={20} />
+        </button>
       </div>
     </div>
   );
@@ -154,24 +159,22 @@ const Agents: React.FC = () => {
     <div className="p-6 min-h-screen dark:text-white">
       <ToastContainer position="bottom-center" />
       <div>
-        <h1 className="font-bold font-manrope text-3xl">{t('welcome', { name: profile?.firstName ?? '' })}</h1>
+        <h1 className="font-bold text-3xl">{t('welcome', { name: profile?.firstName ?? '' })}</h1>
         <span>{t('explore_agents')}</span>
       </div>
 
-      <div className="flex justify-between my-6">
+      <div className="flex justify-between flex-wrap my-6 gap-4">
+        <Link to={'/create-agent'}>
+          <Button variant="primary">{t('create_agent')}</Button>
+        </Link>
         <FilterAgentAndSearch />
 
-        <Link to={'/create-agent'}>
-          <Button variant='primary' >
-            {t('create_agent')}
-          </Button>
-        </Link>
       </div>
 
       {loading ? (
         <LoadingSkeleton />
       ) : (
-        <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {agents.map((agent) => (
             <AgentCard key={agent.id} agent={agent} onDeleteClick={handleDeleteClick} />
           ))}

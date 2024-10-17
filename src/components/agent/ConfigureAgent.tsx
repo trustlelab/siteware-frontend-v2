@@ -69,6 +69,11 @@ const ConfigureAgent: React.FC = () => {
     }
   };
 
+  const handleAgentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const id = parseInt(e.target.value, 10);
+    handleAgentClick(id);
+  };
+
   const renderContent = () => {
     switch (activeTab) {
       case 'Agent':
@@ -91,52 +96,76 @@ const ConfigureAgent: React.FC = () => {
   };
 
   return (
-    <main className="flex space-y-4 m-10 w-full">
-      <div className="flex space-y-4">
-        <div className="space-y-3 dark:bg-gray-900 shadow-light dark:shadow-none mr-[12px] px-4 py-2 rounded-lg w-[290px] h-screen">
-          <h1 className="text-xl">{t('agents')}</h1>
-          {agents.map((agent) => {
-            const isActive = currentId === agent.id;
+    <div className="flex flex-col xl-custom:flex-row space-y-4 xl-custom:space-y-0 xl-custom:space-x-4 p-4 w-auto">
+      {/* Dropdown for mobile devices */}
+      <div className="xl-custom:hidden">
+        <select
+          value={currentId || ''}
+          onChange={handleAgentChange}
+          className="bg-gray-100 dark:bg-gray-800 p-2 rounded w-full"
+        >
+          <option value="">{t('select_agent')}</option>
+          {agents.map((agent) => (
+            <option key={agent.id} value={agent.id}>
+              {agent.name}
+            </option>
+          ))}
+        </select>
+      </div>
 
-            return (
-              <div
-                key={agent.id}
-                onClick={() => handleAgentClick(agent.id)}
-                className={`p-2 rounded hover:text-white dark:text-white ${
-                  isActive ? 'bg-primary-light text-white' : 'bg-blue-50 hover:bg-primary-light hover:dark:!bg-primary-light/50 dark:bg-gray-800'
-                }`}
-              >
-                {agent.name}
-              </div>
-            );
-          })}
-        </div>
-        <div className="space-y-4 w-full">
-          <div className="flex justify-between w-[900px]">
-            <div className="rounded-full text-xl sapce-y-5">
-              <p>{currentAgentName || t('select_agent')}</p>
-              <div className="border-green-600 dark:bg-gray-900 px-2 border rounded-lg text-green-500 dark:text-gray-300">
-                <div className="font-semibold text-sm">{t('call_rate')}</div>
-              </div>
+      {/* Sidebar for larger screens */}
+      <div className="hidden xl-custom:block space-y-3 dark:bg-gray-900 shadow-light dark:shadow-none mr-[12px] px-4 py-2 rounded-lg w-[290px] h-screen">
+        <h1 className="text-xl">{t('agents')}</h1>
+        {agents.map((agent) => {
+          const isActive = currentId === agent.id;
+
+          return (
+            <div
+              key={agent.id}
+              onClick={() => handleAgentClick(agent.id)}
+              className={`p-2 rounded hover:text-white dark:text-white ${isActive
+                ? 'bg-primary-light text-white'
+                : 'bg-blue-50 hover:bg-primary-light hover:dark:!bg-primary-light/50 dark:bg-gray-800'
+              }`}
+            >
+              {agent.name}
             </div>
+          );
+        })}
+      </div>
 
-            <div className="flex space-x-4">
-              <button className="flex items-center hover:dark:bg-gray-700 dark:bg-gray-800 shadow-md px-[12px] p-2 rounded-lg h-[40px] dark:text-gray-300 transition duration-200">
-                <FaPhone className="mr-2" />
-                {t('incoming_calls')}
-              </button>
-
-              <button className="flex items-center bg-primary-light hover:bg-purple-800 shadow-md px-[12px] p-2 rounded-lg h-[40px] text-white transition duration-200">
-                <FaComments className="mr-2" />
-                {t('speak_to_agent')}
-              </button>
+      {/* Main content area */}
+      <div className="flex flex-col w-full space-y-4">
+        <div className="flex justify-between">
+          <div className="rounded-full text-xl space-y-5">
+            <p>{currentAgentName || t('select_agent')}</p>
+            <div className="border-green-600 dark:bg-gray-900 px-2 border rounded-lg text-green-500 dark:text-gray-300">
+              <div className="font-semibold text-sm">{t('call_rate')}</div>
             </div>
           </div>
-          <Tab onSelect={setActiveTab} />
-          <div className="mt-4">{renderContent()}</div>
+
+          <div className="flex space-x-4">
+            <button className="flex items-center justify-center hover:dark:bg-gray-700 dark:bg-gray-800 shadow-md px-4 py-2 rounded-lg h-10 dark:text-gray-300 transition duration-200 text-sm md:text-base">
+              <span className="hidden sm:inline">{t('incoming_calls')}</span>
+              <span className="sm:hidden">
+                <FaPhone />
+              </span>
+            </button>
+
+            <button className="flex items-center justify-center bg-primary-light hover:bg-purple-800 shadow-md px-4 py-2 rounded-lg h-10 text-white transition duration-200 text-sm md:text-base">
+              <span className="hidden sm:inline">{t('speak_to_agent')}</span>
+              <span className="sm:hidden">
+                <FaComments />
+              </span>
+            </button>
+          </div>
         </div>
+
+        <Tab onSelect={setActiveTab} />
+
+        <div className="mt-4">{renderContent()}</div>
       </div>
-    </main>
+    </div>
   );
 };
 

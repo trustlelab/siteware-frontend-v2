@@ -55,10 +55,12 @@ const FunctionsConfig: FC = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-[900px]">
+    <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-full max-w-full mx-auto">
       <ToastContainer />
-      <div className="flex justify-between items-center gap-4">
-        <div className="w-3/4">
+      <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+        
+        {/* Dropdown for selecting function */}
+        <div className="w-full md:w-3/4">
           <Dropdown
             label={t('choose_function')} // Translated label
             options={[
@@ -71,13 +73,15 @@ const FunctionsConfig: FC = () => {
           />
         </div>
 
-        <div className="flex justify-end w-1/4">
+        {/* Save Button */}
+        <div className="w-full md:w-1/4 flex justify-end">
           <Button
             variant="primary"
             size="normal"
             radius="lg"
             onClick={handleSave}
             disabled={isSaving}
+            className="w-full md:w-auto"
           >
             {isSaving ? t('saving') : t('save_function')} {/* Translated button label */}
           </Button>

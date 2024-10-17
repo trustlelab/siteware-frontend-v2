@@ -35,7 +35,7 @@ const TranscriberConfig = () => {
     if (agentData) {
       setTranscriber(agentData.transcriptionEngine || 'Deepgram');
       setVersion(agentData.transcriptionVersion || 'nova-2');
-      setLanguage(agentData.languageSupport || 'English');
+      setLanguage(agentData.languageSupport || 'Deutsch');
       setKeywords(agentData.keywords || 'Bruce:100');
       setInterruptWords(agentData.endpointing ? agentData.endpointing / 100 : 0.7);
       setBackchanneling(agentData.taskSummarization || false);
@@ -68,8 +68,9 @@ const TranscriberConfig = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-900 p-4 rounded-md w-[900px]">
+    <div className="bg-white dark:bg-gray-900 p-4 rounded-md w-full md:w-5xl mx-auto">
       <ToastContainer />
+      {/* Grid layout for responsive form fields */}
       <div className="gap-4 grid grid-cols-1 md:grid-cols-2">
         <Dropdown
           label={t('choose_transcriber')} // Translated label
@@ -87,7 +88,7 @@ const TranscriberConfig = () => {
 
         <Dropdown
           label={t('choose_language')} // Translated label
-          options={['English', 'Spanish', 'French']}
+          options={['Deutsch','English', 'Spanish', 'French']}
           selected={language}
           onChange={(value) => setLanguage(value)}
         />
@@ -99,11 +100,13 @@ const TranscriberConfig = () => {
             value={keywords}
             onChange={(e) => setKeywords(e.target.value)}
             placeholder={t('keywords')}
+            className="w-full"
           />
           <p className="config_helper_text">{t('keywords_helper')}</p> {/* Translated helper text */}
         </div>
       </div>
 
+      {/* Interrupt Words Slider */}
       <SliderInput
         label={t('interrupt_words')} // Translated label
         min={0}
@@ -114,7 +117,8 @@ const TranscriberConfig = () => {
         helperText={t('interrupt_words_helper')} // Translated helper text
       />
 
-      <div className="mt-4">
+      {/* Backchanneling Checkbox */}
+      <div className="mt-4 flex items-center">
         <Checkbox
           id="backchanneling"
           label={t('backchanneling')} // Translated label
@@ -126,7 +130,8 @@ const TranscriberConfig = () => {
         </span>
       </div>
 
-      <div className="mt-4">
+      {/* Save Button */}
+      <div className="mt-6">
         <Button
           variant="primary"
           size="normal"
