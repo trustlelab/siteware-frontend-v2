@@ -27,7 +27,7 @@ interface AgentsResponse {
 }
 
 const ConfigureAgent: React.FC = () => {
-  const { t } = useTranslation('configureAgent'); // Use the 'configureAgent' namespace
+  const { t } = useTranslation(); // Use the 'configureAgent' namespace
   const [activeTab, setActiveTab] = useState<string>('Model');
   const [agents, setAgents] = useState<Agent[]>([]);
   const dispatch = useDispatch<AppDispatch>();

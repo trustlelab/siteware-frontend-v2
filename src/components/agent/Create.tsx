@@ -5,7 +5,7 @@ import { RiUserVoiceLine } from 'react-icons/ri';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
 const CreateAgent: React.FC = () => {
-  const { t } = useTranslation('createAgent'); // Use the 'createAgent' namespace
+  const { t } = useTranslation(); // Use the 'createAgent' namespace
   const [agentType, setAgentType] = useState<'voice' | 'text'>('text');
 
   const templates = [

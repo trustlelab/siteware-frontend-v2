@@ -10,7 +10,7 @@ import SliderInput from '../../../lib/SliderInput';
 import { useTranslation } from 'react-i18next'; // Import the translation hook
 
 const CallConfig = () => {
-  const { t } = useTranslation('callConfig'); // Use the namespace for CallConfig translations
+  const { t } = useTranslation(); // Use the namespace for CallConfig translations
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);

@@ -9,7 +9,7 @@ import Input from '../../../lib/Input';
 import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
 
 const AgentConfig = () => {
-  const { t } = useTranslation('agentConfig'); // Use the 'agentConfig' namespace for translations
+  const { t } = useTranslation(); // Use the 'agentConfig' namespace for translations
   const dispatch = useDispatch<AppDispatch>();
   const agentData = useSelector((state: RootState) => state.agent.agentData);
   const id = useSelector((state: RootState) => state.agent.id);

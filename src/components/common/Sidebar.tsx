@@ -8,7 +8,7 @@ import SmallLogo from './SmallLogo';
 import { useTranslation } from 'react-i18next';
 
 const Sidebar: React.FC = () => {
-  const { t } = useTranslation('sidebar');
+  const { t } = useTranslation();
   const location = useLocation();
   const initialSidebarState = JSON.parse(localStorage.getItem('sidebarOpen') || 'true');
   const initialOpenState = JSON.parse(localStorage.getItem('openSubmenus') || '{}');

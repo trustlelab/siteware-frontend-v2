@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'; // Import i18n translation hook
  *
  */
 const Carousel = () => {
-  const { t } = useTranslation('carousel'); // Initialize i18n translation
+  const { t } = useTranslation(); // Initialize i18n translation
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const slides = [

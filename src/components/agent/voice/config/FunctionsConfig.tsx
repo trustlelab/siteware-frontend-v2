@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next'; // Import the translation hook
  * Function component for configuring agent functions.
  */
 const FunctionsConfig: FC = () => {
-  const { t } = useTranslation('functionsConfig'); // Use the namespace for FunctionsConfig translations
+  const { t } = useTranslation(); // Use the namespace for FunctionsConfig translations
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);

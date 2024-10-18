@@ -10,7 +10,7 @@ import SliderInput from '../../../lib/SliderInput'; // Importing the new SliderI
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const LLMConfigurator = () => {
-  const { t } = useTranslation('llmConfigurator'); // Use 'llmConfigurator' namespace for translations
+  const { t } = useTranslation(); // Use 'llmConfigurator' namespace for translations
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);

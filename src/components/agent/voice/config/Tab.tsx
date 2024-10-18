@@ -7,7 +7,7 @@ interface TabProps {
 }
 
 const Tab: React.FC<TabProps> = ({ onSelect }) => {
-  const { t } = useTranslation('tabs'); // Use the 'tabs' namespace for translations
+  const { t } = useTranslation(); // Use the 'tabs' namespace for translations
   const tabs = [
     { name: 'Agent', icon: <FaCog className="mr-1" />, translationKey: 'agent' },
     { name: 'LLM', icon: <FaCog className="mr-1" />, translationKey: 'llm' },

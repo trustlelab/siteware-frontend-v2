@@ -12,7 +12,7 @@ import Checkbox from '../../../lib/Checkbox';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
 const TranscriberConfig = () => {
-  const { t } = useTranslation('transcriberConfig'); // Use the 'transcriberConfig' namespace
+  const { t } = useTranslation(); // Use the 'transcriberConfig' namespace
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);

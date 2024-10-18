@@ -1,0 +1,349 @@
+{
+
+  "create_agent": "Create your agent",
+  "agent_name": "Agent Name",
+  "agent_name_placeholder": "Ted Lasso",
+  "agent_name_error": "Agent name must be at least 4 characters long.",
+  "creating_agent": "Creating...",
+  "next": "Next →",
+  "ai_text_assistant": "AI Text Assistant",
+  "real_time_voice_assistant": "Real-Time Voice Assistant",
+  "text_assistant_description": "An AI Assistant for Text Queries",
+  "voice_assistant_description": "An Employee Who Works 24 x 7",
+  "create_button": "+ Create",
+  "create_agent_error": "Failed to create agent. Please try again.",
+  "creation_error": "An error occurred while creating the agent."
+,
+
+
+  "agent_configuration": "Agent Configuration",
+  "welcome_message_label": "Agent Welcome Message",
+  "welcome_message_placeholder": "Enter welcome message",
+  "welcome_message_help": "This will be the initial message from the agent. You can use variables here using {variable_name}",
+  "agent_prompt_label": "Agent Prompt",
+  "agent_prompt_placeholder": "You are a helpful agent...",
+  "agent_prompt_help": "You can define variables in the prompt using {variable_name}",
+  "saving": "Saving...",
+  "save": "Save",
+  "save_success": "Agent configuration saved successfully"
+,
+
+
+  "welcome": "Welcome, {{name}}",
+  "explore_agents": "Explore your created agents",
+  "create_agent_1": "Create Agent",
+  "running": "Running",
+  "not_deployed": "NOT DEPLOYED",
+  "confirm_remove_agent": "Are you sure you want to remove this agent?",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "agent_removed_success": "Agent removed successfully",
+  "agent_remove_error": "Error removing agent"
+,
+
+
+  "provider": "Provider",
+  "call_hangup_logic": "Call Hangup Logic",
+  "hangup_on_silence": "Call hangs up on silence for {{seconds}} seconds",
+  "call_termination": "Call Termination",
+  "termination_after_seconds": "The call ends after {{seconds}} seconds of call time",
+  "time_seconds": "Time (seconds)",
+  "save_1": "Save",
+  "saving_1": "Saving...",
+  "configuration_saved": "Configuration saved successfully"
+,
+
+
+  "create_assistant_title": "Create Your Own Voice Assistant",
+  "create_assistant_phrase": "Easily build a custom voice assistant to address your specific needs on any platform.",
+  "customize_responses_title": "Customize Responses for Any Problem",
+  "customize_responses_phrase": "Define how your assistant responds to various user inputs with AI-driven solutions.",
+  "deploy_platforms_title": "Deploy Across Platforms",
+  "deploy_platforms_phrase": "Your assistant can be deployed on any platform, supporting web, mobile, and desktop apps."
+,
+
+
+  "agents": "Agents",
+  "select_agent": "Select an Agent",
+  "call_rate": "$0.05/min",
+  "incoming_calls": "Receive Incoming Calls",
+  "speak_to_agent": "Speak to Your Agent"
+,
+
+
+  "create_agent_2": "Create Agent",
+  "personalized_agent": "Begin from the ground up for a fully personalized agent experience.",
+  "chatting": "Chatting",
+  "voice_call": "Voice Call",
+  "choose_template": "Choose A Template",
+  "generic_sales_model": "Generic sales model. Select this and you can further customize."
+,
+
+
+  "title": "Files",
+  "subtitle": "Explore and manage uploaded files",
+  "uploadButton": "Upload New File",
+  "uploadTitle": "Upload New File",
+  "fileLabel": "File Label",
+  "enterFileLabel": "Enter file label",
+  "selectedFile": "Selected File",
+  "dropzoneText": "Drag 'n' drop a file here, or click to select a file",
+  "uploading": "Uploading...",
+  "uploadFile": "Upload File",
+  "cancel_1": "Cancel",
+  "confirmDelete": "Are you sure you want to delete this file?",
+  "removing": "Removing...",
+  "remove": "Remove",
+  "loadingFiles": "Loading files...",
+  "error": "Error: {{error}}",
+  "fileName": "File Name",
+  "label": "Label",
+  "uuid": "UUID",
+  "createdAt": "Created At",
+  "actions": "Actions",
+  "noLabel": "No label",
+  "uploadSuccess": "File uploaded successfully!",
+  "uploadError": "Failed to upload the file.",
+  "deleteSuccess": "File deleted successfully!",
+  "deleteError": "Failed to delete the file.",
+  "copySuccess": "File URL copied to clipboard!",
+  "copyError": "Failed to copy URL."
+,
+
+
+  "search_agents": "Search Agents",
+  "text_filter": "Text",
+  "voice_filter": "Voice"
+,
+
+
+  "forgot_password": "Forgot Password",
+  "enter_details": "Please enter your details to reset your password.",
+  "email": "Email",
+  "enter_email": "Enter your email",
+  "send_verification_code": "Send Verification Code",
+  "sending_email": "Sending email...",
+  "verification_code": "Verification Code",
+  "enter_verification_code": "Enter verification code",
+  "new_password": "New Password",
+  "enter_new_password": "Enter new password",
+  "confirm_password": "Confirm Password",
+  "confirm_new_password": "Confirm new password",
+  "reset_password": "Reset Password",
+  "verifying": "Verifying...",
+  "password_must_match": "Passwords do not match.",
+  "verification_code_sent": "Verification code sent to your email.",
+  "password_reset_success": "Password reset successfully! Redirecting to login...",
+  "remembered_password": "Remembered your password?",
+  "login": "Log in"
+,
+
+
+  "choose_function": "Choose a function",
+  "check_slot_availability": "Check slot availability (using Cal.com)",
+  "another_function": "Another function",
+  "yet_another_function": "Yet another function",
+  "save_function": "Save Function",
+  "saving_2": "Saving...",
+  "function_saved": "Function configuration saved successfully"
+,
+
+
+  "choose_llm_model": "Choose LLM Model",
+  "choose_llm_version": "Choose LLM Version",
+  "tokens_generated": "Tokens generated on each LLM output",
+  "tokens_helper_text": "Increasing tokens enables longer responses to be queued before sending to speech generation but increases latency.",
+  "temperature": "Temperature",
+  "temperature_helper_text": "Increasing temperature enables heightened creativity but increases the chance of deviation from the prompt.",
+  "saving_3": "Saving...",
+  "save_2": "Save",
+  "save_success_1": "Agent configuration saved successfully"
+,
+
+
+  "welcome_back": "Welcome Back",
+  "enter_credentials": "Please enter your credentials to continue.",
+  "email_1": "Email",
+  "enter_email_1": "Enter your email",
+  "password": "Password",
+  "enter_password": "Enter your password",
+  "remember_me": "Remember Me",
+  "signing_in": "Signing in...",
+  "login_1": "Login",
+  "dont_have_account": "Don't have an account?",
+  "sign_up": "Sign up",
+  "forgot_password_1": "Forgot Password?",
+  "google_sign_in": "Continue with Google"
+,
+
+
+  "overview": "Overview",
+  "total_call_minutes": "Total Call Minutes",
+  "number_of_calls": "Number of Calls",
+  "total_spent": "Total Spent",
+  "average_cost_per_call": "Average Cost per Call",
+  "call_analysis": "Call Analysis",
+  "reason_call_ended": "Reason Call Ended",
+  "average_call_duration_by_assistant": "Average Call Duration by Assistant",
+  "cost_per_provider": "Cost Per Provider",
+  "increase": "+0.00%"
+,
+
+
+  "manage_phone_numbers": "Manage Your Phone Numbers",
+  "import_description": "Import your phone numbers or buy one to use with your AI assistants.",
+  "import_number": "Import Number",
+  "your_phone_numbers": "Your Phone Numbers",
+  "no_phone_numbers": "No phone numbers available",
+  "phone_number_imported_success": "Phone number imported successfully!",
+  "phone_number_import_failed": "Failed to import phone number: {{error}}",
+  "phone_number_label_updated_success": "Phone number label updated successfully!",
+  "phone_number_label_update_failed": "Failed to update phone number label: {{error}}",
+  "loading_phone_numbers": "Loading phone numbers...",
+  "failed_to_load_phone_numbers": "Failed to load phone numbers.",
+  "import_phone_number": "Import Phone Number",
+  "edit_phone_number_label": "Edit Phone Number Label",
+  "country_code": "Country Code",
+  "twilio_phone_number": "Twilio Phone Number",
+  "twilio_account_sid": "Twilio Account SID",
+  "twilio_auth_token": "Twilio Auth Token",
+  "label_1": "Label",
+  "label_for_phone_number": "Label for Phone Number",
+  "new_label_for_phone_number": "New Label for Phone Number",
+  "cancel_2": "Cancel",
+  "import": "Import",
+  "update_label": "Update Label"
+,
+
+
+  "personal_information": "Personal Information",
+  "username": "Username",
+  "email_2": "Email",
+  "first_name": "First Name",
+  "last_name": "Last Name",
+  "avatar_alt": "Profile Avatar",
+  "password_1": "Password",
+  "update_password": "Update Password",
+  "delete_account": "Delete Account",
+  "confirm_delete_account": "Are you sure you want to remove your account?",
+  "yes_delete_account": "Yes, Delete My Account",
+  "no_keep_account": "No, Keep My Account",
+  "saving_4": "Saving...",
+  "save_3": "Save",
+  "avatar_updated": "Profile avatar updated successfully!",
+  "avatar_update_failed": "Failed to update profile avatar.",
+  "avatar_removed": "Profile avatar removed successfully!",
+  "avatar_remove_failed": "Failed to remove profile avatar.",
+  "profile_updated": "Profile updated successfully!",
+  "profile_update_failed": "Failed to update profile.",
+  "account_removed": "Your account has been successfully removed.",
+  "account_remove_failed": "Failed to remove account."
+,
+
+
+  "overview_1": "Overview",
+  "platform": "Platform",
+  "agents_1": "Agents",
+  "voices": "Voices",
+  "phone_numbers": "Phone Numbers",
+  "files": "Files",
+  "tools": "Tools",
+  "blocks": "Blocks",
+  "squads": "Squads",
+  "logs": "Logs",
+  "voice_library": "Voice Library",
+  "profile": "Profile",
+  "logout": "Logout"
+,
+
+
+  "create_account": "Create your account",
+  "welcome_details": "Welcome! Please enter your details.",
+  "email_3": "Email",
+  "enter_email_2": "Enter your email",
+  "password_2": "Password",
+  "enter_password_1": "Enter your password",
+  "confirm_password_1": "Confirm Password",
+  "confirm_your_password": "Confirm your password",
+  "password_must_be_6": "Password must be at least 6 characters",
+  "passwords_do_not_match": "Passwords do not match",
+  "terms_and_conditions": "I accept the Siteware Terms of Service and Privacy Policy.",
+  "already_have_account": "Already have a Siteware account?",
+  "login_2": "Login",
+  "signup": "Sign up",
+  "signing_up": "Signing up..."
+,
+
+
+  "agent": "Agent",
+  "llm": "LLM",
+  "transcriber": "Transcriber",
+  "voice": "Voice",
+  "call": "Call",
+  "functions": "Functions",
+  "tasks": "Tasks"
+,
+
+
+  "tasks_configuration": "Tasks Configuration",
+  "tasks_configuration_description": "Configure the tasks that should be executed after the conversation ends.",
+  "summarization": "Summarization",
+  "summarization_description": "Automatically generate a summary of the conversation.",
+  "extraction": "Extraction",
+  "extraction_description": "Extract structured data from the conversation based on the prompt.",
+  "webhook": "Post extracted data to webhook",
+  "webhook_description": "Automatically send extracted data to a webhook.",
+  "enter_webhook": "Enter a valid webhook URL",
+  "save_success_2": "Agent configuration saved successfully",
+  "saving_5": "Saving...",
+  "save_4": "Save"
+,
+
+
+  "choose_transcriber": "Choose Transcriber",
+  "version": "Version",
+  "choose_language": "Choose language",
+  "keywords": "Keywords",
+  "keywords_helper": "Enter certain keywords/proper nouns you'd want to boost while understanding speech",
+  "interrupt_words": "Number of words to wait for before interrupting (in words)",
+  "interrupt_words_helper": "Agent will not consider interruptions until these many words are spoken (If recipient says 'Stopwords' such as Stop, Wait, Hold On, agent will pause by default)",
+  "backchanneling": "Backchanneling",
+  "backchanneling_helper": "Agent will speak filler words in between sentences to show the recipient that they are listening to them",
+  "saving_6": "Saving...",
+  "save_5": "Save",
+  "save_success_3": "Agent configuration saved successfully"
+,
+
+
+  "choose_synthesizer": "Choose Synthesizer",
+  "choose_voice_model": "Choose Voice Model",
+  "buffer_size": "Buffer Size",
+  "buffer_size_helper": "Increasing buffer size enables the agent to speak long responses fluently, but increases latency.",
+  "endpointing": "Endpointing (in ms)",
+  "endpointing_helper": "Number of milliseconds your agent will wait before generating a response. Lower endpointing reduces latency but could lead to the agent interrupting mid-sentence.",
+  "linear_delay": "Linear delay (in ms)",
+  "linear_delay_helper": "Linear delay accounts for long pauses mid-sentence. If the recipient is expected to speak long sentences, increase the value of linear delay.",
+  "ambient_noise": "Ambient Noise",
+  "user_online_check": "Agent will check if the user is online if there's no reply from the user.",
+  "user_online_message": "User is online message",
+  "invoke_after_seconds": "Invoke message after (seconds)",
+  "saving_7": "Saving...",
+  "save_6": "Save",
+  "save_success_4": "Agent configuration saved successfully"
+,
+
+
+  "title_1": "Voices",
+  "subtitle_1": "Explore and test voices",
+  "loading": "Loading voices...",
+  "error_1": "Error: {{error}}",
+  "expressive": "expressive",
+  "accent": "Accent",
+  "age": "Age",
+  "useCase": "Use Case",
+  "gender": "Gender",
+  "NA": "N/A",
+  "stop": "Stop",
+  "play": "Play Voice"
+
+}

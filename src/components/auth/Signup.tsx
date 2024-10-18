@@ -12,7 +12,7 @@ import Checkbox from '../lib/Checkbox';
 import Button from '../lib/Button';
 
 const Signup: React.FC = () => {
-  const { t } = useTranslation('signup'); // Specify 'signup' namespace
+  const { t } = useTranslation(); // Specify 'signup' namespace
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');

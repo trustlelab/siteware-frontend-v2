@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import CountrySelector from '../common/Country_selector';
 
 const PhoneNumbers: React.FC = () => {
-  const { t } = useTranslation('phoneNumbers'); // Initialize i18n translation
+  const { t } = useTranslation(); // Initialize i18n translation
   const dispatch = useAppDispatch();
   const phoneNumbersState = useAppSelector((state) => state.phoneNumber);
   const { phoneNumbers, status, error } = phoneNumbersState;

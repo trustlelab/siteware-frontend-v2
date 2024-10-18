@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
 const FilterAgentAndSearch: React.FC = () => {
-  const { t } = useTranslation('filter'); // Use 'filter' namespace
+  const { t } = useTranslation(); // Use 'filter' namespace
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [activeFilter, setActiveFilter] = useState<'text' | 'voice'>('text');
 

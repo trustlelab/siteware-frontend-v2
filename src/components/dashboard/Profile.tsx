@@ -12,7 +12,7 @@ import Button from '../lib/Button';
 import { useTranslation } from 'react-i18next';
 
 const Profile: React.FC = () => {
-  const { t } = useTranslation('profile');  // Specify the namespace 'profile'
+  const { t } = useTranslation();  // Specify the namespace 'profile'
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const { profile } = useSelector((state: RootState) => state.userProfile);

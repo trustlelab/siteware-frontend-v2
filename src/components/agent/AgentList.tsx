@@ -30,7 +30,7 @@ interface AgentsResponse {
 }
 
 const ConfirmDeleteModal: React.FC<{ isOpen: boolean; onConfirm: () => void; onCancel: () => void }> = ({ isOpen, onConfirm, onCancel }) => {
-  const { t } = useTranslation('agents'); // Use the agents namespace for translations
+  const { t } = useTranslation(); // Use the agents namespace for translations
   return (
     <Modal
       isOpen={isOpen}
@@ -54,7 +54,7 @@ const ConfirmDeleteModal: React.FC<{ isOpen: boolean; onConfirm: () => void; onC
 const AgentCard: React.FC<{ agent: Agent; onDeleteClick: (agent: Agent) => void }> = ({ agent, onDeleteClick }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { t } = useTranslation('agents'); // Use the agents namespace for translations
+  const { t } = useTranslation(); // Use the agents namespace for translations
 
   const handleCardClick = () => {
     dispatch(setId(agent.id));
@@ -96,7 +96,7 @@ const AgentCard: React.FC<{ agent: Agent; onDeleteClick: (agent: Agent) => void 
 };
 
 const Agents: React.FC = () => {
-  const { t } = useTranslation('agents'); // Use the agents namespace for translations
+  const { t } = useTranslation(); // Use the agents namespace for translations
   const [agents, setAgents] = useState<Agent[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

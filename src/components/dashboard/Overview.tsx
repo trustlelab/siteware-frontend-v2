@@ -4,7 +4,7 @@ import 'chart.js/auto';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const Overview: React.FC = () => {
-  const { t } = useTranslation('overview'); // Specify the 'overview' namespace
+  const { t } = useTranslation(); // Specify the 'overview' namespace
 
   const callData = {
     totalMinutes: 5,

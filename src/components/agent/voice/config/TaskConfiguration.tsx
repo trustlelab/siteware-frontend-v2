@@ -11,7 +11,7 @@ import Checkbox from '../../../lib/Checkbox'; // Reusable Checkbox component
 import { useTranslation } from 'react-i18next'; // Import the translation hook
 
 const TasksConfig = () => {
-  const { t } = useTranslation('tasksConfig'); // Use the namespace for TasksConfig translations
+  const { t } = useTranslation(); // Use the namespace for TasksConfig translations
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);

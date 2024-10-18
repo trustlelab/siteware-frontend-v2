@@ -13,7 +13,7 @@ import Button from '../lib/Button';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
 
 const ForgotPassword: React.FC = () => {
-  const { t } = useTranslation('forgotPassword'); // Use 'forgotPassword' namespace
+  const { t } = useTranslation(); // Use 'forgotPassword' namespace
   const [step, setStep] = useState<number>(1);
   const [email, setEmail] = useState<string>('');
   const [verificationCode, setVerificationCode] = useState<string>('');
