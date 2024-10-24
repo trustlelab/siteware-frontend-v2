@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState, AppDispatch } from '../../app/store';
 import { fetchUserProfile, updateProfileAvatar, updateUserProfile, removeProfileAvatar, removeUserAccount } from '../../features/slices/profileSlice';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Modal from '../common/Modal';
 import { useNavigate } from 'react-router-dom';
 import Input from '../lib/Input';

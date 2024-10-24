@@ -41,8 +41,9 @@
   "agent_remove_error": "Error removing agent"
 ,
 
-
+  "select":"Select",
   "provider": "Provider",
+  "select_phone_number":"Select phone number",
   "call_hangup_logic": "Call Hangup Logic",
   "hangup_on_silence": "Call hangs up on silence for {{seconds}} seconds",
   "call_termination": "Call Termination",
@@ -240,13 +241,13 @@
   "account_remove_failed": "Failed to remove account."
 ,
 
-
-  "overview_1": "Overview",
+  "home": "Home",
+  "dashboard": "Dashboard",
   "platform": "Platform",
   "agents_1": "Agents",
   "voices": "Voices",
   "phone_numbers": "Phone Numbers",
-  "files": "Files",
+  "knowledge_base": "Knowledge Base",
   "tools": "Tools",
   "blocks": "Blocks",
   "squads": "Squads",

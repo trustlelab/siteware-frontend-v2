@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../../app/store';
 import { fetchAgentData, updateAgentData } from '../../../../features/slices/agentSlice';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../../lib/Button'; // Reusable Button component
 import Dropdown from '../../../lib/DropDown'; // Reusable Dropdown component
 import Input from '../../../lib/Input'; // Reusable Input component

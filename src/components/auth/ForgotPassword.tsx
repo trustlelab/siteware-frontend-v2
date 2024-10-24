@@ -6,7 +6,6 @@ import Carouselwrapper from '../common/CarouselWrapper';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import Logo from '../common/Logo';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import Input from '../lib/Input';
 import Button from '../lib/Button';

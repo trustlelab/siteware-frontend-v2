@@ -40,9 +40,9 @@
   "agent_removed_success": "Agent erfolgreich entfernt",
   "agent_remove_error": "Fehler beim Entfernen des Agenten"
 ,
-
-
+  "select":"Wählen",
   "provider": "Anbieter",
+  "select_phone_number":"Telefonnummer auswählen",
   "call_hangup_logic": "Anruf-Auflegelogik",
   "hangup_on_silence": "Der Anruf wird nach {{seconds}} Sekunden Stille beendet",
   "call_termination": "Anrufbeendigung",

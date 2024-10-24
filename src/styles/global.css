@@ -18,14 +18,14 @@ a {
 }
 
 .sidebar a {
-  @apply text-black dark:text-white/80  no-underline;
+  @apply text-black dark:text-white/80  no-underline
 }
 .sidebar li {
-  @apply hover:bg-gray-200 hover:font-bold dark:hover:bg-gray-800 p-2 rounded-lg transition duration-300;
+  @apply  hover:font-bold dark:hover:bg-gray-800 p-2 rounded-lg transition duration-300 py-2 px-3;
 }
 
 body {
-  @apply font-manrope dark:bg-[#090d14] dark:text-white overflow-x-hidden;
+  @apply font-manrope  overflow-x-hidden;
 }
 .FormInput_label {
   @apply block text-gray-700 text-[16px] font-bold mb-2 dark:text-white;
@@ -38,6 +38,9 @@ body {
   @apply dark:bg-gradient-to-r dark:from-[#C1B5FD] dark:to-[#AC9DFC] dark:text-black;
 }
 
+.sidebar  span{
+  @apply !text-white
+}
 /* Custom form classes with more unique names */
 .config_input {
   @apply border-gray-600 bg-gray-100 dark:bg-gray-800 mt-1 p-2 dark:border rounded w-full dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-400;

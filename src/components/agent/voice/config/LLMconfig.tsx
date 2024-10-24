@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../../app/store';
 import { updateAgentData, fetchAgentData } from '../../../../features/slices/agentSlice';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../../lib/Button';
 import Dropdown from '../../../lib/DropDown';
 import SliderInput from '../../../lib/SliderInput'; // Importing the new SliderInput component

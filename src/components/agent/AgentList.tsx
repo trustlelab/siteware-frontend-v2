@@ -9,7 +9,6 @@ import FilterAgentAndSearch from './FilterAgentAndSearch';
 import { fetchUserProfile } from '../../features/slices/profileSlice';
 import { RootState, AppDispatch } from '../../app/store';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Modal from '../common/Modal';
 import Button from '../lib/Button';
 import { useTranslation } from 'react-i18next'; // Import useTranslation hook
