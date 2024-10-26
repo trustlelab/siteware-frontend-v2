@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import { Link, useNavigate } from 'react-router-dom';
 import API from '../../utils/API';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setId } from '../../features/slices/agentSlice';
 import LoadingSkeleton from '../common/LoadingSkeleton';
 import FilterAgentAndSearch from './FilterAgentAndSearch';
 import { fetchUserProfile } from '../../features/slices/profileSlice';
-import { RootState, AppDispatch } from '../../app/store';
+import {  AppDispatch } from '../../app/store';
 import { toast, ToastContainer } from 'react-toastify';
 import Modal from '../common/Modal';
 import Button from '../lib/Button';
@@ -67,30 +67,67 @@ const AgentCard: React.FC<{ agent: Agent; onDeleteClick: (agent: Agent) => void 
 
   return (
     <div
-      onClick={handleCardClick}
-      className="bg-white border border-gray-200 dark:border-gray-900 dark:bg-gray-800 p-4 rounded-lg transition duration-300 cursor-pointer hover:shadow-lg"
+      className="w-[349px] pb-0 p-6 bg-white rounded-xl shadow border border-[#eaecf0] flex-col justify-start items-start gap-6 inline-flex"
     >
-      <h3 className="mb-2 font-bold text-black text-lg dark:text-white">{agent.name}</h3>
-      <p className="text-gray-500 text-sm">Model: {agent.model}</p>
-      <p className="text-gray-500 text-sm">Created: {new Date(agent.createdAt).toLocaleDateString()}</p>
-      <div className="flex justify-between mt-auto">
-        <div className="flex items-center space-y-2 mt-4">
-          <span className="text-gray-400 text-xs">
-            {agent.deployed ? (
-              t('running')
-            ) : (
-              <div className="bg-green-400 p-2 rounded-full font-bold text-black">{t('not_deployed')}</div>
-            )}
-          </span>
+      <div className='flex items-center  justify-between w-full'>
+
+        <div className="w-10 h-10 bg-[#f0ebff] rounded-full">
+
         </div>
+
+
+
+        <div>
+          {agent.deployed ? (
+            t('running')
+          ) : (
+            <div className="h-7 px-3 py-1 mix-blend-multiply bg-[#027a48]/10 rounded-2xl justify-start items-center gap-1 inline-flex">
+              <div className="w-2 h-2 relative">
+                <div className="w-1.5 h-1.5 left-[1px] top-[1px] absolute bg-[#027947] rounded-full" />
+              </div>
+              <div className="text-center text-[#027947] text-xs font-semibold  leading-tight">{t('not_deployed')}</div>
+            </div>
+
+          )}
+        </div>
+
+
+      </div>
+      <div className='flex gap-y-2 flex-col'>
+        <div className="w-[301.33px] text-[#344053] text-base font-bold  leading-tight">{agent.name}</div>
+        <div className="text-[#667085] text-sm font-semibold  leading-tight">Voice Agent</div>
+      </div>
+      <div className="w-[301px] h-[0px] border border-[#eaecf0]"></div>
+      <div className="text-[#667085] text-sm font-semibold  leading-[25px]">Helps resolve common customer inquiries with quick, automated responses. Optimized for e-commerce and service industries.</div>
+
+
+
+      <div className='flex justify-between w-full space-x-3'>
+
+        <Button className='w-full' onClick={handleCardClick}>
+          Open
+        </Button>
+
+        <div className="w-10 h-10 flex-col justify-start items-start gap-4 inline-flex">
+          <div className="w-10 h-10  bg-white rounded-lg shadow border border-[#d0d5dd] justify-center items-center gap-2 inline-flex">
+            <RiDeleteBin6Line size={20} />
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div className="flex justify-between mt-auto">
+
         <button
           className="flex items-center text-red-500 hover:text-red-700 transition duration-300"
           onClick={handleDeleteClick}
         >
-          <RiDeleteBin6Line size={20} />
+
         </button>
       </div>
-    </div>
+    </div >
   );
 };
 
@@ -101,7 +138,6 @@ const Agents: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
   const dispatch = useDispatch<AppDispatch>();
-  const profile = useSelector((state: RootState) => state.userProfile.profile);
 
   useEffect(() => {
     dispatch(fetchUserProfile());
@@ -156,16 +192,34 @@ const Agents: React.FC = () => {
 
   return (
     <div className="p-6 min-h-screen dark:text-white">
-      <ToastContainer position="bottom-center" />
-      <div>
-        <h1 className="font-bold text-3xl">{t('welcome', { name: profile?.firstName ?? '' })}</h1>
-        <span>{t('explore_agents')}</span>
+
+      <div className='flex justify-between'>
+        <div>
+          <h2 className="text-[#101828] text-2xl font-bold  leading-9">Agents</h2>
+          <div className="text-[#475466] text-base font-medium leading-[30px]">Description</div>
+        </div>
+
+        <div className='flex gap-x-6'>
+          <div className="h-10 px-[18px] py-2.5 bg-white rounded-lg shadow border border-[#d0d5dd] justify-center items-center gap-2 inline-flex">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14" fill="none"> <path d="M7.00008 1.1665V12.8332M1.16675 6.99984H12.8334" stroke="black" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" /> </svg>
+            <div className="text-[#101828] text-sm font-bold  leading-normal">Explore templates</div>
+          </div>
+
+          <div className="w-auto h-10 flex-col justify-start items-start gap-4 inline-flex">
+            <div className="self-stretch h-10 px-[18px] py-2.5 bg-[#7e56d8] rounded-lg shadow border border-[#7e56d8] justify-center items-center gap-2 inline-flex">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M10.0001 4.1665V15.8332M4.16675 9.99984H15.8334" stroke="white" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round" /> </svg>
+              <Link to={'/create-agent'}><div className="text-white text-sm font-bold  leading-normal">{t('create_agent')}</div></Link>
+            </div>
+          </div>
+        </div>
+
       </div>
 
+
+      <ToastContainer position="bottom-center" />
+
       <div className="flex justify-between flex-wrap my-6 gap-4">
-        <Link to={'/create-agent'}>
-          <Button variant="primary">{t('create_agent')}</Button>
-        </Link>
+
         <FilterAgentAndSearch />
 
       </div>
@@ -173,7 +227,7 @@ const Agents: React.FC = () => {
       {loading ? (
         <LoadingSkeleton />
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="flex gap-6 flex-wrap">
           {agents.map((agent) => (
             <AgentCard key={agent.id} agent={agent} onDeleteClick={handleDeleteClick} />
           ))}

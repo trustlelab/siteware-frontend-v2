@@ -22,7 +22,7 @@ const MainLayout: React.FC = () => {
 
       {/* Main content area */}
       <div className="flex-1 flex flex-col w-full bg-[#fdfdfd] ">
-        <Header toggleSidebar={toggleSidebar} /> {/* Header with toggle button for mobile */}
+        <Header toggleSidebar={toggleSidebar} /> 
 
         {/* Content Area */}
         <main className="flex-1 p-4">

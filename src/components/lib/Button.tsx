@@ -28,8 +28,7 @@ const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary: `
-      bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 
-      hover:bg-gradient-to-br 
+       bg-[#7e56d8]
       focus:ring-purple-300 dark:focus:ring-purple-800 
       text-white
     `,

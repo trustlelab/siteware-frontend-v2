@@ -4,10 +4,33 @@
 
 @font-face {
   font-family: 'Manrope';
-  src: url('./assets/Fonts/Manrope/Manrope-VariableFont_wght.ttf') format('truetype');
-  font-weight: 100 900; /* Adjust this based on the font weight range */
+  font-weight: 400;
   font-style: normal;
+  src: url('/src/assets/fonts/Manrope-Regular.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'Manrope';
+  font-weight: 500;
+  font-style: normal;
+  src: url('/src/assets/fonts/Manrope-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-weight: 600;
+  font-style: normal;
+  src: url('/src/assets/fonts/Manrope-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/src/assets/fonts/Manrope-Bold.ttf') format('truetype');
+}
+
+/* Add other weights (ExtraBold, ExtraLight, Light, VariableFont) as needed */
 
 input {
   @apply outline-none;
@@ -25,7 +48,7 @@ a {
 }
 
 body {
-  @apply font-manrope  overflow-x-hidden;
+  @apply !font-manrope  overflow-x-hidden;
 }
 .FormInput_label {
   @apply block text-gray-700 text-[16px] font-bold mb-2 dark:text-white;
