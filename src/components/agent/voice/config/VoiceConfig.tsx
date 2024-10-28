@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../../app/store';
 import { fetchAgentData, updateAgentData } from '../../../../features/slices/agentSlice';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../../lib/Button';
 import Dropdown from '../../../lib/DropDown';
 import SliderInput from '../../../lib/SliderInput';
@@ -11,7 +10,7 @@ import SliderInput from '../../../lib/SliderInput';
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const VoiceConfig = () => {
-  const { t } = useTranslation('voiceConfig'); // Use the 'voiceConfig' namespace
+  const { t } = useTranslation(); // Use the 'voiceConfig' namespace
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);

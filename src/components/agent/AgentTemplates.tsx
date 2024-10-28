@@ -12,7 +12,7 @@ interface AgentCardProps {
 }
 
 const AgentCard: React.FC<AgentCardProps> = ({ type }) => {
-  const { t } = useTranslation('agentCard'); // Use the 'agentCard' namespace
+  const { t } = useTranslation(); // Use the 'agentCard' namespace
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [agentName, setAgentName] = useState<string>('');
   const [error, setError] = useState<string>('');

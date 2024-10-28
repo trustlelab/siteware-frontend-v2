@@ -3,14 +3,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../../app/store';
 import { updateAgentData, fetchAgentData } from '../../../../features/slices/agentSlice';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../../lib/Button';
 import Dropdown from '../../../lib/DropDown';
 import SliderInput from '../../../lib/SliderInput'; // Importing the new SliderInput component
 import { useTranslation } from 'react-i18next'; // Import useTranslation
 
 const LLMConfigurator = () => {
-  const { t } = useTranslation('llmConfigurator'); // Use 'llmConfigurator' namespace for translations
+  const { t } = useTranslation(); // Use 'llmConfigurator' namespace for translations
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);

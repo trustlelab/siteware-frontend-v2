@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../../app/store';
 import { updateAgentData, fetchAgentData } from '../../../../features/slices/agentSlice';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../../lib/Button'; // Reusable Button component
 import Dropdown from '../../../lib/DropDown'; // Reusable Dropdown component
 import { useTranslation } from 'react-i18next'; // Import the translation hook
@@ -12,7 +11,7 @@ import { useTranslation } from 'react-i18next'; // Import the translation hook
  * Function component for configuring agent functions.
  */
 const FunctionsConfig: FC = () => {
-  const { t } = useTranslation('functionsConfig'); // Use the namespace for FunctionsConfig translations
+  const { t } = useTranslation(); // Use the namespace for FunctionsConfig translations
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);

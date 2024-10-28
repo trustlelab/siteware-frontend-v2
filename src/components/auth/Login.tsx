@@ -11,7 +11,7 @@ import Checkbox from '../lib/Checkbox';
 import { useTranslation } from 'react-i18next';
 
 const Login: React.FC = () => {
-  const { t } = useTranslation('login'); // Specify the 'login' namespace
+  const { t } = useTranslation(); // Specify the 'login' namespace
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [rememberMe, setRememberMe] = useState<boolean>(false);

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../app/store';
 import { updatePassword } from '../../features/slices/profileSlice';

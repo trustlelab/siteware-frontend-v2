@@ -2,28 +2,33 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../../../app/store';
 import { fetchAgentData, updateAgentData } from '../../../../features/slices/agentSlice';
+import { fetchPhoneNumbers } from '../../../../features/slices/phonenumberSlice'; // Import the fetch phone numbers thunk
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Button from '../../../lib/Button';
 import Dropdown from '../../../lib/DropDown';
 import SliderInput from '../../../lib/SliderInput';
 import { useTranslation } from 'react-i18next'; // Import the translation hook
 
 const CallConfig = () => {
-  const { t } = useTranslation('callConfig'); // Use the namespace for CallConfig translations
+  const { t } = useTranslation(); // Use the namespace for CallConfig translations
   const dispatch = useDispatch<AppDispatch>();
   const agentId = useSelector((state: RootState) => state.agent.id);
   const agentData = useSelector((state: RootState) => state.agent.agentData);
+  const phoneNumbers = useSelector((state: RootState) => state.phoneNumber.phoneNumbers); // Get phone numbers from slice
 
   const [provider, setProvider] = useState('Twilio');
   const [hangupTime, setHangupTime] = useState(10);
   const [terminationTime, setTerminationTime] = useState(180);
+  const [selectedPhoneNumber, setSelectedPhoneNumber] = useState<string>(''); // State to store the selected phone number
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     if (agentId) {
       dispatch(fetchAgentData(agentId));
     }
+
+    // Fetch phone numbers when component loads
+    dispatch(fetchPhoneNumbers());
   }, [agentId, dispatch]);
 
   useEffect(() => {
@@ -44,6 +49,7 @@ const CallConfig = () => {
         callProvider: provider,
         callHangupLogic: hangupTime.toString(),
         callTerminationTime: terminationTime,
+        phoneNumber: selectedPhoneNumber, // Add selected phone number to save
       },
     };
     try {
@@ -55,6 +61,8 @@ const CallConfig = () => {
       setIsSaving(false);
     }
   };
+
+ 
 
   return (
     <div className="bg-white dark:bg-gray-900 shadow-md p-6 rounded-lg w-full max-w-full mx-auto">
@@ -70,6 +78,17 @@ const CallConfig = () => {
         />
       </div>
 
+      {/* Phone Number Selection Dropdown */}
+      <div className="mb-6">
+        <Dropdown
+          label={t('select_phone_number')} // Translated label
+          options={[t('select'), ...phoneNumbers.map((pn) => `${pn.phoneNumber}`)]} // Add "Select" option at the beginning
+          selected={selectedPhoneNumber || 'Select'} // Set 'Select' as default if no phone number is selected
+          onChange={(value) => setSelectedPhoneNumber(value)} // Handle change
+        />
+
+      </div>
+
       {/* Call Hangup Logic */}
       <div className="mb-6">
         <label className="text-gray-600 dark:text-gray-200">{t('call_hangup_logic')}</label>
@@ -78,7 +97,7 @@ const CallConfig = () => {
             label=""
             options={[`${t('hangup_on_silence', { seconds: hangupTime })}`]}
             selected={`${t('hangup_on_silence', { seconds: hangupTime })}`}
-            onChange={() => {}}
+            onChange={() => { }}
           />
           <div className="mt-4 md:mt-0 md:ml-4 w-full md:w-1/3">
             <SliderInput
@@ -101,7 +120,7 @@ const CallConfig = () => {
             label=""
             options={[`${t('termination_after_seconds', { seconds: terminationTime })}`]}
             selected={`${t('termination_after_seconds', { seconds: terminationTime })}`}
-            onChange={() => {}}
+            onChange={() => { }}
           />
           <div className="mt-4 md:mt-0 md:ml-4 w-full md:w-1/3">
             <SliderInput

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 type ButtonProps = {
   children: React.ReactNode;
-  variant?: 'primary' | 'warning' | 'error' | 'success';
+  variant?: 'primary' | 'warning' | 'error' | 'success'|'light';
   size?: 'small' | 'normal' | 'large';
   radius?: 'square' | 'md' | 'lg' | 'full';
   elevated?: boolean; // New elevated prop to manage shadow
@@ -28,14 +28,15 @@ const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary: `
-      bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 
-      hover:bg-gradient-to-br 
+       bg-[#7e56d8]
       focus:ring-purple-300 dark:focus:ring-purple-800 
       text-white
     `,
     warning: 'bg-yellow-500 text-black hover:bg-yellow-600 dark:bg-yellow-400 dark:text-black',
     error: 'bg-red-500 text-white hover:bg-red-600 dark:bg-red-400 dark:text-white',
     success: 'bg-green-500 text-white hover:bg-green-600 dark:bg-green-400 dark:text-white',
+    light: 'ounded-lg shadow border border-[#d0d5dd] justify-center items-center gap-2 inline-flex bg-white text-black hover:bg-gray-50 shadow-sm dark:bg-gray-900 dark:text-white dark:border-gray-700',
+
   };
 
   const sizeStyles = {

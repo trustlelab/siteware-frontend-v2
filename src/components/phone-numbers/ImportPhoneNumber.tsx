@@ -5,14 +5,13 @@ import { customCountryOptions, CountryOption } from '../../data/countryOptions';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { fetchPhoneNumbers, removePhoneNumber, addPhoneNumber, updatePhoneNumberLabel } from '../../features/slices/phonenumberSlice';
 import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Button from '../lib/Button';
 import Input from '../lib/Input';
 import { useTranslation } from 'react-i18next';
 import CountrySelector from '../common/Country_selector';
 
 const PhoneNumbers: React.FC = () => {
-  const { t } = useTranslation('phoneNumbers'); // Initialize i18n translation
+  const { t } = useTranslation(); // Initialize i18n translation
   const dispatch = useAppDispatch();
   const phoneNumbersState = useAppSelector((state) => state.phoneNumber);
   const { phoneNumbers, status, error } = phoneNumbersState;
@@ -189,16 +188,15 @@ const PhoneNumbers: React.FC = () => {
       </Modal>
 
       {/* Edit Phone Number Modal */}
-      <Modal isOpen={isEditModalOpen} onClose={closeEditModal} className="modal">
-        <h2 className="mb-4 font-bold text-xl">{t('edit_phone_number_label')}</h2>
-        <form>
+      <Modal isOpen={isEditModalOpen} onClose={closeEditModal} className="modal w-[400px]">
+        <h2 className="mb-4 font-bold text-xl mt-6">{t('edit_phone_number_label')}</h2>
+        <form >
           <div className="mb-4">
             <label className="form-label">{t('label')}</label>
-            <input
+            <Input
               type="text"
               value={editLabel}
               onChange={(e) => setEditLabel(e.target.value)}
-              className="dark:bg-gray-800 form-input"
               placeholder={t('new_label_for_phone_number')}
             />
           </div>

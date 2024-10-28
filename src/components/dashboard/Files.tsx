@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "../../app/hooks";
 import { FaTrash, FaDownload, FaPlus, FaCopy } from "react-icons/fa";
 import Button from "../lib/Button";
 import { toast, ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
 import Modal from "../common/Modal";
 import Input from "../lib/Input";
 import { useTranslation } from 'react-i18next';
