@@ -1,20 +1,35 @@
-{
+{       
+  
 
-  "create_agent": "Create your agent",
-  "agent_name": "Agent Name",
-  "agent_name_placeholder": "Ted Lasso",
-  "agent_name_error": "Agent name must be at least 4 characters long.",
-  "creating_agent": "Creating...",
-  "next": "Next →",
-  "ai_text_assistant": "AI Text Assistant",
-  "real_time_voice_assistant": "Real-Time Voice Assistant",
-  "text_assistant_description": "An AI Assistant for Text Queries",
-  "voice_assistant_description": "An Employee Who Works 24 x 7",
-  "create_button": "+ Create",
-  "create_agent_error": "Failed to create agent. Please try again.",
-  "creation_error": "An error occurred while creating the agent."
-,
+      "title_agent_management": "Agents",
+      "description_manage_agents": "Manage your agents and automate responses for customer inquiries.",
+      "status_not_deployed": "Not deployed",
+      "status_deployed": "Deployed",
+      "role_voice_agent": "Voice Agent",
+      "summary_agent_purpose": "Helps resolve common customer inquiries with quick, automated responses. Optimized for e-commerce and service industries.",
+      "action_open": "Open",
+      "action_delete_agent": "Delete Agent",
+      "modal_delete_title": "Delete Agent",
+      "modal_delete_confirmation": "Are you sure you want to delete this agent?",
+      "button_cancel": "Cancel",
+      "button_confirm": "Confirm",
+      "toast_success_agent_removed": "Agent removed successfully.",
+      "toast_error_agent_removal": "Error removing agent.",
 
+   
+      "create_agent": "Create Agent",
+      "select_option": "Select one of the options below to create your agent and set an agent name before proceeding.",
+      "chat_agent": "Chat Agent",
+      "voice_agent": "Voice Agent",
+      "chat_agent_description": "Automated chat-based customer support.",
+      "voice_agent_description": "Voice support for handling calls automatically.",
+      "agent_name": "Agent Name",
+      "agent_name_placeholder": "Enter agent name...",
+      "agent_name_error": "Agent name must be at least 4 characters long.",
+      "create_agent_error": "There was an error creating the agent.",
+      "creation_error": "An unexpected error occurred.",
+      "creating_agent": "Creating Agent...",
+      
 
   "agent_configuration": "Agent Configuration",
   "welcome_message_label": "Agent Welcome Message",
@@ -72,13 +87,6 @@
 ,
 
 
-  "create_agent_2": "Create Agent",
-  "personalized_agent": "Begin from the ground up for a fully personalized agent experience.",
-  "chatting": "Chatting",
-  "voice_call": "Voice Call",
-  "choose_template": "Choose A Template",
-  "generic_sales_model": "Generic sales model. Select this and you can further customize."
-,
 
 
   "title": "Files",

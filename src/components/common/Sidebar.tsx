@@ -22,12 +22,13 @@ const Sidebar: React.FC = () => {
 
 
   const isActive = (path: string) => location.pathname === path;
+  const [sidebarOpen] = useState(false); // State to control sidebar visibility
 
   return (
     <div
-      className={`sidebar relative w-[280px] bg-gray-900  border-slate-800 bg-bg-gray-800 border ${isSidebarOpen ? 'w-64' : 'w-[95px]'} max-w-xs h-screen text-gray-200 transition-width duration-300 ease-in-out`}
+      className={`sidebar fixed bottom-0 top-0 transition-transform duration-300 transform lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:block  w-[280px] bg-gray-900  border-slate-800 bg-bg-gray-800 border ${isSidebarOpen ? 'w-64' : 'w-[95px]'} max-w-xs h-screen text-gray-200 transition-width duration-300 ease-in-out`}
     >
-      <aside className="sticky top-0 flex flex-col justify-between h-screen  w-full">
+      
         <div>
           <div className="flex justify-between items-center mt-[24px]  ml-[20px]">
             {isSidebarOpen ? (
@@ -132,7 +133,6 @@ const Sidebar: React.FC = () => {
         </div>
 
 
-      </aside>
     </div>
   );
 };

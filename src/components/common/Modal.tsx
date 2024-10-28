@@ -36,12 +36,12 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children, className = ''
 
   return (
     <div
-      className={`fixed z-50 left-0 top-0 bottom-0 right-0 flex items-center backdrop-blur-[5px] justify-center bg-black bg-opacity-50 ${overlayClassName}`}
+      className={`fixed z-50 left-0 top-0 bottom-0 right-0 flex items-center justify-center bg-[#101828D1] bg-opacity-[80%] ${overlayClassName}`}
       onClick={onClose}
     >
       <div
         ref={modalRef}
-        className={`relative bg-white dark:bg-gray-700 p-6 rounded-lg shadow-lg ${className}`}
+        className={`relative bg-white dark:bg-[#1D2939] p-6 rounded-lg shadow-lg ${className}`}
         onClick={(e) => e.stopPropagation()} // Prevent closing on content click
       >
         {/* Close Button */}

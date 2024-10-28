@@ -14,14 +14,14 @@ const MainLayout: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen !font-manrope">
+    <div className="flex min-h-screen !font-manrope ">
       {/* Sidebar for larger screens */}
-      <div className={`fixed z-50 inset-y-0 left-0 transition-transform duration-300 transform lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} lg:relative lg:block `}>
+      <div className={`fixed z-50 inset-y-0 left-0 `}>
         <Sidebar />
       </div>
 
       {/* Main content area */}
-      <div className="flex-1 flex flex-col w-full bg-[#fdfdfd] ">
+      <div className="flex-1 flex flex-col w-full bg-[#fdfdfd] dark:bg-[#101828] sm:ml-[280px] md:ml-[280px]">
         <Header toggleSidebar={toggleSidebar} /> 
 
         {/* Content Area */}

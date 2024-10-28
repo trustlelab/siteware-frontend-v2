@@ -48,7 +48,7 @@ a {
 }
 
 body {
-  @apply !font-manrope  overflow-x-hidden;
+  @apply !font-manrope  overflow-x-hidden dark:bg-[#101828] dark:text-white;
 }
 .FormInput_label {
   @apply block text-gray-700 text-[16px] font-bold mb-2 dark:text-white;

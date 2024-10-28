@@ -1,19 +1,32 @@
 {
 
-  "create_agent": "Erstellen Sie Ihren Agenten",
+  "title_agent_management": "Agenten",
+  "description_manage_agents": "Verwalten Sie Ihre Agenten und automatisieren Sie Antworten auf Kundenanfragen.",
+  "status_not_deployed": "Nicht bereitgestellt",
+  "status_deployed": "Bereitgestellt",
+  "role_voice_agent": "Sprachagent",
+  "summary_agent_purpose": "Hilft, häufige Kundenanfragen schnell und automatisch zu beantworten. Optimiert für E-Commerce und Dienstleistungsbranchen.",
+  "action_open": "Öffnen",
+  "action_delete_agent": "Agent löschen",
+  "modal_delete_title": "Agent löschen",
+  "modal_delete_confirmation": "Sind Sie sicher, dass Sie diesen Agenten löschen möchten?",
+  "button_cancel": "Abbrechen",
+  "button_confirm": "Bestätigen",
+  "toast_success_agent_removed": "Agent erfolgreich entfernt.",
+  "toast_error_agent_removal": "Fehler beim Entfernen des Agenten.", 
+
+  "create_agent": "Agent erstellen",
+  "select_option": "Wählen Sie eine der untenstehenden Optionen, um Ihren Agenten zu erstellen und legen Sie einen Namen fest, bevor Sie fortfahren.",
+  "chat_agent": "Chat-Agent",
+  "voice_agent": "Sprach-Agent",
+   "chat_agent_description": "Automatisierter Chat-Support.",
+  "voice_agent_description": "Automatische Anrufbearbeitung.",
   "agent_name": "Agentenname",
-  "agent_name_placeholder": "Ted Lasso",
-  "agent_name_error": "Der Agentenname muss mindestens 4 Zeichen lang sein.",
-  "creating_agent": "Erstellen...",
-  "next": "Weiter →",
-  "ai_text_assistant": "KI-Textassistent",
-  "real_time_voice_assistant": "Echtzeit-Sprachassistent",
-  "text_assistant_description": "Ein KI-Assistent für Textabfragen",
-  "voice_assistant_description": "Ein Mitarbeiter, der 24 x 7 arbeitet",
-  "create_button": "+ Erstellen",
-  "create_agent_error": "Agent konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
-  "creation_error": "Beim Erstellen des Agenten ist ein Fehler aufgetreten."
-,
+  "agent_name_placeholder": "Agentennamen eingeben...",
+  "agent_name_error": "Der Name des Agenten muss mindestens 4 Zeichen lang sein.",
+  "create_agent_error": "Beim Erstellen des Agenten ist ein Fehler aufgetreten.",
+  "creation_error": "Ein unerwarteter Fehler ist aufgetreten.",
+  "creating_agent": "Agent wird erstellt...",
 
 
   "agent_configuration": "Agenten-Konfiguration",
@@ -68,15 +81,6 @@
   "call_rate": "$0.05/Min",
   "incoming_calls": "Eingehende Anrufe entgegennehmen",
   "speak_to_agent": "Sprechen Sie mit Ihrem Agenten"
-,
-
-
-  "create_agent_2": "Agent erstellen",
-  "personalized_agent": "Beginnen Sie von Grund auf, um eine vollständig personalisierte Agentenerfahrung zu erstellen.",
-  "chatting": "Chatten",
-  "voice_call": "Sprachanruf",
-  "choose_template": "Wählen Sie eine Vorlage",
-  "generic_sales_model": "Generisches Verkaufsmodell. Wählen Sie dies und passen Sie es weiter an."
 ,
 
 
