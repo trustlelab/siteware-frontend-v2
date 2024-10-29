@@ -23,7 +23,7 @@ const AccessibleCard: React.FC<AccessibleCardProps> = ({ title, type, descriptio
     tabIndex={0}
     onClick={onClick}
     onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && onClick()}
-    className={`h-[82px] w-full flex justify-between  p-4 rounded-xl border-2 ${isActive ? 'bg-[#f9f5ff] dark:bg-[#4c1d95]/20 border-[#7e56d8]' : 'bg-white dark:bg-gray-800 border-[#d0d5dd] dark:border-gray-700'} flex items-center gap-4 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+    className={`h-[82px] w-full flex justify-between  p-4 rounded-xl border-2 ${isActive ? 'bg-[#f9f5ff] dark:bg-[#4c1d95]/20 border-[#7e56d8]' : 'bg-white dark:bg-gray-800 border-[#d0d5dd] dark:border-gray-700'} flex items-center  gap-4 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
   >
     <div className="flex items-center gap-4 ">
       <div className="w-10 h-10 flex items-center justify-center bg-[#f4ebff] dark:bg-[#3b216f] rounded-full border-4 border-[#f9f5ff] dark:border-[#4c1d95]">
@@ -51,7 +51,7 @@ const CreateAgent: React.FC = () => {
   const [agentName, setAgentName] = useState<string>('');
   const [error, setError] = useState<string>('');
   const [isCreating, setIsCreating] = useState<boolean>(false);
-  const [selectedAgent, setSelectedAgent] = useState<string>('text');
+  const [selectedAgent, setSelectedAgent] = useState<string>('TEXT');
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -73,11 +73,12 @@ const CreateAgent: React.FC = () => {
       setError(t('agent_name_error'));
       return;
     }
-
+  
     setIsCreating(true);
-
+  
     try {
-      const action = await dispatch(createAgentData({ name: agentName, data: {} }));
+      // Include agentType in the dispatch
+      const action = await dispatch(createAgentData({ name: agentName, agentType: selectedAgent, data: {} }));
       if (createAgentData.fulfilled.match(action)) {
         navigate(`/configure-agent?id=${action.payload.id}`);
       } else {
@@ -89,6 +90,7 @@ const CreateAgent: React.FC = () => {
       setIsCreating(false);
     }
   };
+  
 
   return (
     <div>
@@ -112,8 +114,8 @@ const CreateAgent: React.FC = () => {
 
               title={t('chat_agent')}
               description={t('chat_agent_description')}
-              isActive={selectedAgent === 'text'}
-              onClick={() => setSelectedAgent('text')}
+              isActive={selectedAgent === 'TEXT'}
+              onClick={() => setSelectedAgent('TEXT')}
             />
 
             <AccessibleCard
@@ -121,8 +123,8 @@ const CreateAgent: React.FC = () => {
 
               title={t('voice_agent')}
               description={t('voice_agent_description')}
-              isActive={selectedAgent === 'voice'}
-              onClick={() => setSelectedAgent('voice')}
+              isActive={selectedAgent === 'VOICE'}
+              onClick={() => setSelectedAgent('VOICE')}
             />
           </div>
 

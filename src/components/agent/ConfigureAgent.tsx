@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Tab from './voice/config/Tab';
-import { FaPhone, FaComments } from 'react-icons/fa';
+import { FaPhone } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { setId, fetchAgentData } from '../../features/slices/agentSlice';
 import { RootState, AppDispatch } from '../../app/store';
@@ -12,7 +12,9 @@ import VoiceConfig from './voice/config/VoiceConfig';
 import CallConfig from './voice/config/CallConfig';
 import FunctionsConfig from './voice/config/FunctionsConfig';
 import TasksConfig from './voice/config/TaskConfiguration';
-import { useTranslation } from 'react-i18next'; // Import the useTranslation hook
+import { useTranslation } from 'react-i18next';
+import SpeakToAgent from './SpeakToAgent';
+import Chat from './Chat';
 
 interface Agent {
   id: number;
@@ -27,12 +29,14 @@ interface AgentsResponse {
 }
 
 const ConfigureAgent: React.FC = () => {
-  const { t } = useTranslation(); // Use the 'configureAgent' namespace
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<string>('Model');
   const [agents, setAgents] = useState<Agent[]>([]);
   const dispatch = useDispatch<AppDispatch>();
   const currentId = useSelector((state: RootState) => state.agent.id);
   const currentAgentName = useSelector((state: RootState) => state.agent.agentData?.name);
+  const currentAgentType = useSelector((state: RootState) => state.agent.agentData?.agentType);
+
 
   useEffect(() => {
     const fetchAgents = async () => {
@@ -72,28 +76,49 @@ const ConfigureAgent: React.FC = () => {
   const handleAgentChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const id = parseInt(e.target.value, 10);
     handleAgentClick(id);
+    console.log('Rendering Tabs with agentType:', currentAgentType);
+
   };
 
   const renderContent = () => {
-    switch (activeTab) {
-      case 'Agent':
-        return <AgentConfig />;
-      case 'LLM':
-        return <LLMConfig />;
-      case 'Transcriber':
-        return <TranscriberConfig />;
-      case 'Voice':
-        return <VoiceConfig />;
-      case 'Call':
-        return <CallConfig />;
-      case 'Functions':
-        return <FunctionsConfig />;
-      case 'Tasks':
-        return <TasksConfig />;
-      default:
-        return <AgentConfig />;
+    console.log('Current Agent Type:', currentAgentType);
+    console.log('Active Tab:', activeTab);
+
+    if (currentAgentType === 'TEXT') {
+      switch (activeTab) {
+        case 'Agent':
+          return <AgentConfig />;
+        case 'LLM':
+          return <LLMConfig />;
+        case 'Chat':
+          return <Chat />;
+        default:
+          return <AgentConfig />;
+      }
+    } else if (currentAgentType === 'VOICE') {
+      switch (activeTab) {
+        case 'Agent':
+          return <AgentConfig />;
+        case 'LLM':
+          return <LLMConfig />;
+        case 'Transcriber':
+          return <TranscriberConfig />;
+        case 'Voice':
+          return <VoiceConfig />;
+        case 'Call':
+          return <CallConfig />;
+        case 'Functions':
+          return <FunctionsConfig />;
+        case 'Tasks':
+          return <TasksConfig />;
+        default:
+          return <AgentConfig />;
+      }
     }
+    return <AgentConfig />;
   };
+
+
 
   return (
     <div className="flex flex-col xl-custom:flex-row space-y-4 xl-custom:space-y-0 xl-custom:space-x-4 p-4 w-auto">
@@ -123,10 +148,8 @@ const ConfigureAgent: React.FC = () => {
             <div
               key={agent.id}
               onClick={() => handleAgentClick(agent.id)}
-              className={`p-2 rounded hover:text-white dark:text-white ${isActive
-                ? 'bg-primary-light text-white'
-                : 'bg-blue-50 hover:bg-primary-light hover:dark:!bg-primary-light/50 dark:bg-gray-800'
-              }`}
+              className={`p-2 rounded hover:text-white dark:text-white ${isActive ? 'bg-primary-light text-white' : 'bg-blue-50 hover:bg-primary-light hover:dark:!bg-primary-light/50 dark:bg-gray-800'
+                }`}
             >
               {agent.name}
             </div>
@@ -139,29 +162,30 @@ const ConfigureAgent: React.FC = () => {
         <div className="flex justify-between">
           <div className="rounded-full text-xl space-y-5">
             <p>{currentAgentName || t('select_agent')}</p>
-            <div className="border-green-600 dark:bg-gray-900 px-2 border rounded-lg text-green-500 dark:text-gray-300">
-              <div className="font-semibold text-sm">{t('call_rate')}</div>
+            {currentAgentType === 'VOICE' && (
+              <div className="border-green-600 dark:bg-gray-900 px-2 border rounded-lg text-green-500 dark:text-gray-300">
+                <div className="font-semibold text-sm">{t('call_rate')}</div>
+              </div>
+            )}
+          </div>
+
+          {currentAgentType === 'VOICE' && (
+            <div className="flex space-x-4">
+              <button className="flex items-center justify-center hover:dark:bg-gray-700 dark:bg-gray-800 shadow-md px-4 py-2 rounded-lg h-10 dark:text-gray-300 transition duration-200 text-sm md:text-base">
+                <span className="hidden sm:inline">{t('incoming_calls')}</span>
+                <span className="sm:hidden">
+                  <FaPhone />
+                </span>
+              </button>
+
+              <SpeakToAgent />
             </div>
-          </div>
-
-          <div className="flex space-x-4">
-            <button className="flex items-center justify-center hover:dark:bg-gray-700 dark:bg-gray-800 shadow-md px-4 py-2 rounded-lg h-10 dark:text-gray-300 transition duration-200 text-sm md:text-base">
-              <span className="hidden sm:inline">{t('incoming_calls')}</span>
-              <span className="sm:hidden">
-                <FaPhone />
-              </span>
-            </button>
-
-            <button className="flex items-center justify-center bg-primary-light hover:bg-purple-800 shadow-md px-4 py-2 rounded-lg h-10 text-white transition duration-200 text-sm md:text-base">
-              <span className="hidden sm:inline">{t('speak_to_agent')}</span>
-              <span className="sm:hidden">
-                <FaComments />
-              </span>
-            </button>
-          </div>
+          )}
         </div>
 
-        <Tab onSelect={setActiveTab} />
+
+        <Tab onSelect={setActiveTab} agentType={currentAgentType || 'TEXT'} />
+
 
         <div className="mt-4">{renderContent()}</div>
       </div>
