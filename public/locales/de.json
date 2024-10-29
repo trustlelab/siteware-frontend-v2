@@ -1,10 +1,11 @@
 {
-
+"chat":"Chat",
   "title_agent_management": "Agenten",
   "description_manage_agents": "Verwalten Sie Ihre Agenten und automatisieren Sie Antworten auf Kundenanfragen.",
   "status_not_deployed": "Nicht bereitgestellt",
   "status_deployed": "Bereitgestellt",
-  "role_voice_agent": "Sprachagent",
+  "agentTypeText": "Textagent",
+  "agentTypeVoice":"Sprachagent",
   "summary_agent_purpose": "Hilft, häufige Kundenanfragen schnell und automatisch zu beantworten. Optimiert für E-Commerce und Dienstleistungsbranchen.",
   "action_open": "Öffnen",
   "action_delete_agent": "Agent löschen",

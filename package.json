@@ -10,11 +10,13 @@
     "lint": "npx eslint ."
   },
   "dependencies": {
+    "@emoji-mart/react": "^1.1.1",
     "@reduxjs/toolkit": "^2.2.7",
     "@types/react-redux": "^7.1.34",
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.7.7",
     "country-telephone-data": "^0.6.3",
+    "emoji-mart": "^5.6.0",
     "i18next": "^23.15.2",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^2.6.2",

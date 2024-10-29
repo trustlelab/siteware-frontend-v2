@@ -1,11 +1,12 @@
 {       
   
-
+      "chat":"Chat",
       "title_agent_management": "Agents",
       "description_manage_agents": "Manage your agents and automate responses for customer inquiries.",
       "status_not_deployed": "Not deployed",
       "status_deployed": "Deployed",
-      "role_voice_agent": "Voice Agent",
+      "agentTypeText": "Chatbot",
+      "agentTypeVoice":"Voice agent",
       "summary_agent_purpose": "Helps resolve common customer inquiries with quick, automated responses. Optimized for e-commerce and service industries.",
       "action_open": "Open",
       "action_delete_agent": "Delete Agent",

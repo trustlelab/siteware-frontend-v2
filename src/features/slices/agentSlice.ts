@@ -5,6 +5,7 @@ interface Agent {
   id: number;
   name: string;
   model: string;
+  agentType: string;
   welcomeMessage?: string;
   agentPrompt?: string;
   speechRecognition?: boolean;
@@ -71,8 +72,8 @@ export const deleteAgentData = createAsyncThunk<number, number>('agent/deleteAge
 });
 
 // Thunk to create agent data
-export const createAgentData = createAsyncThunk<Agent, { name: string; data: Partial<Agent> }>('agent/createAgentData', async ({ name, data }) => {
-  const response = await API.post<{ agent: Agent }>('/agent/create', { name, ...data });
+export const createAgentData = createAsyncThunk<Agent, { name: string; agentType:string, data: Partial<Agent> }>('agent/createAgentData', async ({ name,agentType, data }) => {
+  const response = await API.post<{ agent: Agent }>('/agent/create', { name, agentType,...data });
   return response.data.agent;
 });
 

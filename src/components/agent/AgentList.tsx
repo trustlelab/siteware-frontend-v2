@@ -17,6 +17,7 @@ import ExploreAgents from './Explore';
 import { DeleteIcon } from '../../assets/icons/Icons';
 
 interface Agent {
+  agentType: string;
   id: number;
   name: string;
   model: string;
@@ -93,7 +94,7 @@ const AgentCard: React.FC<{ agent: Agent; onDeleteClick: (agent: Agent) => void 
       </div>
       <div className='flex gap-y-2 flex-col'>
         <div className="w-[301.33px] text-[#344053] dark:text-white text-base font-bold leading-tight">{agent.name}</div>
-        <div className="text-[#667085] dark:text-gray-400 text-sm font-semibold leading-tight">{t('role_voice_agent')}</div>
+        <div className="text-[#667085] dark:text-gray-400 text-sm font-semibold leading-tight">{agent.agentType==="TEXT"?t('agentTypeText'):t('agentTypeVoice')}</div>
       </div>
       <div className="w-[301px] h-[0px] border border-[#eaecf0] dark:border-gray-700"></div>
       <div className="text-[#667085] dark:text-gray-400 text-sm font-semibold leading-[25px]">{t('summary_agent_purpose')}</div>
