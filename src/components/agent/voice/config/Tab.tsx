@@ -12,20 +12,25 @@ const Tab: React.FC<TabProps> = ({ onSelect, agentType }) => {
   console.log(`Agent ${agentType}`)
   const { t } = useTranslation();
 
+ 
+
   const allTabs = [
     { name: 'Agent', icon: <FaCog className="mr-1" />, translationKey: 'agent' },
-    { name: 'LLM', icon: <FaCog className="mr-1" />, translationKey: 'llm' },
+    { name: 'Knowledge Base', icon: <FaCog className="mr-1" />, translationKey: 'Knowledgebase' },
     { name: 'Transcriber', icon: <FaMicrophone className="mr-1" />, translationKey: 'transcriber' },
     { name: 'Voice', icon: <FaVolumeUp className="mr-1" />, translationKey: 'voice' },
     { name: 'Call', icon: <FaPhone className="mr-1" />, translationKey: 'call' },
     { name: 'Functions', icon: <FaTools className="mr-1" />, translationKey: 'functions' },
     { name: 'Tasks', icon: <FaChartLine className="mr-1" />, translationKey: 'tasks' },
-    { name: 'Chat', icon: <FaCog className="mr-1" />, translationKey: 'chat' },
   ];
-
+  
+  // Define Chat tab separately
+  const chatTab = { name: 'Chat', icon: <FaCog className="mr-1" />, translationKey: 'chat' };
+  
   const filteredTabs = agentType === 'TEXT' 
-    ? allTabs.filter(tab => ['Agent', 'LLM', 'Chat'].includes(tab.name))
+    ? [...allTabs.filter(tab => ['Agent', 'Knowledge Base'].includes(tab.name)), chatTab]
     : allTabs;
+  
 
   const [activeTab, setActiveTab] = useState(filteredTabs[0].name);
 

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Sidebar from '../common/Sidebar';
-import Header from '../dashboard/Header';
 
 /**
  * Main layout with responsive sidebar
@@ -22,7 +21,6 @@ const MainLayout: React.FC = () => {
 
       {/* Main content area */}
       <div className="flex-1 flex flex-col w-full bg-[#fdfdfd] dark:bg-[#101828] sm:ml-[280px] md:ml-[280px]">
-        <Header toggleSidebar={toggleSidebar} /> 
 
         {/* Content Area */}
         <main className="flex-1 p-4">

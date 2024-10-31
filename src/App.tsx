@@ -12,8 +12,8 @@ import PhoneNumbers from './components/phone-numbers/ImportPhoneNumber';
 import Overview from './components/dashboard/Overview';
 import SetNewPassword from './components/dashboard/SetNewPassword';
 import Voices from './components/dashboard/Voices';
-import Files from './components/dashboard/Files';
 import 'react-toastify/dist/ReactToastify.css';
+import KnowledgeBase from './components/dashboard/KnowledgeBase';
 
 /**
  *
@@ -48,7 +48,7 @@ const App: React.FC = () => {
           <Route path="phone-numbers" element={<PhoneNumbers />} />
           <Route path="update-password" element={<SetNewPassword />} />
           <Route path='voice-library' element={<Voices/>}/>
-          <Route path='knowledge-base' element={<Files/>}/>
+          <Route path='knowledge-base' element={<KnowledgeBase/>}/>
 
         </Route>
 
