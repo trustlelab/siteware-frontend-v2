@@ -6,7 +6,7 @@ import { createAgentData } from '../../features/slices/agentSlice';
 import Button from '../lib/Button';
 import Input from '../lib/Input';
 import { useTranslation } from 'react-i18next';
-import { ChatBubbleIcon, TickIcon, VoiceIcon } from '../../assets/icons/Icons';
+import { ChatBubbleIcon, PlusIcon, TickIcon, VoiceIcon } from '../../assets/icons/Icons';
 
 // AccessibleCard Component
 interface AccessibleCardProps {
@@ -97,9 +97,7 @@ const CreateAgent: React.FC = () => {
       <Modal className="border-gray-700 dark:bg-gray-800 border !rounded-[20px]" isOpen={isModalOpen} onClose={handleCloseModal}>
         <div className="mt-5 px-[12px] w-[480px]">
           <div className="w-12 h-12 p-3 bg-white dark:bg-gray-800 rounded-[10px] shadow border border-[#eaecf0] dark:border-gray-700 justify-center items-center inline-flex">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12 5V19M5 12H19" stroke="#667085" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
+           <PlusIcon/>
           </div>
 
           <h2 className="mb-6 font-semibold text-2xl mt-4 dark:text-white">{t('create_agent')}</h2>
