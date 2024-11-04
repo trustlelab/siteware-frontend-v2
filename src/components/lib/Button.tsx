@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
   const variantStyles = {
     primary: `
        bg-[#7e56d8]
-      focus:ring-purple-300 dark:focus:ring-purple-800 
+      focus:ring-purple-300 dark:focus:ring-purple-800  
       text-white
     `,
     warning: 'bg-yellow-500 text-black hover:bg-yellow-600 dark:bg-yellow-400 dark:text-black',

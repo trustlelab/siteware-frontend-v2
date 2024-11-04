@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { GoChevronLeft, GoChevronRight } from "react-icons/go";
 import { AgentsIcon, CubeIcon, DashboardIcon, FavoritesIcon, HomeIcon, KnowledgebaseIcon, PhoneNumbersIcon, StarIcon, VoiceAgentIcon, } from '../../assets/icons/Icons';
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import ThemeChanger from './ThemeChnager';
+import ThemeChanger from './ThemeChanger';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Sidebar: React.FC = () => {
@@ -136,13 +136,13 @@ const Sidebar: React.FC = () => {
         <div className="pb-10 absolute bottom-0">
 
           <div className='px-4'>
-            <LanguageSwitcher />
-            <ThemeChanger />
+            <LanguageSwitcher isExpanded={isSidebarOpen} />
+            <ThemeChanger  isExpanded={isSidebarOpen}/>
           </div>
 
           <Link
             to="/profile"
-            className={`flex items-center space-x-3 p-2 rounded-lg transition duration-300 ease-in-out ${isActive('/profile') ? 'bg-gray-800 font-bold' : ''}`}
+            className={`flex items-center space-x-3 p-2 rounded-lg transition duration-300 ease-in-out ${isActive('/profile') ? ' font-bold' : ''}`}
           >
             <div className=''>
               <div className="flex items-center space-x-4 bg-gray-900 p-4 rounded-lg ">

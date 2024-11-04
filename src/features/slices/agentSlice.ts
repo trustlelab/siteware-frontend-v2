@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import API from '../../utils/API';
 
 interface Agent {
+  phoneNumber: string;
   id: number;
   name: string;
   model: string;

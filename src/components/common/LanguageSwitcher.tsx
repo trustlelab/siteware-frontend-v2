@@ -5,7 +5,11 @@ import { DownArrowIcon } from '../../assets/icons/Icons';
 
 const GlobeIcon = FiGlobe;
 
-const LanguageSwitcher: React.FC = () => {
+interface LanguageSwitcherProps {
+    isExpanded: boolean;
+}
+
+const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({ isExpanded }) => {
     const { i18n } = useTranslation();
     const [language, setLanguage] = useState(localStorage.getItem('i18nLanguage') || 'en');
     const [isOpen, setIsOpen] = useState(false);
@@ -48,20 +52,26 @@ const LanguageSwitcher: React.FC = () => {
         <div className="relative text-left" ref={dropdownRef}>
             <div
                 onClick={toggleDropdown}
-                className="w-60 p-3 rounded-md flex items-center gap-2 cursor-pointer"
+                className={`w-60 p-3 rounded-md flex items-center gap-2 cursor-pointer ${
+                    isExpanded ? 'w-full' : 'w-auto'
+                }`}
             >
-                <div className="flex-grow flex items-center gap-2">
-                    <GlobeIcon />
-                    <div className="text-gray-200 text-base font-semibold">Language</div>
-                </div>
-                <div className="flex items-center">
-                    <div className="text-white text-base font-bold">{language.toUpperCase()}</div>
-                    <DownArrowIcon />
-                </div>
+                <GlobeIcon />
+                {isExpanded && (
+                    <>
+                        <div className="flex-grow flex items-center gap-2">
+                            <div className="text-gray-200 text-base font-semibold">Language</div>
+                        </div>
+                        <div className="flex items-center">
+                            <div className="text-white text-base font-bold">{language.toUpperCase()}</div>
+                            <DownArrowIcon />
+                        </div>
+                    </>
+                )}
             </div>
             {isOpen && (
-                <div className="absolute  bg-gray-950 shadow-lg mt-2 rounded-md w-60">
-                    <ul className="py-1 ">
+                <div className="absolute bg-gray-950 shadow-lg mt-2 rounded-md w-60">
+                    <ul className="py-1">
                         <li>
                             <button
                                 onClick={() => changeLanguage('en')}
