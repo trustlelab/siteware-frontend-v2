@@ -6,7 +6,6 @@ import { setId, fetchAgentData } from '../../features/slices/agentSlice';
 import { RootState, AppDispatch } from '../../app/store';
 import API from '../../utils/API';
 import AgentConfig from './voice/config/AgentConfig';
-import LLMConfig from './voice/config/LLMconfig';
 import TranscriberConfig from './voice/config/TranscriberConfig';
 import VoiceConfig from './voice/config/VoiceConfig';
 import CallConfig from './voice/config/CallConfig';
@@ -15,6 +14,7 @@ import TasksConfig from './voice/config/TaskConfiguration';
 import { useTranslation } from 'react-i18next';
 import SpeakToAgent from './SpeakToAgent';
 import Chat from './Chat';
+import KnowledgeBaseConfig from './voice/KnowledgebaseConfig';
 
 interface Agent {
   id: number;
@@ -88,8 +88,8 @@ const ConfigureAgent: React.FC = () => {
       switch (activeTab) {
         case 'Agent':
           return <AgentConfig />;
-        case 'LLM':
-          return <LLMConfig />;
+        case 'Knowledge Base':
+          return <KnowledgeBaseConfig />;
         case 'Chat':
           return <Chat />;
         default:
@@ -99,10 +99,10 @@ const ConfigureAgent: React.FC = () => {
       switch (activeTab) {
         case 'Agent':
           return <AgentConfig />;
-        case 'LLM':
-          return <LLMConfig />;
         case 'Transcriber':
           return <TranscriberConfig />;
+        case 'Knowledge Base':
+          return <KnowledgeBaseConfig />;
         case 'Voice':
           return <VoiceConfig />;
         case 'Call':
@@ -121,7 +121,7 @@ const ConfigureAgent: React.FC = () => {
 
 
   return (
-    <div className="flex flex-col xl-custom:flex-row space-y-4 xl-custom:space-y-0 xl-custom:space-x-4 p-4 w-auto">
+    <div className="w-[90%] m-8 p-6 bg-white dark:bg-gray-900 dark:border-gray-600 rounded-xl shadow border border-[#eaecf0] flex-col justify-start items-start gap-8 inline-flex">
       {/* Dropdown for mobile devices */}
       <div className="xl-custom:hidden">
         <select
@@ -138,24 +138,7 @@ const ConfigureAgent: React.FC = () => {
         </select>
       </div>
 
-      {/* Sidebar for larger screens */}
-      <div className="hidden xl-custom:block space-y-3 dark:bg-gray-900 shadow-light dark:shadow-none mr-[12px] px-4 py-2 rounded-lg w-[290px] h-screen">
-        <h1 className="text-xl">{t('agents')}</h1>
-        {agents.map((agent) => {
-          const isActive = currentId === agent.id;
 
-          return (
-            <div
-              key={agent.id}
-              onClick={() => handleAgentClick(agent.id)}
-              className={`p-2 rounded hover:text-white dark:text-white ${isActive ? 'bg-primary-light text-white' : 'bg-blue-50 hover:bg-primary-light hover:dark:!bg-primary-light/50 dark:bg-gray-800'
-                }`}
-            >
-              {agent.name}
-            </div>
-          );
-        })}
-      </div>
 
       {/* Main content area */}
       <div className="flex flex-col w-full space-y-4">

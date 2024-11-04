@@ -5,7 +5,7 @@ import { VoiceIcon } from '../../assets/icons/Icons';
 const FilterAgentAndSearch: React.FC = () => {
   const { t } = useTranslation(); // Use 'filter' namespace
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [activeTab, setActiveTab] = useState<string>('Voice Agents');
+  const [activeTab, setActiveTab] = useState<string>('All Agents');
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

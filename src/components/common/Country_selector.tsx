@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { DownArrowIcon } from '../../assets/icons/Icons';
 
 // Define the type for your options
 interface CountryOption {
@@ -35,7 +36,7 @@ const CountrySelector: React.FC<CountrySelectorProps> = ({ options, onSelect, se
 
     // Add event listener for clicks
     document.addEventListener('mousedown', handleClickOutside);
-    
+
     // Cleanup event listener
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -43,20 +44,21 @@ const CountrySelector: React.FC<CountrySelectorProps> = ({ options, onSelect, se
   }, []);
 
   return (
-    <div ref={dropdownRef} className="relative inline-block w-full">
+    <div ref={dropdownRef} className="relative inline-block ">
       <div
-        className="bg-gray-100 dark:bg-gray-800 text-black dark:text-white py-2 px-4 rounded cursor-pointer"
+        className=" dark:bg-gray-800 text-black dark:text-white py-2 px-2 rounded cursor-pointer flex items-center justify-between"
         onClick={toggleDropdown}
       >
-        {selected ? selected.label : 'Select Country'}
+        <span>{selected ? selected.value : '  '}</span>
+        <DownArrowIcon/>
       </div>
 
       {isOpen && (
-        <ul className="absolute w-full bg-gray-100 dark:bg-gray-800 text-black dark:text-white shadow-md rounded mt-1 max-h-40 overflow-auto">
+        <ul className="absolute top-full left-0 w-72 bg-white dark:bg-gray-800 text-black dark:text-white shadow-lg rounded mt-2 max-h-60 overflow-auto z-20">
           {options.map((option) => (
             <li
               key={option.value}
-              className="py-2 px-4 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer"
+              className="py-3 px-4 hover:bg-gray-200 dark:hover:bg-gray-600 cursor-pointer"
               onClick={() => handleOptionClick(option)}
             >
               {option.label}

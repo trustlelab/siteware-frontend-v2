@@ -47,26 +47,36 @@ export const removePhoneNumber = createAsyncThunk<number, number>('phoneNumber/r
   return id;
 });
 
-export const updatePhoneNumberLabel = createAsyncThunk<PhoneNumber, { id: number; label: string }>(
+export const updatePhoneNumberLabel = createAsyncThunk<
+  PhoneNumber,
+  { id: number; label?: string; phoneNumber?: string }
+>(
   'phoneNumber/updatePhoneNumberLabel',
-  async ({ id, label }, { rejectWithValue }) => {
+  async ({ id, label, phoneNumber }, { rejectWithValue }) => {
     try {
-      // Call API and await the response
-      const response = await API.put<{ message: string; id: string; label: string }>(`/twilio/update-number/${id}`, { label });
+      // Prepare the payload with both fields if available
+      const payload: { label?: string; phoneNumber?: string } = {};
+      if (label) payload.label = label;
+      if (phoneNumber) payload.phoneNumber = phoneNumber;
 
-      // Log the API response to check if the format is correct
+      // Call API and await the response
+      const response = await API.put<{ message: string; id: string; label: string; phoneNumber: string }>(
+        `/twilio/update-number/${id}`,
+        payload
+      );
+
+      // Log the API response to verify the format
       console.log('API response (successful):', response.data);
 
       // Check if the response contains the necessary fields
       if (response.data && response.data.id && response.data.label) {
-        // Return the correct structure, converting id to a number
         return {
-          id: Number(response.data.id), // Convert the id to a number
-          phoneNumber: '', // Adjust the phoneNumber field as needed
-          label: response.data.label, // Use the label from the response
+          id: Number(response.data.id),
+          phoneNumber: response.data.phoneNumber || '', // Return updated phoneNumber if provided
+          label: response.data.label,
         };
       } else {
-        throw new Error('Invalid response format'); // Throw error if format is incorrect
+        throw new Error('Invalid response format');
       }
     } catch (error: any) {
       console.error('Caught error in thunk:', error);
