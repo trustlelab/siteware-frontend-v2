@@ -1,0 +1,243 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Manrope';
+  font-weight: 400;
+  font-style: normal;
+  src: url('/src/assets/fonts/Manrope-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-weight: 500;
+  font-style: normal;
+  src: url('/src/assets/fonts/Manrope-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-weight: 600;
+  font-style: normal;
+  src: url('/src/assets/fonts/Manrope-SemiBold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Manrope';
+  font-weight: 700;
+  font-style: normal;
+  src: url('/src/assets/fonts/Manrope-Bold.ttf') format('truetype');
+}
+
+/* Add other weights (ExtraBold, ExtraLight, Light, VariableFont) as needed */
+
+input {
+  @apply outline-none;
+}
+
+a {
+  @apply text-[#6941C6] dark:text-[#AFA1FC];
+}
+
+.sidebar a {
+  @apply text-black dark:text-white/80  no-underline
+}
+.sidebar li {
+  @apply  hover:font-bold dark:hover:bg-gray-800 p-2 rounded-lg transition duration-300 py-2 px-3;
+}
+
+body {
+  @apply !font-manrope  overflow-x-hidden dark:bg-[#101828] dark:text-white;
+}
+.FormInput_label {
+  @apply block text-gray-700 text-[16px] font-bold mb-2 dark:text-white;
+}
+.form_input {
+  @apply active:dark:bg-black dark:text-white appearance-none dark:bg-[#1D2939] dark:border-white dark:border-opacity-[6%] border border-gray-300 rounded-[8px] w-full py-[12px] px-[14px] text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-purple-500 transition duration-200;
+}
+.btn_primary {
+  @apply bg-[#6941C6] text-white h-[48px] font-bold py-2 px-4 rounded-[8px] w-full hover:bg-[#5c37a6] transition duration-200;
+  @apply dark:bg-gradient-to-r dark:from-[#C1B5FD] dark:to-[#AC9DFC] dark:text-black;
+}
+
+.sidebar  span{
+  @apply !text-white
+}
+/* Custom form classes with more unique names */
+.config_input {
+  @apply border-gray-600 bg-gray-100 dark:bg-gray-800 mt-1 p-2 dark:border rounded w-full dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-400;
+}
+
+.config_label {
+  @apply text-gray-600 dark:text-gray-300;
+}
+
+.config_helper_text {
+  @apply text-sm text-gray-500 dark:text-gray-400 mt-1;
+}
+
+.config_button {
+  @apply bg-teal-500 text-white p-2 px-10 rounded focus:outline-none hover:bg-teal-600 transition-colors;
+}
+
+.createAgentcard {
+  @apply flex flex-col justify-center items-center space-y-2   w-[200px] h-[120px] hover:scale-105 duration-500;
+}
+
+/* index.css */
+.assistant-card {
+  @apply flex flex-col  cursor-pointer dark:bg-gray-900   p-5 border border-gray-200 dark:border-gray-700 rounded-[10px] h-[200px] transform duration-700   transition-all hover:-translate-y-1;
+}
+
+.assistant-status {
+  @apply flex justify-between items-center mb-2;
+}
+
+.assistant-title {
+  @apply font-semibold text-lg dark:text-white;
+}
+
+.assistant-trigger {
+  @apply dark:text-gray-300 text-sm;
+}
+
+.assistant-date {
+  @apply dark:text-gray-400 text-xs;
+}
+
+.assistant-button {
+  @apply bg-[#C1B5FD] text-black hover:bg-[#AC9DFC] px-4 py-2 rounded-lg font-bold  transform transition duration-300 ease-in-out hover:scale-105;
+}
+
+.assistant-delete-button {
+  @apply flex items-center hover:text-red-500  hover:border border-red-600 px-4 py-2 rounded-lg font-bold dark:text-white transform transition duration-300 ease-in-out hover:scale-105;
+}
+
+/* Signup.css */
+.terms-checkbox {
+  display: none; /* Hide the default checkbox */
+}
+
+.terms-checkbox + label {
+  position: relative;
+  padding-left: 30px; /* Space for the custom checkbox */
+  cursor: pointer;
+  user-select: none; /* Prevent text selection */
+}
+
+.checkmark {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #6941c6; /* Border color */
+  border-radius: 4px; /* Rounded corners */
+  background-color: white; /* Background color */
+}
+
+.terms-checkbox:checked + label .checkmark {
+  background-color: #6941c6; /* Background color when checked */
+  border-color: #6941c6; /* Border color when checked */
+}
+
+.terms-checkbox:checked + label .checkmark:after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 4px;
+  height: 10px;
+  border: solid white; /* Checkmark color */
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Add this in your global CSS if necessary */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  @apply bg-[#f1f9ff] dark:bg-black;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-[#bdbdbd] dark:bg-gray-600;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-[#c4ccd8];
+}
+
+/* width */
+.msb::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.msb::-webkit-scrollbar-track {
+  @apply dark:bg-gray-600;
+}
+
+/* Handle */
+.msb::-webkit-scrollbar-thumb {
+  @apply dark:bg-black;
+}
+
+/* Handle on hover */
+.msb::-webkit-scrollbar-thumb:hover {
+  @apply dark:bg-gray-600;
+}
+
+/* Custom styles for the range input */
+.range-slider {
+  appearance: none; /* Remove default styling */
+  width: 100%; /* Full width */
+  height: 8px; /* Height of the track */
+  border-radius: 5px; /* Rounded track */
+  background: linear-gradient(to right, #8a6aff, #139e70); /* Gradient background */
+  outline: none; /* Remove outline */
+  opacity: 0.9; /* Slightly transparent */
+  transition: opacity 0.2s; /* Smooth transition */
+}
+
+.range-slider:hover {
+  opacity: 1; /* Full opacity on hover */
+}
+
+/* Styles for the thumb */
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; /* Remove default styling */
+  appearance: none; /* Remove default styling */
+  width: 20px; /* Increased thumb width */
+  height: 20px; /* Increased thumb height */
+  border-radius: 50%; /* Rounded thumb */
+  background: #ffffff; /* Thumb color */
+  border: 2px solid #1605f7; /* Outline for better visibility */
+  box-shadow: 0 0 5px rgba(255, 106, 106, 0.5); /* Subtle shadow for depth */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+.range-slider::-moz-range-thumb {
+  width: 20px; /* Increased thumb width */
+  height: 20px; /* Increased thumb height */
+  border-radius: 50%; /* Rounded thumb */
+  background: #ffffff; /* Thumb color */
+  border: 2px solid #ff6a6a; /* Outline for better visibility */
+  box-shadow: 0 0 5px rgba(255, 106, 106, 0.5); /* Subtle shadow for depth */
+  cursor: pointer; /* Pointer cursor on hover */
+}
