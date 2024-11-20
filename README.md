@@ -1,10 +1,21 @@
 # Siteware Frontend
 
+=======
+
+**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+
+
 ## Overview
 
 **Siteware Frontend** is the frontend of an AI-powered voice agent platform built using **Vite**, **TypeScript**, and **React**. The project is designed for scalability and ease of use, integrating modern frontend technologies.
 
+
 ## Prerequisites
+=======
+
+# Design of Siteware
+https://www.figma.com/design/1UcsZsQdZl7XuyA8Q81ccn/Untitled?node-id=0-1&node-type=canvas&t=IStAgQGlXEA06mlC-0
+
 
 Ensure you have the following installed on your system:
 
@@ -40,6 +51,7 @@ The application will be available at:
 ```
 http://localhost:5000
 ```
+
 
 ### Step 4: Build the Project for Production
 
@@ -118,3 +130,5 @@ http://localhost:5000
 ## Accessing the Application in Production
 
 Once deployed, you can access the application on the appropriate server URL.
+=======
+Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
