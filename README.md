@@ -1,3 +1,5 @@
+# Siteware Frontend
+
 **Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
 When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
@@ -5,6 +7,8 @@ When you're done, you can delete the content in this README and update the file 
 *We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
 
 ---
+# Design of Siteware
+https://www.figma.com/design/1UcsZsQdZl7XuyA8Q81ccn/Untitled?node-id=0-1&node-type=canvas&t=IStAgQGlXEA06mlC-0
 
 ## Edit a file
 
